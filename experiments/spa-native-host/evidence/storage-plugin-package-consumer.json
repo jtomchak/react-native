@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "name": "@nativehost/plugin-api",
+      "integrity": "sha512-+IHmECky+eYq6w3Am2kisc/nkYqMur6nYoXSqGuQGe8TJOl++2UbmIZono2BArt0PR6U7ZLH/YaQDdjp202RXg==",
+      "files": 7
+    },
+    {
+      "name": "@nativehost/auth",
+      "integrity": "sha512-46VJ5ix17GnSHy0VfiWntY5RtBpR+xb2vA4vArit5ur5W1NPX2DUSlegfssWM9ReqrTfplEsyROJBih19zm03Q==",
+      "files": 25
+    },
+    {
+      "name": "@nativehost/storage",
+      "integrity": "sha512-sGCfCS4wzLcM8YnGnur05kPzMvbAvQRumZZF/POU76yBZHZbiTWfs1ABQRJvggj2DCVw0k8Vo/IoKTITW/PoKA==",
+      "files": 18
+    }
+  ],
+  "consumer": "isolated npm tarball installation",
+  "result": "passed",
+  "checks": [
+    "artifact allowlist",
+    "offline peer/dependency resolution",
+    "client/server execution",
+    "React/manifest exports",
+    "SwiftPM manifest and peer path",
+    "Gradle source resolution"
+  ]
+}

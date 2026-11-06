@@ -1,5 +1,34 @@
 import {test, expect} from '@playwright/test';
 import {installMockNative} from './mock-native.mjs';
+import {assembleSDK, loadSelectedPlugins} from '../../tooling/plugins.mjs';
+
+test('storage removal keeps application routes usable without opening a camera or dispatching storage', async ({page}) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  if (process.env.SPA_STORAGE_REMOVED_BUILD !== '1') {
+    const source = await assembleSDK({plugins: loadSelectedPlugins().filter(plugin => plugin.id !== 'storage')});
+    await page.route('**/platform-sdk.js', route => route.fulfill({contentType: 'text/javascript', body: source}));
+  }
+  await installMockNative(page, {storage: false, auth: {}, analytics: true});
+  await page.goto('/compose/');
+  await expect(page.getByTestId('connection')).toHaveText('iOS host');
+  await expect(page.getByText('Native storage is unavailable in this app.')).toBeVisible();
+  await expect(page.getByTestId('draft')).toBeEnabled();
+  await expect(page.getByRole('button', {name: /Save draft/})).toBeDisabled();
+  await expect(page.getByRole('button', {name: 'Remove saved draft'})).toBeDisabled();
+  await expect.poll(() => page.evaluate(() => window.__mockNative.state.toolbar?.actions.length)).toBe(0);
+  expect(await page.evaluate(() => Object.hasOwn(platform, 'storage'))).toBe(false);
+  expect(await page.evaluate(() => platform.auth.status().then(value => value.authenticated))).toBe(false);
+  expect(await page.evaluate(() => platform.analytics.status().then(value => value.enabled))).toBe(true);
+  await page.getByRole('link', {name: 'Library', exact: true}).click();
+  await expect(page.getByRole('button', {name: /Take a photo/})).toBeDisabled();
+  await expect(page.getByText('Native storage is unavailable in this app.')).toBeVisible();
+  await page.getByRole('link', {name: 'Overview', exact: true}).click();
+  await expect(page.getByRole('button', {name: 'Take a photo', exact: true})).toBeDisabled();
+  const requests = await page.evaluate(() => window.__mockNative.requests.map(request => request.action));
+  expect(requests.some(action => action.startsWith('storage.') || action === 'camera.capture')).toBe(false);
+  expect(errors).toEqual([]);
+});
 
 test('browser preview makes native unavailability explicit and retains useful SPA routes', async ({page}) => {
   await page.goto('/');

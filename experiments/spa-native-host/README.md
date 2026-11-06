@@ -1,8 +1,9 @@
 # SPA native host prototype
 
-Auth is now the first single-package native plug-in, with SwiftPM and Gradle
-integration generated from one declaration. See [PLUGINS.md](PLUGINS.md) and
-[PLUGIN-VERIFICATION.md](evidence/PLUGIN-VERIFICATION.md).
+Auth and native storage are single-package native plug-ins, with SwiftPM and
+Gradle integration generated from one declaration. See [PLUGINS.md](PLUGINS.md),
+the [auth plug-in results](evidence/PLUGIN-VERIFICATION.md) and the
+[storage plug-in results](evidence/STORAGE-PLUGIN-VERIFICATION.md).
 
 Native OAuth/passkeys and the Next.js HttpOnly session handoff are described in
 [AUTH.md](AUTH.md), with current results in

@@ -1,8 +1,9 @@
 # Single-package native plug-ins
 
-Auth is the first plug-in. One npm package owns its JavaScript facade, optional
-React hook, server adapter, Swift package and Android library. The application
-selects and configures it once in `configuration/plugins.json`:
+Auth is the first plug-in and native storage is the second. One npm package owns
+its JavaScript facade, optional React/server adapters, Swift package and Android
+library. The application selects and configures packages once in
+`configuration/plugins.json`:
 
 ```json
 {
@@ -15,6 +16,9 @@ selects and configures it once in `configuration/plugins.json`:
       "providers": [],
       "rpId": null
     }
+  }, {
+    "package": "@nativehost/storage",
+    "configuration": {}
   }]
 }
 ```
@@ -24,6 +28,13 @@ removed: no SDK namespace/events, server registration, native factory, callback
 contribution, or auth native dependency. Source `host-config.json` stores only
 core settings; its `plugins:{}` is populated in the generated asset from this
 single declaration. Private auth server configuration remains separate.
+
+Removing only the storage entry retains auth and core analytics. It removes the
+storage SDK namespace, capabilities, native library and tests. Stored values are
+preserved for reinstallation. The storage package uses the existing system
+SQLite database and adds no third-party runtime dependency. Its methods still
+return strings or null through the same `platform.storage` API; see
+[the storage package](packages/storage/README.md).
 
 ## Build workflow
 
@@ -81,6 +92,12 @@ peer; the framework-independent facade still works with ordinary HTML.
 particular application or Next.js router. Server exports require Node24+ and
 retain the existing single-host SQLite prototype boundary.
 
+`@nativehost/storage` exposes `/client`, `/configuration` and `/manifest`. Its
+manifest omits the optional `react` and `server` fields, so it introduces neither
+a React dependency nor a server storage route. When declared, framework/server
+exports must resolve inside the package. The generator registers only selected
+packages with a declared server adapter.
+
 `@nativehost/plugin-api` is the host's shared native SPI. The app depends on it;
 auth declares its exact matching peer. This first version supports flat npm or
 Yarn Classic package layouts, with API and plug-in adjacent under the same scope.
@@ -94,6 +111,9 @@ module and product must use its unique product name, for example
 prototype host classes. Factories receive typed host services and per-call
 presentation/document context. The host retains navigation, presentation leases,
 session epochs, JavaScript-realm retirement and stale-context admission.
+The Swift environment supplies the native application data root; Android
+supplies application context. Native invocation results can be JSON-compatible
+objects, arrays, scalars or null, preserving storage's string/null contract.
 
 ## Adding another plug-in
 
@@ -119,9 +139,11 @@ npm run test:auth
 npm run plugins:pack-test
 ```
 
-The pack test creates allowlisted tarballs, installs them offline into a temporary
+The pack test discovers selected packages from the declaration, creates
+allowlisted tarballs, installs them offline into a temporary
 consumer outside the source checkout, executes client/server exports, checks the
-React/manifest exports, resolves native paths and evaluates the SwiftPM manifest.
+declared React/manifest exports, resolves native paths and evaluates each
+SwiftPM manifest. Storage's native-only package is exercised alongside auth.
 It publishes nothing.
 
 For a removal matrix, create a temporary JSON declaration with an empty array and
@@ -136,4 +158,5 @@ uninstalling the npm package, remove application imports of its React/server
 exports as appropriate; unresolved imports fail the build clearly.
 
 Current results: [PLUGIN-VERIFICATION.md](evidence/PLUGIN-VERIFICATION.md).
+Second-package results: [STORAGE-PLUGIN-VERIFICATION.md](evidence/STORAGE-PLUGIN-VERIFICATION.md).
 Authentication behavior/configuration: [AUTH.md](AUTH.md).

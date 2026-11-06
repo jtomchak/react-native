@@ -46,14 +46,13 @@ import java.io.File
 import java.net.URLConnection
 import java.util.UUID
 import java.lang.ref.WeakReference
-import java.util.concurrent.Executors
 
 /** Native shell owns screens; each screen independently owns its WebView/session. */
 class HostActivity : ComponentActivity() {
     companion object {
         const val ORIGIN = "https://appassets.androidplatform.net"
         private const val MAX_WIRE = 128 * 1024
-        private val ACTIONS = listOf("haptics.impact", "storage.get", "storage.set", "storage.remove", "navigation.update", "navigation.back", "navigation.present", "navigation.dismiss", "toolbar.set", "toolbar.clear", "camera.capture", "files.previewURL", "files.remove", "cancel", "chrome.state", "chrome.update", "chrome.selectTab", "events.subscribe", "events.unsubscribe", "notifications.status", "notifications.requestPermission", "notifications.register", "links.getInitial", "share.present", "biometrics.status", "biometrics.authenticate", "analytics.track", "analytics.observe", "analytics.status", "analytics.flush")
+        private val ACTIONS = listOf("haptics.impact", "navigation.update", "navigation.back", "navigation.present", "navigation.dismiss", "toolbar.set", "toolbar.clear", "camera.capture", "files.previewURL", "files.remove", "cancel", "chrome.state", "chrome.update", "chrome.selectTab", "events.subscribe", "events.unsubscribe", "notifications.status", "notifications.requestPermission", "notifications.register", "links.getInitial", "share.present", "biometrics.status", "biometrics.authenticate", "analytics.track", "analytics.observe", "analytics.status", "analytics.flush")
         private val UI_ACTIONS = setOf("haptics.impact", "navigation.update", "navigation.back", "navigation.present", "navigation.dismiss", "navigation.visit", "toolbar.set", "toolbar.clear", "chrome.update", "chrome.selectTab", "camera.capture", "share.present", "biometrics.authenticate", "notifications.requestPermission", "notifications.register", "analytics.track", "analytics.observe", "analytics.status", "analytics.flush")
         private val EXTERNAL_EVENTS = setOf("navigation.changed", "chrome.tabSelected", "links.opened", "notifications.token", "notifications.received", "notifications.opened")
         private val ID = Regex("[!-~]{1,128}")
@@ -61,8 +60,6 @@ class HostActivity : ComponentActivity() {
     }
     private lateinit var configuration: HostConfiguration
     private val main = Handler(Looper.getMainLooper())
-    private val worker = Executors.newSingleThreadExecutor()
-    private lateinit var storage: Storage
     private lateinit var analytics: NativeAnalytics
     private val plugins get() = (application as HostApplication).plugins
     private var pluginRequest: Request? = null
@@ -81,7 +78,6 @@ class HostActivity : ComponentActivity() {
     private var keyboardVisible = false
     private var pushObserver: ((String, JSONObject) -> Unit)? = null
     private var destroyed = false
-    private var diskOutstanding = 0
     private var modal: AlertDialog? = null
     private var modalSurface: Surface? = null
     private var visitDialog: com.google.android.material.bottomsheet.BottomSheetDialog? = null
@@ -175,7 +171,6 @@ class HostActivity : ComponentActivity() {
             { _ -> invalidateContentSurfaces() },
             { _ -> main.post { if (!destroyed) active?.let { refreshContentSurface(it) } } })
         plugins.consumeIntent(intent)
-        storage = Storage(this)
         val initialTap = NativePushState.consumeTap(this, intent)
         initialLink = deepLink(intent) ?: initialTap?.first?.takeIf { validRoute(it) }
         root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(Color.WHITE); fitsSystemWindows = true }
@@ -547,22 +542,6 @@ class HostActivity : ComponentActivity() {
         if (policy != null) { dispatchPlugin(req, policy); return }
         when (req.action) {
             "hello" -> respond(req, JSONObject().put("platform", "android").put("capabilities", JSONArray(capabilities())).put("host", hostMetadata(req.surface)))
-            "storage.get", "storage.set", "storage.remove" -> {
-                requireKeys(a, if (req.action == "storage.set") setOf("key", "value") else setOf("key"))
-                val key = text(a, "key", 128, allowNul = true)
-                val value = if (req.action == "storage.set") text(a, "value", 32768, empty = true, allowNul = true) else ""
-                if (diskOutstanding >= 64) fail("QUOTA_EXCEEDED", "Storage operation capacity exceeded")
-                diskOutstanding++
-                worker.execute {
-                    val outcome = runCatching {
-                        when (req.action) { "storage.get" -> storage.get(key); "storage.set" -> { storage.set(key, value); null }; else -> { storage.remove(key); null } }
-                    }
-                    main.post {
-                        diskOutstanding--
-                        outcome.fold({ respond(req, it) }, { respond(req, error = it as? HostError ?: HostError("IO_ERROR", "Storage operation failed")) })
-                    }
-                }
-            }
             "haptics.impact" -> {
                 requireKeys(a, setOf("style")); val style = text(a, "style", 16)
                 val duration = when (style) { "light" -> 15L; "medium" -> 30L; "heavy" -> 50L; else -> fail("INVALID_REQUEST", "Unknown impact style") }
@@ -915,7 +894,6 @@ class HostActivity : ComponentActivity() {
         visitDialog?.setOnDismissListener(null); visitDialog?.dismiss(); visitDialog = null
         biometricSignal?.cancel(); biometricSignal = null
         if (::content.isInitialized) { stacks.values.flatMap { it.toList() }.forEach { disposeSurface(it) }; modalSurface?.let { disposeSurface(it) } }
-        if (::storage.isInitialized) { worker.execute { storage.close() }; worker.shutdown() }
         super.onDestroy()
     }
 }

@@ -40,7 +40,7 @@ interface NativePlugin {
     val id: String
     val actions: List<PluginAction>
     val events: Set<String>
-    fun invoke(context: PluginCallContext, action: String, args: JSONObject, completion: (JSONObject?, PluginFailure?) -> Unit)
+    fun invoke(context: PluginCallContext, action: String, args: JSONObject, completion: (Any?, PluginFailure?) -> Unit)
     fun cancel(owner: String, requestId: String? = null) {}
     fun consumeIntent(intent: Intent): Boolean = false
     fun onActivityPaused(activity: Activity) {}

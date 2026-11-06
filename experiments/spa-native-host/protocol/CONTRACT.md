@@ -42,6 +42,12 @@ mutate a replacement document. Native full navigation clears toolbar and session
 
 ## Actions
 
+The three storage actions belong to the optional `@nativehost/storage` package.
+The default prototype selects it alongside auth. Removing its declaration
+removes the `platform.storage` facade and native capabilities; raw calls then
+fail `UNSUPPORTED`. Storage keeps the existing private SQLite paths, string/null
+results and quotas. Its removal does not remove auth or native analytics.
+
 - hello: {}.
 - haptics.impact: {style:"light"|"medium"|"heavy"}; returns null.
 - storage.get: {key}; returns string or null.

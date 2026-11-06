@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "configuration": "auth-and-storage",
+  "platform": "iOS Simulator 27.2",
+  "toolchain": "Xcode.RC",
+  "selectedPluginIds": [
+    "auth",
+    "storage"
+  ],
+  "checks": {
+    "authNativeLinked": true,
+    "storageNativeLinked": true,
+    "authSDKInstallerPresent": true,
+    "storageSDKInstallerPresent": true
+  },
+  "assets": {
+    "count": 40,
+    "algorithm": "SHA256",
+    "allMatched": true
+  },
+  "runtimeEvidence": "storage-plugin-ios-restored-runtime-tests.txt"
+}

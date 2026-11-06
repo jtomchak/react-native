@@ -20,9 +20,21 @@ final class PluginRegistryTests: XCTestCase {
         }
         let result: Any = try await withCheckedThrowingContinuation { continuation in host.webView.callAsyncJavaScript("return (await platform.ready()).capabilities", arguments: [:], in: nil, in: .page) { continuation.resume(with: $0) } }
         let advertised = try XCTUnwrap(result as? [String])
-        let core = Set(["navigation", "toolbar", "haptics", "storage", "camera", "files", "cancel", "chrome", "events", "notifications", "links", "share", "biometrics", "analytics"])
+        let core = Set(["navigation", "toolbar", "haptics", "camera", "files", "cancel", "chrome", "events", "notifications", "links", "share", "biometrics", "analytics"])
         let nonCore = Set(advertised.filter { !core.contains(String($0.split(separator: ".").first ?? "")) })
         XCTAssertEqual(nonCore, Set(services.pluginActions.map(\.name)))
         for action in services.pluginActions { XCTAssertTrue(advertised.contains(action.name)) }
+        let namespaces: Any = try await withCheckedThrowingContinuation { continuation in
+            host.webView.callAsyncJavaScript("return Object.keys(platform).filter(key => typeof platform[key] === 'object' && !['navigation','toolbar','haptics','camera','files','chrome','notifications','links','share','biometrics','analytics'].includes(key))", arguments: [:], in: nil, in: .page) { continuation.resume(with: $0) }
+        }
+        XCTAssertEqual(Set(try XCTUnwrap(namespaces as? [String])), Set(services.plugins.map(\.id)))
+        if !services.plugins.contains(where: { $0.id == "storage" }) {
+            let missing: Any = try await withCheckedThrowingContinuation { continuation in host.webView.callAsyncJavaScript("try { await platform.call('storage.get', {key:'removed-plugin-probe'}); return 'ALLOWED'; } catch (error) { return error.code; }", arguments: [:], in: nil, in: .page) { continuation.resume(with: $0) } }
+            XCTAssertEqual(missing as? String, "UNSUPPORTED")
+        }
+        if services.plugins.contains(where: { $0.id == "auth" }) {
+            let retained: Any = try await withCheckedThrowingContinuation { continuation in host.webView.callAsyncJavaScript("return typeof (await platform.auth.status()).authenticated", arguments: [:], in: nil, in: .page) { continuation.resume(with: $0) } }
+            XCTAssertEqual(retained as? String, "boolean")
+        }
     }
 }

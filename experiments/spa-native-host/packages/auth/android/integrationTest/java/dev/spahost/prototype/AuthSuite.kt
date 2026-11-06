@@ -63,7 +63,7 @@ internal class AuthSuite(private val runner: HostInstrumentation, private val ar
             check("orphan web reset creates no native credential", vault.read(origin) == null)
             val auth = AuthPlugin(PluginEnvironment(context, true, { _, _ -> }, { _ -> }, { _ -> }, { it() }))
             var status: JSONObject? = null
-            runner.runOnMainSync { auth.invoke(PluginCallContext(Activity(), "suite", "status", JSONObject()), "auth.status", JSONObject()) { value, error -> if (error != null) throw error; status = value } }
+            runner.runOnMainSync { auth.invoke(PluginCallContext(Activity(), "suite", "status", JSONObject()), "auth.status", JSONObject()) { value, error -> if (error != null) throw error; status = value as? JSONObject } }
             check("disabled native auth status does not invent session", status?.optBoolean("configured") == false && status?.optBoolean("authenticated") == false)
             runner.runOnMainSync {
                 check("orphan auth callback consumed without login", auth.consumeIntent(Intent().setData(Uri.parse("spahost-auth://callback?code=0123456789abcdef"))))

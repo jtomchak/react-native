@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {root as defaultRoot} from './paths.mjs';
 
-const reserved = new Set(['constructor', 'prototype', 'platform', 'protocolVersion', 'ready', 'call', 'on', 'dispose', 'PlatformError', 'navigation', 'chrome', 'notifications', 'links', 'share', 'biometrics', 'haptics', 'storage', 'camera', 'files', 'toolbar', 'analytics']);
+const reserved = new Set(['constructor', 'prototype', 'platform', 'protocolVersion', 'ready', 'call', 'on', 'dispose', 'PlatformError', 'navigation', 'chrome', 'notifications', 'links', 'share', 'biometrics', 'haptics', 'camera', 'files', 'toolbar', 'analytics']);
 const object = value => value && typeof value === 'object' && !Array.isArray(value);
 const invalid = message => { throw new Error(`Plug-in configuration: ${message}`); };
 function exact(value, allowed, label) { if (!object(value) || Object.keys(value).some(key => !allowed.includes(key))) invalid(`invalid ${label}`); }
@@ -44,7 +44,7 @@ export function loadSelectedPlugins({root = defaultRoot, declarationFile = proce
     if (manifest.schemaVersion !== 1 || manifest.hostApiVersion !== 1 || typeof manifest.id !== 'string' || !/^[a-z][a-z0-9_]{0,31}$/.test(manifest.id) || reserved.has(manifest.id) || ids.has(manifest.id)) invalid('unsupported, reserved or duplicate plug-in identity');
     ids.add(manifest.id);
     if (manifest.peer !== '@nativehost/plugin-api' || pkg.peerDependencies?.[manifest.peer] !== api.version) invalid('plug-in API peer must match the installed exact version');
-    if (realpathSync(path.resolve(directory, '../plugin-api')) !== apiRoot) invalid('this version requires flat sibling auth/API package installation (npm or Yarn Classic)');
+    if (realpathSync(path.resolve(directory, '../plugin-api')) !== apiRoot) invalid('this version requires flat sibling plug-in/API package installation (npm or Yarn Classic)');
     exact(manifest.client, ['entry', 'factory'], 'client');
     if (typeof manifest.client.factory !== 'string' || !/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(manifest.client.factory)) invalid('invalid client factory');
     const clientFile = localFile(directory, manifest.client.entry);
@@ -72,9 +72,16 @@ export function loadSelectedPlugins({root = defaultRoot, declarationFile = proce
     }
     // No alternate package-manager field or Podfile is accepted by this schema.
     for (const nativeRoot of [iosRoot, androidRoot]) if (existsSync(path.join(nativeRoot, 'Podfile'))) invalid('CocoaPods is not supported');
-    if (manifest.react !== './react' || manifest.server !== './server') invalid('expected explicit client/server exports');
-    const serverFile = realpathSync(require.resolve(`${entry.package}/server`));
-    if (!serverFile.startsWith(directory + path.sep)) invalid('server export escapes package');
+    // Framework/server adapters are optional. A native-only package must not
+    // manufacture server routes or depend on React just to register natively.
+    let serverFile;
+    for (const name of ['react', 'server']) {
+      if (manifest[name] === undefined) continue;
+      if (manifest[name] !== `./${name}`) invalid(`expected explicit ${name} export`);
+      const exported = realpathSync(require.resolve(`${entry.package}/${name}`));
+      if (!exported.startsWith(directory + path.sep) || !statSync(exported).isFile()) invalid(`${name} export escapes package or is not a file`);
+      if (name === 'server') serverFile = exported;
+    }
     exact(manifest.configuration, ['validator'], 'configuration validator');
     if (manifest.configuration.validator !== './configuration') invalid('configuration validator must use the public export');
     const validator = require(`${entry.package}/configuration`).validateConfiguration;
@@ -135,8 +142,9 @@ export function pluginOutputs({root = defaultRoot, outputRoot = path.join(root, 
   const expectedKotlin = plugins.map(p => `${JSON.stringify(p.id)} to setOf(${p.actions.map(a => JSON.stringify(a.name)).join(', ')})`).join(', ');
   const eventsKotlin = plugins.map(p => `${JSON.stringify(p.id)} to setOf(${p.events.map(e => JSON.stringify(e)).join(', ')})`).join(', ');
   const kotlin = `package dev.spahost.prototype\n\nimport dev.nativehost.pluginapi.NativePlugin\nimport dev.nativehost.pluginapi.PluginEnvironment\nimport dev.nativehost.pluginapi.PluginFailure\n\ninternal object GeneratedPluginRegistry {\n    fun make(environment: PluginEnvironment): List<NativePlugin> {\n        val plugins: List<NativePlugin> = listOf(${plugins.map(p => `${p.android.factory}(environment)`).join(', ')})\n        val actions: Map<String, Set<String>> = mapOf(${expectedKotlin})\n        val events: Map<String, Set<String>> = mapOf(${eventsKotlin})\n        for (plugin in plugins) {\n            if (plugin.actions.map { it.name }.toSet() != actions[plugin.id] || plugin.events != events[plugin.id]) throw PluginFailure("INVALID_REQUEST", "Plug-in manifest/runtime mismatch")\n        }\n        return plugins\n    }\n}\n`;
-  const imports = plugins.map((p, i) => `import * as plugin${i} from ${JSON.stringify(`${p.package}/server`)};`).join('\n');
-  const server = `${imports}\nexport const serverPlugins = Object.freeze({${plugins.map((p, i) => `${JSON.stringify(p.id)}: plugin${i}`).join(', ')}});\n`;
+  const serverAdapters = plugins.filter(p => p.server !== undefined);
+  const imports = serverAdapters.map((p, i) => `import * as plugin${i} from ${JSON.stringify(`${p.package}/server`)};`).join('\n');
+  const server = `${imports}\nexport const serverPlugins = Object.freeze({${serverAdapters.map((p, i) => `${JSON.stringify(p.id)}: plugin${i}`).join(', ')}});\n`;
   const testModes = plugins.flatMap(p => Object.entries(p.android.testEntrypoints ?? {}));
   const testRegistry = `package dev.spahost.prototype\n\ninternal object GeneratedPluginTestRegistry {\n    val modes: Map<String, String> = mapOf(${testModes.map(([mode, name]) => `${JSON.stringify(mode)} to ${JSON.stringify(name)}`).join(', ')})\n}\n`;
   const receipt = {schemaVersion: 1, hostApiVersion: 1, plugins: plugins.map(({id, package: name, version, manifestSha256, configuration}) => ({id, package: name, version, manifestSha256, configuration}))};

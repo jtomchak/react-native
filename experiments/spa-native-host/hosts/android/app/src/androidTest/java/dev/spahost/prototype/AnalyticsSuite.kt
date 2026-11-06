@@ -67,11 +67,11 @@ internal class AnalyticsSuite(private val runner: Instrumentation, private val a
         rejected("bundled analytics origin forbids HTTP", { AnalyticsConfiguration.parse(JSONObject().put("origin", "http://127.0.0.1:18797")) })
         val lane = AnalyticsRequestLane()
         for (sequence in 1..4200) lane.admit("document", "document-a$sequence", "analytics.observe", JSONObject())
-        check("4200 semantic requests bypass ordinary seen capacity", !lane.admit("document", "business-request", "storage.get", JSONObject()))
+        check("4200 semantic requests bypass ordinary seen capacity", !lane.admit("document", "business-request", "chrome.state", JSONObject()))
         rejected("telemetry replay is rejected") { lane.admit("document", "document-a4200", "analytics.observe", JSONObject()) }
         rejected("telemetry cannot cancel ordinary business work") { lane.admit("document", "document-a4201", "cancel", JSONObject().put("requestId", "business-request")) }
         check("telemetry cancellation has its own sequence", lane.admit("document", "document-a4202", "cancel", JSONObject().put("requestId", "document-a4200")))
-        rejected("ordinary work cannot use reserved telemetry identity") { lane.admit("document", "document-a5000", "storage.set", JSONObject()) }
+        rejected("ordinary work cannot use reserved telemetry identity") { lane.admit("document", "document-a5000", "toolbar.set", JSONObject()) }
         lane.reset(); check("document invalidation resets its telemetry lane", lane.admit("document", "document-a1", "analytics.status", JSONObject()))
         check("sampling agrees with fixed FNV1a vector", NativeAnalytics.sample("hello") == 1723 && NativeAnalytics.sample("00000000-0000-4000-8000-000000000001") == 9522 && NativeAnalytics.sample("00000000-0000-4000-8000-000000000002") == 1903)
         check("route bucketing strips dynamic/query data", NativeAnalytics.screen("/hosted/item/private-identifier/?token=secret") == "hosted")
@@ -215,9 +215,9 @@ internal class AnalyticsSuite(private val runner: Instrumentation, private val a
         action("return await platform.call('analytics.status',{})")
         val after = appAnalytics.inspectForTest().count { it.getString("category") == "bridge" }
         check("analytics status does not recursively log bridge events", before == after)
-        check("ordinary storage still operates with telemetry lane", action("await platform.storage.set('analytics-business-proof','actual-value');return await platform.storage.get('analytics-business-proof')") == "actual-value")
+        check("ordinary chrome still operates with telemetry lane", action("await platform.toolbar.set({registration:'analytics-business-proof',title:'actual-value',actions:[]});await platform.toolbar.clear({registration:'analytics-business-proof'});return true") == true)
         val stored = appAnalytics.inspectForTest()
-        check("bridge journal excludes storage values and keys", stored.none { it.toString().contains("actual-value") || it.toString().contains("analytics-business-proof") || it.toString().contains("private-input") })
+        check("bridge journal excludes native action arguments", stored.none { it.toString().contains("actual-value") || it.toString().contains("analytics-business-proof") || it.toString().contains("private-input") })
     }
     private fun js(source: String): Any? {
         val latch = CountDownLatch(1); var result: String? = null

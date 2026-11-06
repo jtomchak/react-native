@@ -74,3 +74,8 @@ same previously approved OIDC/WebAuthn npm dependencies and Android Credentials/
 Browser Maven dependencies. The application uses local file dependencies and
 selects native integrations through `configuration/plugins.json`. SwiftPM builds
 the iOS library; Gradle builds the Android library. Nothing was published to npm.
+
+Native storage is the second first-party package, `@nativehost/storage` 0.1.0,
+using the same exact API peer. It extracts the existing system SQLite store;
+no third-party runtime dependency is added. The prototype's npm lockfile is
+included for reproducible installation of all selected local packages.

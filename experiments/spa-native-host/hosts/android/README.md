@@ -2,7 +2,9 @@
 
 The native semantic analytics extension is owned by `HostApplication`, so its
 SQLite journal and uploader survive Activity/WebView recreation. User KV storage
-remains separate. See the [analytics guide](../../ANALYTICS.md) and
+is the optional `@nativehost/storage` Gradle package, selected by the shared
+plug-in declaration. Its process-owned SQLite queue uses the original
+`platform.sqlite` schema and survives Activity/WebView recreation. See the [analytics guide](../../ANALYTICS.md) and
 [current analytics receipts](../../evidence/ANALYTICS-VERIFICATION.md).
 
 Standalone Kotlin Android application; no React Native, Hermes, Yoga, Capacitor,
@@ -12,7 +14,7 @@ or Tauri. Build only this Gradle project, after the parent web export/sync step:
 bash experiments/spa-native-host/hosts/android/build.sh assembleDebug assembleDebugAndroidTest
 adb -s DEVICE install -r experiments/spa-native-host/hosts/android/app/build/outputs/apk/debug/app-debug.apk
 adb -s DEVICE install -r experiments/spa-native-host/hosts/android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-adb -s DEVICE shell am instrument -w dev.spahost.prototype.test/dev.spahost.prototype.HostInstrumentation
+adb -s DEVICE shell am instrument -w -e mode storage-host dev.spahost.prototype.test/dev.spahost.prototype.HostInstrumentation
 ```
 
 `build.sh` uses the generated Gradle 8.14.3 wrapper with the distribution's
@@ -32,7 +34,7 @@ application scripts. `/injected.html` has no SDK script tag and exercises this
 injection contract independently of Next.
 
 The host implements native toolbar controls, Back coordination, a native demo
-dialog, vibrator impacts, asynchronous SQLite storage, and Android Activity
+dialog, vibrator impacts, and Android Activity
 Result still capture. Camera delegates to an installed camera application, which
 owns its camera permissions; it does not claim this app has a continuous camera
 session. Capture returns only validated JPEG handles. Photos remain private,
@@ -58,6 +60,12 @@ Instrumentation controls the actual WebView using Android's native test APIs;
 there is no public web evaluation method. Browser/SDK and real service assertions
 are separate from physical camera capture and perceived haptic sensation.
 See the parent evidence ledger for actually executed cases and remaining gates.
+
+With storage selected, `-e mode storage` exercises strict UTF-8, scalar replies,
+legacy database continuity, isolated quota accounting, and the 64 accepted-work
+limit. `storage-host` runs the bridge/navigation regression suite;
+`storage-persistence` checks its unique checkpoint in a subsequent process.
+The generic `-e mode plugins` runner has no storage dependency.
 
 The device verification runner includes a targeted force-stop and a second
 instrumentation process to verify a unique, acknowledged storage checkpoint:

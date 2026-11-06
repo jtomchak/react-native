@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "configuration": "auth-only",
+  "platform": "iOS Simulator 27.2",
+  "toolchain": "Xcode.RC",
+  "applicationBundle": "hosts/ios/build/DerivedData/Build/Products/Debug-iphonesimulator/SPAHost.app",
+  "selectedPluginIds": [
+    "auth"
+  ],
+  "checks": {
+    "storageNativeSymbolsAbsent": true,
+    "storageLoadCommandAbsent": true,
+    "storageFrameworkAbsent": true,
+    "storageSDKInstallerAbsent": true,
+    "authNativeRetained": true,
+    "authSDKRetained": true,
+    "sqliteRetainedForAnalytics": true
+  },
+  "commands": [
+    "nm -j <applicationBundle>/SPAHost.debug.dylib",
+    "otool -L <applicationBundle>/SPAHost.debug.dylib"
+  ],
+  "runtimeEvidence": [
+    "storage-plugin-ios-auth-only-surface-tests.txt",
+    "storage-plugin-ios-auth-only-retained-tests.txt"
+  ]
+}

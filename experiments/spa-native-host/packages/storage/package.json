@@ -1,0 +1,26 @@
+{
+  "name": "@nativehost/storage",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    "./client": "./client/index.mjs",
+    "./configuration": "./configuration.mjs",
+    "./manifest": "./native-plugin.json"
+  },
+  "files": [
+    "client",
+    "configuration.mjs",
+    "configuration.schema.json",
+    "native-plugin.json",
+    "ios/NativeHostStorage/Package.swift",
+    "ios/NativeHostStorage/Sources",
+    "ios/IntegrationTests",
+    "android/build.gradle.kts",
+    "android/src",
+    "android/integrationTest",
+    "README.md"
+  ],
+  "peerDependencies": {"@nativehost/plugin-api": "0.1.0"},
+  "license": "MIT"
+}

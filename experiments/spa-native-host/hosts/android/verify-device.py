@@ -41,9 +41,9 @@ try:
         report[f'{kind}ApkSha256'] = hashlib.sha256(apk.read_bytes()).hexdigest()
         if args.install:
             print(run(['install', '-r', str(apk)]), flush=True)
-    baseline = instrument([], 'packaged')
+    baseline = instrument(['-e', 'mode', 'storage-host'], 'packaged')
     run(['shell', 'am', 'force-stop', 'dev.spahost.prototype'])
-    restored = instrument(['-e', 'mode', 'verify-persistence', '-e', 'expected', baseline['persistenceToken']], 'process-restart')
+    restored = instrument(['-e', 'mode', 'storage-persistence', '-e', 'prefix', baseline['persistencePrefix'], '-e', 'expected', baseline['persistenceToken']], 'process-restart')
     if baseline['pid'] == restored['pid']:
         raise RuntimeError('Persistence test did not enter a new process')
     report['status'] = 'passed'

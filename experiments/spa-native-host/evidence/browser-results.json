@@ -3,11 +3,7 @@
     "argv": [
       "/opt/homebrew/Cellar/node/26.7.0/bin/node",
       "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/node_modules/.bin/playwright",
-      "test",
-      "tests/browser/analytics.spec.mjs",
-      "tests/browser/application.spec.mjs",
-      "tests/browser/auth-client.spec.mjs",
-      "tests/browser/extensions.spec.mjs"
+      "test"
     ],
     "configFile": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/playwright.config.mjs",
     "rootDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
@@ -125,12 +121,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 974,
+                  "duration": 1048,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:22.097Z",
+                  "startTime": "2026-11-06T16:57:41.007Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -159,12 +155,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 498,
+                  "duration": 413,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:23.527Z",
+                  "startTime": "2026-11-06T16:57:42.477Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -186,6 +182,40 @@
       "line": 0,
       "specs": [
         {
+          "title": "storage removal keeps application routes usable without opening a camera or dispatching storage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 539,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T16:57:42.900Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "334a7e60a3acb75eba18-5f06b5670a2966e48e2f",
+          "file": "application.spec.mjs",
+          "line": 5,
+          "column": 1
+        },
+        {
           "title": "browser preview makes native unavailability explicit and retains useful SPA routes",
           "ok": true,
           "tags": [],
@@ -201,12 +231,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 269,
+                  "duration": 531,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:24.035Z",
+                  "startTime": "2026-11-06T16:57:43.445Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -216,7 +246,7 @@
           ],
           "id": "334a7e60a3acb75eba18-505c311dc1a5f0d16016",
           "file": "application.spec.mjs",
-          "line": 4,
+          "line": 31,
           "column": 1
         },
         {
@@ -235,12 +265,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 251,
+                  "duration": 559,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:24.309Z",
+                  "startTime": "2026-11-06T16:57:43.981Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -250,7 +280,7 @@
           ],
           "id": "334a7e60a3acb75eba18-557fc52876ca0a8b7f17",
           "file": "application.spec.mjs",
-          "line": 17,
+          "line": 44,
           "column": 1
         },
         {
@@ -269,12 +299,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 382,
+                  "duration": 366,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:24.565Z",
+                  "startTime": "2026-11-06T16:57:44.545Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -284,7 +314,7 @@
           ],
           "id": "334a7e60a3acb75eba18-69a702fe62ed575212fa",
           "file": "application.spec.mjs",
-          "line": 41,
+          "line": 68,
           "column": 1
         },
         {
@@ -303,12 +333,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 342,
+                  "duration": 345,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:24.951Z",
+                  "startTime": "2026-11-06T16:57:44.915Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -318,7 +348,7 @@
           ],
           "id": "334a7e60a3acb75eba18-70715fcc678cbb131a9a",
           "file": "application.spec.mjs",
-          "line": 59,
+          "line": 86,
           "column": 1
         },
         {
@@ -337,12 +367,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 177,
+                  "duration": 169,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:25.298Z",
+                  "startTime": "2026-11-06T16:57:45.265Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -352,7 +382,7 @@
           ],
           "id": "334a7e60a3acb75eba18-b95854e41599e3cca6e1",
           "file": "application.spec.mjs",
-          "line": 80,
+          "line": 107,
           "column": 1
         },
         {
@@ -371,12 +401,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 181,
+                  "duration": 183,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:25.479Z",
+                  "startTime": "2026-11-06T16:57:45.438Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -386,7 +416,7 @@
           ],
           "id": "334a7e60a3acb75eba18-9ca23e25e9157369fc49",
           "file": "application.spec.mjs",
-          "line": 95,
+          "line": 122,
           "column": 1
         },
         {
@@ -405,12 +435,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 192,
+                  "duration": 191,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:25.664Z",
+                  "startTime": "2026-11-06T16:57:45.627Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -420,7 +450,7 @@
           ],
           "id": "334a7e60a3acb75eba18-60a9db69b5f0e9571346",
           "file": "application.spec.mjs",
-          "line": 104,
+          "line": 131,
           "column": 1
         }
       ]
@@ -447,12 +477,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 132,
+                  "duration": 130,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:25.865Z",
+                  "startTime": "2026-11-06T16:57:45.826Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -481,12 +511,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 137,
+                  "duration": 130,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:26.001Z",
+                  "startTime": "2026-11-06T16:57:45.960Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -515,12 +545,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 248,
+                  "duration": 250,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:26.141Z",
+                  "startTime": "2026-11-06T16:57:46.094Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -549,12 +579,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 169,
+                  "duration": 172,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:26.393Z",
+                  "startTime": "2026-11-06T16:57:46.348Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -583,12 +613,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 338,
+                  "duration": 337,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:26.566Z",
+                  "startTime": "2026-11-06T16:57:46.524Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -617,12 +647,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 354,
+                  "duration": 329,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:26.908Z",
+                  "startTime": "2026-11-06T16:57:46.865Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -651,12 +681,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 186,
+                  "duration": 196,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:27.266Z",
+                  "startTime": "2026-11-06T16:57:47.198Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -685,12 +715,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 247,
+                  "duration": 256,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:27.456Z",
+                  "startTime": "2026-11-06T16:57:47.398Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -719,12 +749,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 324,
+                  "duration": 309,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:27.707Z",
+                  "startTime": "2026-11-06T16:57:47.657Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -753,12 +783,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 291,
+                  "duration": 275,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:28.035Z",
+                  "startTime": "2026-11-06T16:57:47.971Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -787,12 +817,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 178,
+                  "duration": 214,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:28.331Z",
+                  "startTime": "2026-11-06T16:57:48.251Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -821,12 +851,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 228,
+                  "duration": 305,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:28.514Z",
+                  "startTime": "2026-11-06T16:57:48.468Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -855,12 +885,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1562,
+                  "duration": 1605,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:28.746Z",
+                  "startTime": "2026-11-06T16:57:48.778Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -889,12 +919,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 300,
+                  "duration": 345,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:30.312Z",
+                  "startTime": "2026-11-06T16:57:50.392Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -931,12 +961,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 231,
+                  "duration": 274,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:30.619Z",
+                  "startTime": "2026-11-06T16:57:50.763Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -965,12 +995,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 191,
+                  "duration": 179,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:30.855Z",
+                  "startTime": "2026-11-06T16:57:51.043Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -999,12 +1029,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 241,
+                  "duration": 233,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T15:19:31.050Z",
+                  "startTime": "2026-11-06T16:57:51.226Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1018,14 +1048,247 @@
           "column": 1
         }
       ]
+    },
+    {
+      "title": "hosted.spec.mjs",
+      "file": "hosted.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "actual production Next hosted server",
+          "file": "hosted.spec.mjs",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "request-time rendering changes its nonce while sharing the client application routes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run hosted.playwright.mjs against an owned production server.",
+                      "location": {
+                        "file": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.spec.mjs",
+                        "line": 4,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-06T16:57:51.464Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run hosted.playwright.mjs against an owned production server.",
+                          "location": {
+                            "file": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.spec.mjs",
+                            "line": 4,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9f045cd6b3c59568f8ab-a446750c22b593067949",
+              "file": "hosted.spec.mjs",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "server action commits an HttpOnly cookie and server rendering reads it after reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run hosted.playwright.mjs against an owned production server.",
+                      "location": {
+                        "file": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.spec.mjs",
+                        "line": 4,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-06T16:57:51.464Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run hosted.playwright.mjs against an owned production server.",
+                          "location": {
+                            "file": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.spec.mjs",
+                            "line": 4,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9f045cd6b3c59568f8ab-02767257cb674397a8d1",
+              "file": "hosted.spec.mjs",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "hosted health is dynamic server data and the independent injection fixture remains available",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run hosted.playwright.mjs against an owned production server.",
+                      "location": {
+                        "file": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.spec.mjs",
+                        "line": 4,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-06T16:57:51.464Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run hosted.playwright.mjs against an owned production server.",
+                          "location": {
+                            "file": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.spec.mjs",
+                            "line": 4,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9f045cd6b3c59568f8ab-fd4561214a5f0711acb2",
+              "file": "hosted.spec.mjs",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "dynamic server item routes accept identifiers that were never packaged",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Run hosted.playwright.mjs against an owned production server.",
+                      "location": {
+                        "file": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.spec.mjs",
+                        "line": 4,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-06T16:57:51.464Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Run hosted.playwright.mjs against an owned production server.",
+                          "location": {
+                            "file": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.spec.mjs",
+                            "line": 4,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "9f045cd6b3c59568f8ab-3fb1f1aa36f94491ab45",
+              "file": "hosted.spec.mjs",
+              "line": 37,
+              "column": 3
+            }
+          ]
+        }
+      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-06T15:19:21.776Z",
-    "duration": 9559.179,
-    "expected": 26,
-    "skipped": 0,
+    "startTime": "2026-11-06T16:57:40.617Z",
+    "duration": 10878.91,
+    "expected": 27,
+    "skipped": 4,
     "unexpected": 0,
     "flaky": 0
   }

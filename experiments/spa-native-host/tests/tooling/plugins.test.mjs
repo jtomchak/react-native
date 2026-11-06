@@ -22,10 +22,13 @@ test('one selection deterministically generates native, client and server regist
   const outputRoot = await mkdtemp(path.join(os.tmpdir(), 'plugin-output-'));
   t.after(() => rm(outputRoot, {recursive: true, force: true}));
   const first = syncPlugins({outputRoot});
-  assert.equal(first.plugins[0].id, 'auth');
+  assert.deepEqual(first.plugins.map(plugin => plugin.id), ['auth', 'storage']);
   assert.match(first.outputs['ios-project.yml'], /NativeHostAuth/);
   assert.match(first.outputs['app.gradle'], /native-host-auth/);
+  assert.match(first.outputs['ios-project.yml'], /NativeHostStorage/);
+  assert.match(first.outputs['app.gradle'], /native-host-storage/);
   assert.match(first.outputs['server.mjs'], /@nativehost\/auth\/server/);
+  assert.doesNotMatch(first.outputs['server.mjs'], /@nativehost\/storage/);
   assert.match(first.outputs['androidTest/dev/spahost/prototype/GeneratedPluginTestRegistry.kt'], /auth-live/);
   const before = (await stat(path.join(outputRoot, 'server.mjs'))).mtimeMs;
   syncPlugins({outputRoot});
@@ -37,9 +40,26 @@ test('one selection deterministically generates native, client and server regist
 
 test('removing selection erases auth imports, native factories, callback module and server registration', async () => {
   const outputs = pluginOutputs({plugins: []});
-  for (const value of Object.values(outputs)) assert.doesNotMatch(value, /NativeHostAuth|dev\.nativehost\.auth|native-host-auth|@nativehost\/auth|auth-live/);
+  for (const value of Object.values(outputs)) assert.doesNotMatch(value, /NativeHostAuth|dev\.nativehost\.auth|native-host-auth|@nativehost\/auth|auth-live|NativeHostStorage|native-host-storage|@nativehost\/storage/);
   assert.match(outputs['ios-project.yml'], /NativeHostPluginAPI/);
-  assert.doesNotMatch(await assembleSDK({plugins: []}), /auth\.signIn|auth\.changed/);
+  assert.doesNotMatch(await assembleSDK({plugins: []}), /auth\.signIn|auth\.changed|storage\.get|storage\.set|storage\.remove/);
+});
+
+test('removing only storage retains auth while a native-only selection has no server imports', async () => {
+  const plugins = loadSelectedPlugins();
+  const authOnly = plugins.filter(plugin => plugin.id !== 'storage');
+  const outputs = pluginOutputs({plugins: authOnly});
+  assert.match(outputs['GeneratedPluginRegistry.swift'], /NativeHostAuth\.AuthPlugin/);
+  assert.match(outputs['server.mjs'], /@nativehost\/auth\/server/);
+  for (const value of Object.values(outputs)) assert.doesNotMatch(value, /NativeHostStorage|native-host-storage|@nativehost\/storage|storage-host/);
+  const sdk = await assembleSDK({plugins: authOnly});
+  assert.match(sdk, /auth\.signIn/);
+  assert.doesNotMatch(sdk, /storage\.get|storage\.set|storage\.remove/);
+  const storage = plugins.find(plugin => plugin.id === 'storage');
+  assert.equal(storage.serverFile, undefined);
+  assert.deepEqual(storage.validateConfiguration({}), {});
+  assert.throws(() => storage.validateConfiguration({path: '/page-supplied'}));
+  assert.doesNotMatch(pluginOutputs({plugins: [storage]})['server.mjs'], /import |@nativehost/);
 });
 
 test('declarations reject duplicate, undeclared, incompatible and CocoaPods packages', async t => {
@@ -48,7 +68,7 @@ test('declarations reject duplicate, undeclared, incompatible and CocoaPods pack
   assert.throws(() => loadSelectedPlugins({...f, declaration: {...f.declaration, plugins: [...f.declaration.plugins, ...f.declaration.plugins]}}), /unique/);
   assert.throws(() => loadSelectedPlugins({...f, declaration: {schemaVersion: 1, plugins: [{package: 'node:fs', configuration: {}}]}}), /runtime dependencies/);
   const original = JSON.parse(await readFile(f.manifestFile, 'utf8'));
-  for (const change of [m => {m.hostApiVersion = 2;}, m => {m.id = 'storage';}, m => {m.cocoapods = 'Podfile';}, m => {m.client.entry = '../escape.js';}, m => {m.android.factory = 'Factory(); execute()';}, m => {m.android.project = 'native-host-plugin-api';}, m => {m.android.project = 'app';}, m => {m.ios.product = 'NativeHostPluginAPI';}, m => {m.actions.push(m.actions[0]);}, m => {m.events.push(m.events[0]);}, m => {m.actions[0].name = 'auth.' + 'x'.repeat(60);}, m => {m.actions = Array.from({length: 25}, (_, i) => ({name: `auth.action${i}`, timeoutMs: 1000}));}]) {
+  for (const change of [m => {m.hostApiVersion = 2;}, m => {m.id = 'camera';}, m => {m.cocoapods = 'Podfile';}, m => {m.client.entry = '../escape.js';}, m => {m.android.factory = 'Factory(); execute()';}, m => {m.android.project = 'native-host-plugin-api';}, m => {m.android.project = 'app';}, m => {m.ios.product = 'NativeHostPluginAPI';}, m => {m.actions.push(m.actions[0]);}, m => {m.events.push(m.events[0]);}, m => {m.actions[0].name = 'auth.' + 'x'.repeat(60);}, m => {m.actions = Array.from({length: 25}, (_, i) => ({name: `auth.action${i}`, timeoutMs: 1000}));}, m => {m.server = null;}, m => {m.react = '../react';}]) {
     const manifest = structuredClone(original); change(manifest); await writeFile(f.manifestFile, JSON.stringify(manifest));
     assert.throws(() => loadSelectedPlugins(f));
   }
@@ -57,6 +77,22 @@ test('declarations reject duplicate, undeclared, incompatible and CocoaPods pack
   const pkg = JSON.parse(await readFile(pkgFile)); pkg.peerDependencies['@nativehost/plugin-api'] = '9.0.0';
   await writeFile(pkgFile, JSON.stringify(pkg));
   assert.throws(() => loadSelectedPlugins(f), /peer/);
+});
+
+test('optional framework/server adapters resolve only when explicitly declared', async t => {
+  const f = await fixture(t);
+  const manifest = JSON.parse(await readFile(f.manifestFile));
+  delete manifest.react; delete manifest.server;
+  await writeFile(f.manifestFile, JSON.stringify(manifest));
+  const selected = loadSelectedPlugins(f);
+  assert.equal(selected[0].serverFile, undefined);
+  assert.doesNotMatch(pluginOutputs({...f, plugins: selected})['server.mjs'], /@nativehost\/auth\/server/);
+  manifest.server = './server';
+  await writeFile(f.manifestFile, JSON.stringify(manifest));
+  const target = path.join(f.root, 'outside-server.mjs'); await writeFile(target, 'export function handleRequest() {}');
+  const exported = path.join(f.root, 'node_modules/@nativehost/auth/server/index.mjs');
+  await rm(exported); await symlink(target, exported);
+  assert.throws(() => loadSelectedPlugins(f), /server export escapes/);
 });
 
 test('package path symlinks cannot escape into arbitrary application files', async t => {

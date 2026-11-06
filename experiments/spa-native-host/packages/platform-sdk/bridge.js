@@ -375,7 +375,6 @@
     share: Object.freeze({present: helper('share.present')}),
     biometrics: Object.freeze({status: helper('biometrics.status'), authenticate: helper('biometrics.authenticate')}),
     haptics: Object.freeze({impact: helper('haptics.impact')}),
-    storage: Object.freeze({get: (key, options) => call('storage.get', {key}, options), set: (key, value, options) => call('storage.set', {key, value}, options), remove: (key, options) => call('storage.remove', {key}, options)}),
     camera: Object.freeze({capture: helper('camera.capture')}),
     files: Object.freeze({previewURL: (file, options) => call('files.previewURL', {file}, options), remove: (file, options) => call('files.remove', {file}, options)}),
     toolbar: Object.freeze({set: helper('toolbar.set'), clear: helper('toolbar.clear')}),

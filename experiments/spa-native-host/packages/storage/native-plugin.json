@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "storage",
+  "hostApiVersion": 1,
+  "peer": "@nativehost/plugin-api",
+  "client": {"entry": "client/index.mjs", "factory": "installStorage"},
+  "configuration": {"validator": "./configuration"},
+  "actions": [
+    {"name": "storage.get", "timeoutMs": 15000},
+    {"name": "storage.set", "timeoutMs": 15000},
+    {"name": "storage.remove", "timeoutMs": 15000}
+  ],
+  "events": [],
+  "ios": {"path": "ios/NativeHostStorage", "product": "NativeHostStorage", "factory": "StoragePlugin", "testPath": "ios/IntegrationTests"},
+  "android": {
+    "path": "android", "project": "native-host-storage", "factory": "dev.nativehost.storage.StoragePlugin", "testPath": "android/integrationTest",
+    "testEntrypoints": {"storage": "dev.spahost.prototype.StorageSuite", "storage-host": "dev.spahost.prototype.StorageHostSuite", "storage-persistence": "dev.spahost.prototype.StoragePersistenceSuite"}
+  }
+}

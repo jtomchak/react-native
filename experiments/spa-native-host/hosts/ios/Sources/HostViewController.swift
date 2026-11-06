@@ -35,7 +35,6 @@ final class HostViewController: UIViewController, WKNavigationDelegate, WKUIDele
     private(set) var webView: WKWebView!
     private(set) var hapticInvocations = 0
     private var assets: Assets!
-    private var storage: Storage!
     private let handler = WeakHandler()
     #if DEBUG
     private var smokeProbe: SmokeProbe?
@@ -86,7 +85,7 @@ final class HostViewController: UIViewController, WKNavigationDelegate, WKUIDele
     private let dataRoot: URL
     private var checkpoint: URL { dataRoot.appendingPathComponent("route.json") }
     private var photos: URL { dataRoot.appendingPathComponent("photos", isDirectory: true) }
-    private let baseCapabilities = ["navigation.back", "navigation.update", "navigation.present", "navigation.dismiss", "toolbar.set", "toolbar.clear", "haptics.impact", "storage.get", "storage.set", "storage.remove", "camera.capture", "files.previewURL", "files.remove", "cancel"]
+    private let baseCapabilities = ["navigation.back", "navigation.update", "navigation.present", "navigation.dismiss", "toolbar.set", "toolbar.clear", "haptics.impact", "camera.capture", "files.previewURL", "files.remove", "cancel"]
 
     init(assetRoot: URL? = nil, dataRoot: URL? = nil, configuration: HostConfiguration? = nil, services: ApplicationServices? = nil, initialPath: String? = nil) {
         let assets = assetRoot ?? Bundle.main.bundleURL.appendingPathComponent("web")
@@ -108,7 +107,7 @@ final class HostViewController: UIViewController, WKNavigationDelegate, WKUIDele
     }
     #if DEBUG
     var analyticsForTesting: NativeAnalytics { appServices.analytics }
-    var storageForTesting: Storage { appServices.storage }
+    func pluginForTesting(_ id: String) -> NativePlugin? { appServices.plugins.first { $0.id == id } }
     func pendingForTesting(_ action: String) -> Request? { pending.values.first { $0.action == action } }
     #endif
     required init?(coder: NSCoder) { fatalError("Use init") }
@@ -120,7 +119,6 @@ final class HostViewController: UIViewController, WKNavigationDelegate, WKUIDele
         setDisplayTitle("SPA Host")
         try? FileManager.default.createDirectory(at: photos, withIntermediateDirectories: true)
         // Camera writes in memory first; no pending file survives an abandoned capture.
-        storage = appServices.storage
         assets = Assets(root: assetRoot, photos: photos)
         installWebView()
         progressView = UIProgressView(progressViewStyle: .bar)
@@ -479,11 +477,6 @@ final class HostViewController: UIViewController, WKNavigationDelegate, WKUIDele
             generator.prepare(); generator.impactOccurred(); hapticInvocations += 1
             finish(request, .success(NSNull()))
             #endif
-        case "storage.get", "storage.set", "storage.remove":
-            try expected(args, request.action == "storage.set" ? ["key", "value"] : ["key"])
-            let key = try string(args, "key", allowNUL: true)
-            let value = request.action == "storage.set" ? try string(args, "value", max: 32768, empty: true, allowNUL: true) : nil
-            storage.perform(action: request.action, key: key, value: value) { [weak self] result in request.recordOutcome(result); self?.finish(request, result) }
         case "navigation.update":
             try expected(args, ["path", "title", "canGoBack"], optional: ["ack"])
             let path = try string(args, "path", max: 2048)

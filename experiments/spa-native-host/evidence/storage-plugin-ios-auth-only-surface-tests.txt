@@ -1,0 +1,7 @@
+Xcode.RC, iPad simulator iOS 27.2, 2026-11-06.
+    /Applications/Xcode.RC.app/Contents/Developer/usr/bin/xcodebuild test -project SPAHost.xcodeproj -scheme SPAHost -configuration Debug -destination "platform=iOS Simulator,id=6B126463-F3F6-481F-AE05-A660182B4DC5" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=- "-only-testing:SPAHostTests/AuthSurfaceTests"
+
+	 Executed 3 tests, with 0 failures (0 unexpected) in 35.500 (35.516) seconds
+	 Executed 3 tests, with 0 failures (0 unexpected) in 35.500 (35.518) seconds
+	 Executed 3 tests, with 0 failures (0 unexpected) in 35.500 (35.520) seconds
+** TEST SUCCEEDED **

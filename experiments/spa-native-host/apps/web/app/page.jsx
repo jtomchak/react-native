@@ -2,17 +2,19 @@
 
 import {useRouter} from 'next/navigation';
 import {useState} from 'react';
-import {NativeToolbar, useNativeAction} from '../components/platform';
+import {NativeToolbar, useNativeAction, useStorageUnavailable, requireStorage} from '../components/platform';
 import {Button, Result, Shell} from '../components/interface';
 import {NativeIntegrations} from '../components/native-integrations';
 
 export default function Home() {
   const router = useRouter();
   const {run, result, busy} = useNativeAction();
+  const storageUnavailable = useStorageUnavailable();
   const [preview, setPreview] = useState(null);
   const capture = () => run(async (api, options) => {
+    const storage = await requireStorage(api);
     const photo = await api.camera.capture({}, options);
-    await api.storage.set('last-photo', JSON.stringify(photo), options);
+    await storage.set('last-photo', JSON.stringify(photo), options);
     const url = await api.files.previewURL(photo.file, options);
     if (!options.signal.aborted) setPreview(url);
     return {file: photo.file, message: 'Photo saved to your library.'};
@@ -24,7 +26,7 @@ export default function Home() {
     <section className="action-grid" aria-label="Native capabilities">
       <article className="action-card"><span className="icon" aria-hidden="true">↗</span><span className="card-index">01</span><h3>Navigation</h3><p>Keep the page in place. Let the host handle native presentation.</p><button className="text-button" onClick={() => run((api, options) => api.navigation.present({screen: 'native-demo'}, options))} disabled={busy}>Present a sheet <span aria-hidden="true">→</span></button></article>
       <article className="action-card"><span className="icon" aria-hidden="true">≈</span><span className="card-index">02</span><h3>Haptics</h3><p>A small physical response, delivered by the device.</p><button className="text-button" onClick={() => run((api, options) => api.haptics.impact({style: 'light'}, options))} disabled={busy}>Feel a light impact <span aria-hidden="true">→</span></button></article>
-      <article className="action-card"><span className="icon" aria-hidden="true">◎</span><span className="card-index">03</span><h3>Camera</h3><p>Use the native camera. Bring a managed photo back into the page.</p><button className="text-button" onClick={capture} disabled={busy}>Take a photo <span aria-hidden="true">→</span></button></article>
+      <article className="action-card"><span className="icon" aria-hidden="true">◎</span><span className="card-index">03</span><h3>Camera</h3><p>{storageUnavailable ? 'Native storage is unavailable, so photo saving is disabled.' : 'Use the native camera. Bring a managed photo back into the page.'}</p><button className="text-button" onClick={capture} disabled={busy || storageUnavailable}>Take a photo <span aria-hidden="true">→</span></button></article>
       <article className="action-card"><span className="icon" aria-hidden="true">▤</span><span className="card-index">04</span><h3>Storage</h3><p>A draft that stays with your application, even after a restart.</p><button className="text-button" onClick={() => router.push('/compose/')}>Write a draft <span aria-hidden="true">→</span></button></article>
     </section>
     <Result result={result} busy={busy} />

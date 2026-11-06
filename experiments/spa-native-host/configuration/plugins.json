@@ -4,6 +4,10 @@
     {
       "package": "@nativehost/auth",
       "configuration": {"enabled": false, "origin": null, "providers": [], "rpId": null}
+    },
+    {
+      "package": "@nativehost/storage",
+      "configuration": {}
     }
   ]
 }

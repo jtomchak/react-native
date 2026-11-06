@@ -482,10 +482,20 @@ test('auth events require a current subscription and expose only valid session s
 });
 
 
-test('omitting the auth plug-in removes its namespace and subscription event from the assembled SDK', async t => {
+test('omitting plug-ins removes namespaces and subscription events from the assembled SDK', async t => {
   const fixture = host(t, {source: await assembleSDK({plugins: []})});
   assert.equal(Object.hasOwn(fixture.api, 'auth'), false);
+  assert.equal(Object.hasOwn(fixture.api, 'storage'), false);
   assert.equal(Object.isFrozen(fixture.api), true);
   assert.throws(() => fixture.api.on('auth.changed', () => {}), {code: 'INVALID_REQUEST'});
   assert.equal(fixture.posted.length, 0);
+});
+
+test('storage facade is independently removable while auth and host APIs remain installed', async t => {
+  const {loadSelectedPlugins} = await import('../../tooling/plugins.mjs');
+  const plugins = loadSelectedPlugins().filter(plugin => plugin.id !== 'storage');
+  const fixture = host(t, {source: await assembleSDK({plugins}), hello: authHello, onPost(request, respond) { respond(request, {authenticated: false, configured: false}); }});
+  assert.equal(Object.hasOwn(fixture.api, 'storage'), false);
+  assert.equal(typeof fixture.api.analytics.status, 'function');
+  assert.equal((await fixture.api.auth.status()).authenticated, false);
 });

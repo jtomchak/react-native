@@ -1,0 +1,111 @@
+INSTRUMENTATION_STATUS: assertion=analytics defaults are local only
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=remote collection cannot accept arbitrary property fields
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=remote policy cannot select an unknown destination
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=bundled analytics origin forbids HTTP
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=4200 semantic requests bypass ordinary seen capacity
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=telemetry replay is rejected
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=telemetry cannot cancel ordinary business work
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=telemetry cancellation has its own sequence
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=ordinary work cannot use reserved telemetry identity
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=document invalidation resets its telemetry lane
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=sampling agrees with fixed FNV1a vector
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=route bucketing strips dynamic/query data
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=analytics bridge calls do not recursively instrument
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native stamps canonical platform and source
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native owns event installation and session UUIDs
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=stored event has no raw value, label or query fields
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=manual sensitive properties fail before admission
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=initial remote selector excludes retained history
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=unknown ACK cannot discard queued events
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=rejected ACK leaves event selectable
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=successful destination ACK commits exactly requested ID
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=ACK does not remove local history
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=already acknowledged event not selected again
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=new filter selects retained previously excluded event
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=new destination can select acknowledged retained history
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=lower revision cannot resurrect previous upload policy
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=same revision cannot silently change selectors
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=event survives journal close/reopen
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=installation identity persists while process session changes
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=destination receipts survive journal reopen
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=expired policy selects nothing
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=expired fetched policy rejected
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native count bound evicts oldest events
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=TTL evicts data independently of export selectors
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=single-flight transport ACK reaches native receipt
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=repeated flush does not resend destination ACK
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=next remote policy revision applied without binary change
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=future event uploads under changed filters
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=rebind race holds actual GET A
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=origin A response rejected after configuration B commits
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=offline B cannot reuse origin A policy
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=SQLite fault aborts origin rebind before commit
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=failed rebind rolls origin revision and policy back together
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=rollback preserves origin A monotonic revision across reopen
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=rollback recovery can install a newer valid policy
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=actual document SDK analytics capability
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native semantic custom track commits
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=web cannot impersonate lifecycle event
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=web cannot submit raw input values
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=aggregate status excludes raw journal identity
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=analytics status does not recursively log bridge events
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=ordinary chrome still operates with telemetry lane
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=bridge journal excludes native action arguments
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: assertions=53
+INSTRUMENTATION_RESULT: limits=Native journal and semantic transport; collector HTTP and vendor delivery require separate receipts
+INSTRUMENTATION_RESULT: pid=30919
+INSTRUMENTATION_RESULT: status=passed
+INSTRUMENTATION_CODE: -1

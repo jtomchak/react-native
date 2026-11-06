@@ -33,9 +33,9 @@ private func presentationDiagnostics(_ presenter: UIViewController, window: UIWi
 
 @MainActor
 final class SPAHostTests: XCTestCase {
-    private var window: UIWindow!
-    private var host: HostViewController!
-    private var temporary: URL!
+    var window: UIWindow!
+    var host: HostViewController!
+    var temporary: URL!
     override func setUp() async throws {
         executionTimeAllowance = 45
         temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
@@ -45,14 +45,14 @@ final class SPAHostTests: XCTestCase {
         window?.isHidden = true; window = nil; host = nil
         if let temporary { try? FileManager.default.removeItem(at: temporary) }
     }
-    private func start(root: URL? = nil) {
+    func start(root: URL? = nil) {
         host = HostViewController(assetRoot: root, dataRoot: temporary.appendingPathComponent("data"))
         window = sceneWindow()
         window.rootViewController = UINavigationController(rootViewController: host)
         window.makeKeyAndVisible()
         host.loadViewIfNeeded()
     }
-    private func js(_ source: String) async throws -> Any {
+    func js(_ source: String) async throws -> Any {
         try await withCheckedThrowingContinuation { continuation in
             host.webView.evaluateJavaScript(source) { value, error in
                 if let error { continuation.resume(throwing: error) }
@@ -60,13 +60,13 @@ final class SPAHostTests: XCTestCase {
             }
         }
     }
-    private func asyncJS(_ source: String) async throws -> Any {
+    func asyncJS(_ source: String) async throws -> Any {
         print("SPA_TEST_ASYNC: " + source)
         return try await withCheckedThrowingContinuation { continuation in
             host.webView.callAsyncJavaScript(source, arguments: [:], in: nil, in: .page) { result in print("SPA_TEST_RESULT: \(result)"); continuation.resume(with: result) }
         }
     }
-    private func waitFor(_ predicate: String, timeout: TimeInterval = 15) async throws {
+    func waitFor(_ predicate: String, timeout: TimeInterval = 15) async throws {
         let deadline = Date().addingTimeInterval(timeout)
         while Date() < deadline {
             if (try? await js("Boolean(" + predicate + ")")) as? Bool == true { return }
@@ -75,7 +75,7 @@ final class SPAHostTests: XCTestCase {
         XCTFail("Timed out waiting for " + predicate)
         throw HostFailure("TIMEOUT", "Test timed out")
     }
-    private func fixtureRoot() throws -> URL {
+    func fixtureRoot() throws -> URL {
         let root = temporary.appendingPathComponent("fixture")
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         let sdk = Bundle.main.bundleURL.appendingPathComponent("web/platform-sdk.js")
@@ -127,73 +127,10 @@ final class SPAHostTests: XCTestCase {
         XCTAssertNil(Assets.safePath(URL(string: "spa://app/a%5cb")!))
         XCTAssertNil(Assets.safePath(URL(string: "spa://evil/index.html")!))
     }
-    func testRealSDKStorageAndNativePresentation() async throws {
-        start(root: try fixtureRoot())
-        try await waitFor("window.platform && document.readyState === 'complete'")
-        let platform = try await asyncJS("return (await platform.ready()).platform") as? String
-        XCTAssertEqual(platform, "ios")
-        _ = try await asyncJS("await platform.storage.set('native-test', 'persisted'); return true")
-        let value = try await asyncJS("return await platform.storage.get('native-test')") as? String
-        XCTAssertEqual(value, "persisted")
-        _ = try await asyncJS("await platform.storage.remove('native-test'); return true")
-        let removed = try await asyncJS("return (await platform.storage.get('native-test')) === null") as? Bool
-        XCTAssertEqual(removed, true)
-        _ = try await asyncJS("await platform.navigation.present({screen:'native-demo'}); return true")
-        XCTAssertNotNil(host.presentedViewController as? UINavigationController)
-        _ = try await asyncJS("await platform.navigation.dismiss(); return true")
-        XCTAssertNil(host.presentedViewController)
-        let missingCamera = try await asyncJS("try { await platform.camera.capture(); return 'unexpected'; } catch (e) { return e.code; }") as? String
-        #if targetEnvironment(simulator)
-        XCTAssertEqual(missingCamera, "UNAVAILABLE")
-        #endif
-        _ = try await asyncJS("await platform.storage.set('survives', 'restart'); return true")
-        let oldWindow = window
-        start(root: try fixtureRootForRestart())
-        oldWindow?.isHidden = true
-        try await waitFor("window.platform && document.readyState === 'complete'")
-        let restored = try await asyncJS("return await platform.storage.get('survives')") as? String
-        XCTAssertEqual(restored, "restart")
-    }
-    private func fixtureRootForRestart() throws -> URL { temporary.appendingPathComponent("fixture") }
-    func testSQLitePreservesEmbeddedNULAndUTF8WithoutKeyCollision() async throws {
-        let storage = Storage(root: temporary.appendingPathComponent("nul-storage"))
-        func operation(_ action: String, _ key: String, _ value: String? = nil) async throws -> Any {
-            try await withCheckedThrowingContinuation { continuation in
-                storage.perform(action: action, key: key, value: value) { result in
-                    switch result {
-                    case .success(let value): continuation.resume(returning: value)
-                    case .failure(let error): continuation.resume(throwing: error)
-                    }
-                }
-            }
-        }
-        let key = "prefix\u{0}🔑"
-        let value = "before\u{0}📷after"
-        _ = try await operation("storage.set", "prefix", "plain prefix")
-        _ = try await operation("storage.set", key, value)
-        let full = try await operation("storage.get", key) as? String
-        let prefix = try await operation("storage.get", "prefix") as? String
-        XCTAssertEqual(full, value)
-        XCTAssertEqual(prefix, "plain prefix")
-        _ = try await operation("storage.remove", key)
-        let missing = try await operation("storage.get", key)
-        let untouched = try await operation("storage.get", "prefix") as? String
-        XCTAssertTrue(missing is NSNull)
-        XCTAssertEqual(untouched, "plain prefix")
-        // Exercise JSON -> native argument validation -> SQLite -> JSON too.
-        start(root: try fixtureRoot())
-        try await waitFor("window.platform && document.readyState === 'complete'")
-        let roundtrip = try await asyncJS("const key='json'+String.fromCharCode(0)+'🔑'; const value='before'+String.fromCharCode(0)+'📷after'; await platform.storage.set('json','plain'); await platform.storage.set(key,value); return (await platform.storage.get(key)) === value && (await platform.storage.get('json')) === 'plain';") as? Bool
-        XCTAssertEqual(roundtrip, true)
-    }
-    func testStorageQuotaRollsBackRejectedWrite() async throws {
-        start(root: try fixtureRoot())
-        try await waitFor("document.readyState === 'complete' && window.platform")
-        let outcome = try await asyncJS("const value='x'.repeat(32768); for(let i=0;i<31;i++) await platform.storage.set('quota-'+i,value); try { await platform.storage.set('quota-over',value); return 'accepted'; } catch(e) { return e.code; }") as? String
-        XCTAssertEqual(outcome, "QUOTA_EXCEEDED")
-        let rolledBack = try await asyncJS("return (await platform.storage.get('quota-over')) === null") as? Bool
-        XCTAssertEqual(rolledBack, true)
-    }
+
+
+
+
     func testNativeValidationAndSubframeCannotClaimSession() async throws {
         start(root: try fixtureRoot())
         try await waitFor("document.readyState === 'complete' && window.platform")
@@ -206,10 +143,8 @@ final class SPAHostTests: XCTestCase {
         // If the subframe claimed the host session, root ready would fail.
         let established = try await asyncJS("return (await platform.ready()).platform") as? String
         XCTAssertEqual(established, "ios")
-        let invalid = try await asyncJS("try { await platform.call('storage.set',{key:'rejected',value:'wrong',extra:true}); return 'accepted'; } catch(e) { return e.code; }") as? String
+        let invalid = try await asyncJS("try { await platform.call('haptics.impact',{style:'light',extra:true}); return 'accepted'; } catch(e) { return e.code; }") as? String
         XCTAssertEqual(invalid, "INVALID_REQUEST")
-        let absent = try await asyncJS("return (await platform.storage.get('rejected')) === null") as? Bool
-        XCTAssertEqual(absent, true)
         let invalidRoute = try await asyncJS("try { await platform.call('navigation.update',{path:'/escape/',title:'bad',canGoBack:false}); return 'accepted'; } catch(e) { return e.code; }") as? String
         XCTAssertEqual(invalidRoute, "INVALID_REQUEST")
         let unsupported = try await asyncJS("try { await platform.call('unknown.action',{}); return 'accepted'; } catch(e) { return e.code; }") as? String
@@ -238,21 +173,21 @@ final class SPAHostTests: XCTestCase {
 
 @MainActor
 final class NativeShellTests: XCTestCase {
-    private var window: UIWindow!
-    private var root: URL!
-    private var shell: NativeShell!
+    var window: UIWindow!
+    var root: URL!
+    var shell: NativeShell!
     override func setUp() async throws { root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString); try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true) }
     override func tearDown() async throws { window?.isHidden = true; window = nil; shell = nil; try? FileManager.default.removeItem(at: root) }
-    private func start(chrome: String = "tabs", hosted: Bool = false) {
+    func start(chrome: String = "tabs", hosted: Bool = false) {
         var config = HostConfiguration(); config.chromeMode = chrome; config.navigationMode = "native"
         if hosted { config.contentMode = "hosted"; config.origin = URL(string: "http://127.0.0.1:18797") }
         shell = NativeShell(configuration: config, assetRoot: Bundle.main.bundleURL.appendingPathComponent("web"), dataRoot: root)
         window = sceneWindow(); window.rootViewController = shell.rootController; window.makeKeyAndVisible()
     }
-    private func js(_ host: HostViewController, _ code: String) async throws -> Any {
+    func js(_ host: HostViewController, _ code: String) async throws -> Any {
         try await withCheckedThrowingContinuation { continuation in host.webView.callAsyncJavaScript(code, arguments: [:], in: nil, in: .page) { continuation.resume(with: $0) } }
     }
-    private func loaded(_ host: HostViewController) async throws {
+    func loaded(_ host: HostViewController) async throws {
         host.loadViewIfNeeded()
         for _ in 0..<150 {
             if (try? await js(host, "return Boolean(window.platform && document.readyState === 'complete')")) as? Bool == true { return }
@@ -309,8 +244,6 @@ final class NativeShellTests: XCTestCase {
         XCTAssertFalse(first === second)
         XCTAssertEqual(second.navigationController?.viewControllers.count, 2)
         XCTAssertTrue(second.navigationController?.interactivePopGestureRecognizer?.isEnabled == true)
-        let shared = try await js(second, "await platform.storage.set('shared-shell', 'one-store'); return true") as? Bool
-        XCTAssertEqual(shared, true)
         _ = try await js(second, "return await platform.call('chrome.update',{title:'Native detail',largeTitle:false})")
         XCTAssertEqual(second.title, "Native detail")
         _ = try await js(second, "return await platform.call('toolbar.set',{registration:'owned-title',title:'Owned toolbar',actions:[]})")
@@ -325,7 +258,6 @@ final class NativeShellTests: XCTestCase {
         try await Task.sleep(nanoseconds: 500_000_000)
         XCTAssertTrue(shell.activeHost === first)
         let nativeRoot = try await js(first, "return window.shellNonce") as? String; XCTAssertEqual(nativeRoot, "native-root")
-        let stored = try await js(first, "return await platform.storage.get('shared-shell')") as? String; XCTAssertEqual(stored, "one-store")
     }
     func testShareValidationPushUnconfiguredAndBiometricsAreRealCapabilities() async throws {
         start(chrome: "standard"); let host = shell.activeHost!; try await loaded(host)
@@ -417,7 +349,7 @@ final class NativeShellTests: XCTestCase {
         XCTAssertEqual(meta?["contentMode"] as? String, "hosted")
         let body = try await js(host, "return document.body.innerText") as? String
         XCTAssertTrue(body?.contains("hosted") == true || body?.contains("server") == true)
-        let nativeStored = try await js(host, "await platform.storage.set('hosted-native','real');return await platform.storage.get('hosted-native')") as? String; XCTAssertEqual(nativeStored, "real")
+        let nativeMode = try await js(host, "return (await platform.chrome.state()).mode") as? String; XCTAssertEqual(nativeMode, "standard")
         _ = try await js(host, "return await platform.call('navigation.visit',{path:'/hosted/item/42/',presentation:'push'})")
         let item = shell.activeHost!; try await loaded(item)
         let itemID = try await js(item, "return document.querySelector('[data-testid=server-item-id]')?.textContent") as? String

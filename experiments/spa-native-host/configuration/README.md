@@ -4,8 +4,8 @@
 validate it and package it with the app. It is never downloaded from the hosted
 page, and no bridge method grants a new origin.
 
-Select and configure native plug-ins in `plugins.json`. Auth is the first
-single-package plug-in; its public settings are generated into the bundled
+Select and configure native plug-ins in `plugins.json`. Auth and storage are
+single-package plug-ins; their public settings are generated into the bundled
 host configuration. See [PLUGINS.md](../PLUGINS.md) for SwiftPM, Gradle and
 installation/removal checks. Private server credentials stay outside both files.
 

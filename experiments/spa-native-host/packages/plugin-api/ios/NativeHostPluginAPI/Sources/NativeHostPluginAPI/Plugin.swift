@@ -48,11 +48,12 @@ public protocol PluginHostServices: AnyObject {
 public struct PluginEnvironment {
     public let configuration: [String: Any]
     public let services: PluginHostServices
+    public let dataRoot: URL
     public let debug: Bool
     public let features: Set<String>
     public let arguments: [String]
-    public init(configuration: [String: Any], services: PluginHostServices, debug: Bool, features: Set<String>, arguments: [String] = ProcessInfo.processInfo.arguments) {
-        self.configuration = configuration; self.services = services; self.debug = debug; self.features = features; self.arguments = arguments
+    public init(configuration: [String: Any], services: PluginHostServices, dataRoot: URL, debug: Bool, features: Set<String>, arguments: [String] = ProcessInfo.processInfo.arguments) {
+        self.configuration = configuration; self.services = services; self.dataRoot = dataRoot; self.debug = debug; self.features = features; self.arguments = arguments
     }
 }
 

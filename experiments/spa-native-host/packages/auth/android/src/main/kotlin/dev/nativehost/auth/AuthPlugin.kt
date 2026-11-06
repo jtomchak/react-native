@@ -35,7 +35,7 @@ class AuthPlugin(private val environment: PluginEnvironment) : NativePlugin {
             environment.emit("auth.changed", summary)
         }
     }
-    override fun invoke(context: PluginCallContext, action: String, args: JSONObject, completion: (JSONObject?, PluginFailure?) -> Unit) {
+    override fun invoke(context: PluginCallContext, action: String, args: JSONObject, completion: (Any?, PluginFailure?) -> Unit) {
         val policy = actions.firstOrNull { it.name == action } ?: throw PluginFailure("UNSUPPORTED", "Unknown authentication action")
         val keys = args.keys().asSequence().toSet()
         val expected = if (action == "auth.signIn") {

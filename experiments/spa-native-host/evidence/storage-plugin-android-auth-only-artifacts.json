@@ -1,0 +1,14 @@
+{
+  "app": {
+    "sha256": "b27159a92b28c2f5f34bdea5befdf5ab7d3a47970800c4981677eebd55ada153",
+    "storagePackageAndSuitesAbsent": true
+  },
+  "test": {
+    "sha256": "b7fcc3a88ea49c5c6719e0bd40ad18776a431b99c42cbf48573a39e28a22a170",
+    "storagePackageAndSuitesAbsent": true
+  },
+  "runtimeGraph": {
+    "authPresent": true,
+    "storageAbsent": true
+  }
+}

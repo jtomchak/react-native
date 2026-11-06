@@ -45,7 +45,7 @@ internal class PluginRuntime(context: Context) {
         boundOwner = owner; eventSink = emit; beginSessionChange = begin; completeSessionChange = complete
     }
     fun unbind(owner: Any) { if (boundOwner === owner) { boundOwner = null; eventSink = null; beginSessionChange = null; completeSessionChange = null } }
-    fun invoke(context: PluginCallContext, action: String, args: JSONObject, completion: (JSONObject?, HostError?) -> Unit) {
+    fun invoke(context: PluginCallContext, action: String, args: JSONObject, completion: (Any?, HostError?) -> Unit) {
         val plugin = owners[action] ?: throw HostError("UNSUPPORTED", "Native plugin action is not installed")
         try {
             plugin.invoke(context, action, args) { result, failure -> completion(result, failure?.let { HostError(it.code, it.message ?: "Native plugin failed") }) }

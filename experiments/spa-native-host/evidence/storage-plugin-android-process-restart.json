@@ -1,0 +1,28 @@
+{
+  "result": "passed",
+  "device": "Pixel 2 XL",
+  "androidApi": "30",
+  "steps": [
+    {
+      "name": "packaged",
+      "assertions": 47,
+      "pid": "29445",
+      "status": "passed"
+    },
+    {
+      "name": "process-restart",
+      "assertions": 2,
+      "pid": "29653",
+      "status": "passed"
+    }
+  ],
+  "checks": [
+    "selected auth and storage app",
+    "native storage survives force-stop and process restart",
+    "distinct native process IDs"
+  ],
+  "limits": [
+    "No physical camera capture or perceived haptic sensation asserted",
+    "No Release execution or benchmark asserted"
+  ]
+}

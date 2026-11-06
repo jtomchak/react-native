@@ -1,0 +1,11 @@
+Xcode.RC, iPad simulator iOS 27.2, 2026-11-06.
+    /Applications/Xcode.RC.app/Contents/Developer/usr/bin/xcodebuild test -project SPAHost.xcodeproj -scheme SPAHost -configuration Debug -destination "platform=iOS Simulator,id=6B126463-F3F6-481F-AE05-A660182B4DC5" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=- "-only-testing:SPAHostTests/AnalyticsTests" "-only-testing:SPAHostTests/AnalyticsBridgeTests" "-only-testing:SPAHostTests/AuthTests" "-only-testing:SPAHostTests/PluginRegistryTests" "-only-testing:SPAHostTests/SPAHostTests/testDocumentStartSDKWithoutSDKScriptTag" "-only-testing:SPAHostTests/SPAHostTests/testNativeValidationAndSubframeCannotClaimSession"
+
+	 Executed 2 tests, with 0 failures (0 unexpected) in 7.292 (7.304) seconds
+	 Executed 8 tests, with 0 failures (0 unexpected) in 1.275 (1.277) seconds
+	 Executed 14 tests, with 0 failures (0 unexpected) in 0.151 (0.155) seconds
+	 Executed 1 test, with 0 failures (0 unexpected) in 2.225 (2.225) seconds
+	 Executed 2 tests, with 0 failures (0 unexpected) in 4.685 (4.685) seconds
+	 Executed 27 tests, with 0 failures (0 unexpected) in 15.627 (15.649) seconds
+	 Executed 27 tests, with 0 failures (0 unexpected) in 15.627 (15.651) seconds
+** TEST SUCCEEDED **

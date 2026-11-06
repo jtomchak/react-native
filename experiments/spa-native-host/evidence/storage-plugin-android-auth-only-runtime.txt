@@ -1,0 +1,26 @@
+INSTRUMENTATION_STATUS: assertion=real transport handshake
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=generic plugin identifiers permit underscores
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=generated selection matches actual native factories
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=selected package actions advertised
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=removed action not advertised
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=removed action rejected by native dispatcher
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=removed namespace has no native capabilities
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=removed SDK namespace is absent
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=remaining package service still responds
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=core native chrome works independently of optional packages
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native analytics remains independent
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: assertions=13
+INSTRUMENTATION_RESULT: plugins=1
+INSTRUMENTATION_RESULT: status=passed
+INSTRUMENTATION_CODE: -1

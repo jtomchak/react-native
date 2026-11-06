@@ -7,7 +7,6 @@ import NativeHostPluginAPI
 final class ApplicationServices: NSObject, UNUserNotificationCenterDelegate, PluginHostServices {
     let root: URL
     let photoQueue = DispatchQueue(label: "dev.spahost.photos", qos: .userInitiated)
-    let storage: Storage
     let analytics: NativeAnalytics
     let configuration: HostConfiguration
     private(set) var plugins: [NativePlugin] = []
@@ -35,7 +34,7 @@ final class ApplicationServices: NSObject, UNUserNotificationCenterDelegate, Plu
     private weak var shareController: UIActivityViewController?
     private var shareCancellation: (() -> Void)?
     init(root: URL, configuration: HostConfiguration) {
-        self.root = root; self.configuration = configuration; self.storage = Storage(root: root)
+        self.root = root; self.configuration = configuration
         self.analytics = NativeAnalytics(root: root.appendingPathComponent("analytics", isDirectory: true), configuration: configuration.analytics)
         super.init()
         #if DEBUG
@@ -48,7 +47,7 @@ final class ApplicationServices: NSObject, UNUserNotificationCenterDelegate, Plu
         features.insert("passkeys")
         #endif
         do {
-            plugins = try GeneratedPluginRegistry.make(environment: PluginEnvironment(configuration: configuration.pluginConfigurations, services: self, debug: debug, features: features))
+            plugins = try GeneratedPluginRegistry.make(environment: PluginEnvironment(configuration: configuration.pluginConfigurations, services: self, dataRoot: root, debug: debug, features: features))
             let actions = plugins.flatMap { $0.actions.map { $0.name } }, ids = plugins.map { $0.id }
             guard Set(ids).count == ids.count, Set(actions).count == actions.count, !actions.contains("hello"), !actions.contains("cancel"),
                   plugins.allSatisfy({ Set($0.stateEvents).isSubset(of: Set($0.events)) }) else { throw HostFailure("INVALID_REQUEST", "Conflicting native plug-in registration") }

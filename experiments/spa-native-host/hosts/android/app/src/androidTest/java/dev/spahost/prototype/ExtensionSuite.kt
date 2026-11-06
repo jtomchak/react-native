@@ -35,7 +35,7 @@ internal class ExtensionSuite(private val runner: Instrumentation, private val a
                 ready()
                 check("offline fallback establishes packaged mode", action("return (await platform.ready()).host.contentMode") == "packaged")
                 check("offline fallback replaces privileged origin", js("location.origin") == HostActivity.ORIGIN)
-                check("native bridge works after explicit packaged fallback", action("await platform.storage.set('fallback-proof','native');return await platform.storage.get('fallback-proof')") == "native")
+                check("native bridge works after explicit packaged fallback", action("return (await platform.ready()).platform") == "android")
                 report.putString("status", "passed"); report.putInt("assertions", assertions); report.putString("feature", "offline")
                 runner.runOnMainSync { host.finish() }; runner.finish(android.app.Activity.RESULT_OK, report); return
             }
@@ -63,7 +63,7 @@ internal class ExtensionSuite(private val runner: Instrumentation, private val a
             check("toolbar disposal restores route title", (host.nativeToolbar.getChildAt(1) as android.widget.TextView).text.toString() == "Generic route title")
             val base = host.webView
             js(base, "window.__surfaceNonce='retained-root';true")
-            action("await platform.storage.set('extension-shared','shared-native');return true")
+            val sharedAuthorization = action("return (await platform.call('notifications.status',{})).authorization")
             action("await platform.call('chrome.update',{toolbarHidden:true,tabBarHidden:true,statusBarStyle:'light'});return true")
             check("surface appearance applied", host.nativeToolbar.visibility == View.GONE)
             fire("platform.call('navigation.visit',{path:'/compose/',presentation:'push'})")
@@ -72,7 +72,7 @@ internal class ExtensionSuite(private val runner: Instrumentation, private val a
             val pushed = host.webView
             check("new surface appearance defaults restored", host.nativeToolbar.visibility == View.VISIBLE)
             check("native stack depth", JSONObject(action("return await platform.call('chrome.state',{})") as String).getInt("depth") == 2)
-            check("services shared across surfaces", action("return await platform.storage.get('extension-shared')") == "shared-native")
+            check("services shared across surfaces", action("return (await platform.call('notifications.status',{})).authorization") == sharedAuthorization)
             check("hidden surface cannot mutate foreground chrome", action(base, "try{await platform.call('chrome.update',{title:'hidden attack'});return 'bad'}catch(e){return e.code}") == "UNAUTHORIZED")
             fire("platform.navigation.back()")
             waitFor("native pop restores existing root") { host.webView === base }

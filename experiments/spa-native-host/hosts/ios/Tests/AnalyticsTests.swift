@@ -4,18 +4,18 @@ import WebKit
 
 @MainActor
 final class AnalyticsTests: XCTestCase {
-    private var root: URL!
+    var root: URL!
     override func setUp() async throws { root = FileManager.default.temporaryDirectory.appendingPathComponent("analytics-" + UUID().uuidString); try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true) }
     override func tearDown() async throws { try? FileManager.default.removeItem(at: root) }
-    private func record(_ analytics: NativeAnalytics, _ name: String, properties: [String: Any] = [:]) async throws {
+    func record(_ analytics: NativeAnalytics, _ name: String, properties: [String: Any] = [:]) async throws {
         _ = try await withCheckedThrowingContinuation { continuation in analytics.record(category: "custom", name: name, properties: properties, source: "web") { continuation.resume(with: $0) } }
     }
-    private func events(_ analytics: NativeAnalytics) async -> [[String: Any]] { await withCheckedContinuation { continuation in analytics.inspectForTesting { continuation.resume(returning: $0) } } }
-    private func status(_ analytics: NativeAnalytics) async throws -> [String: Any] { try await withCheckedThrowingContinuation { continuation in analytics.status { result in continuation.resume(with: result.map { $0 as! [String: Any] }) } } }
-    private func policy(_ revision: Int, names: [String] = ["*"], destination: String = "recording") -> [String: Any] {
+    func events(_ analytics: NativeAnalytics) async -> [[String: Any]] { await withCheckedContinuation { continuation in analytics.inspectForTesting { continuation.resume(returning: $0) } } }
+    func status(_ analytics: NativeAnalytics) async throws -> [String: Any] { try await withCheckedThrowingContinuation { continuation in analytics.status { result in continuation.resume(with: result.map { $0 as! [String: Any] }) } } }
+    func policy(_ revision: Int, names: [String] = ["*"], destination: String = "recording") -> [String: Any] {
         ["schemaVersion": 1, "revision": revision, "expiresAtMs": NativeAnalytics.now() + 60_000, "enabled": true, "categories": ["custom"], "names": names, "properties": [:], "sampleBasisPoints": 10_000, "lookbackSeconds": 604_800, "destinations": [destination]]
     }
-    private func select(_ analytics: NativeAnalytics, _ object: [String: Any], destination: String = "recording", ack: [String] = []) async throws -> [[String: Any]] {
+    func select(_ analytics: NativeAnalytics, _ object: [String: Any], destination: String = "recording", ack: [String] = []) async throws -> [[String: Any]] {
         try await withCheckedThrowingContinuation { continuation in analytics.policyForTesting(object, destination: destination, acknowledge: ack) { continuation.resume(with: $0) } }
     }
     func testNativeJournalPersistsIdentityAndCommittedEventsAcrossOwners() async throws {
@@ -146,9 +146,9 @@ final class AnalyticsTests: XCTestCase {
 
 @MainActor
 final class AnalyticsBridgeTests: XCTestCase {
-    private var window: UIWindow!
-    private var host: HostViewController!
-    private var root: URL!
+    var window: UIWindow!
+    var host: HostViewController!
+    var root: URL!
     override func setUp() async throws {
         root = FileManager.default.temporaryDirectory.appendingPathComponent("analytics-bridge-" + UUID().uuidString)
         let scene = try XCTUnwrap(UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first)
@@ -162,7 +162,7 @@ final class AnalyticsBridgeTests: XCTestCase {
         XCTFail("Real WebView did not finish loading")
     }
     override func tearDown() async throws { window?.isHidden = true; window = nil; host = nil; try? FileManager.default.removeItem(at: root) }
-    private func js(_ body: String) async throws -> Any { try await withCheckedThrowingContinuation { continuation in host.webView.callAsyncJavaScript(body, arguments: [:], in: nil, in: .page) { continuation.resume(with: $0) } } }
+    func js(_ body: String) async throws -> Any { try await withCheckedThrowingContinuation { continuation in host.webView.callAsyncJavaScript(body, arguments: [:], in: nil, in: .page) { continuation.resume(with: $0) } } }
     func testRealBridgeSemanticAdmissionNoAnalyticsRecursionAndForegroundOwnership() async throws {
         let recorded = try await js("return await platform.call('analytics.track',{name:'custom.bridge',properties:{control:'native-save',count:1}})") as? [String: Any]
         XCTAssertEqual(recorded?["recorded"] as? Bool, true)
@@ -182,30 +182,11 @@ final class AnalyticsBridgeTests: XCTestCase {
         window.isHidden = true
         let hidden = try await js("try{await platform.call('analytics.observe',{type:'click',kind:'button'});return 'bad'}catch(e){return e.code}") as? String; XCTAssertEqual(hidden, "UNAUTHORIZED")
     }
-    func testCommittedStorageOutcomeSurvivesRetiredDocumentAndDuplicateCompletion() async throws {
-        let analytics = host.analyticsForTesting, storage = host.storageForTesting
-        let gate = DispatchSemaphore(value: 0)
-        await withCheckedContinuation { continuation in storage.holdWriterForTesting(entered: { continuation.resume() }, until: gate) }
-        _ = try await js("platform.storage.set('private-key','private-value').catch(()=>{});return true")
-        for _ in 0..<100 { if host.pendingForTesting("storage.set") != nil { break }; try await Task.sleep(nanoseconds: 10_000_000) }
-        let request = try XCTUnwrap(host.pendingForTesting("storage.set"))
-        host.invalidateSurface()
-        gate.signal()
-        let stored: Any = try await withCheckedThrowingContinuation { continuation in storage.perform(action: "storage.get", key: "private-key", value: nil) { continuation.resume(with: $0) } }
-        XCTAssertEqual(stored as? String, "private-value")
-        request.recordOutcome(.success(NSNull()))
-        try await Task.sleep(nanoseconds: 100_000_000)
-        let captured = await withCheckedContinuation { continuation in analytics.inspectForTesting { continuation.resume(returning: $0) } }
-        let completions = captured.filter { ($0["properties"] as? [String: Any])?["action"] as? String == "storage.set" }
-        XCTAssertEqual(completions.count, 1)
-        XCTAssertEqual((completions.first?["properties"] as? [String: Any])?["outcome"] as? String, "ok")
-        let serialized = String(data: try AnalyticsSchema.encode(captured), encoding: .utf8)!
-        XCTAssertFalse(serialized.contains("private-key")); XCTAssertFalse(serialized.contains("private-value"))
-    }
+
     func testTelemetryLaneDoesNotExhaustBusinessRequestLimit() async throws {
         executionTimeAllowance = 60
-        let business = try await js("for(let i=0;i<4100;i++)await platform.call('analytics.status',{});await platform.storage.set('after-telemetry','business-still-live');return await platform.storage.get('after-telemetry')") as? String
-        XCTAssertEqual(business, "business-still-live")
+        let business = try await js("for(let i=0;i<4100;i++)await platform.call('analytics.status',{});return (await platform.chrome.state()).mode") as? String
+        XCTAssertEqual(business, "standard")
         XCTAssertNil(HostViewController.analyticsSequence("0")); XCTAssertNil(HostViewController.analyticsSequence("01")); XCTAssertNil(HostViewController.analyticsSequence("9007199254740992")); XCTAssertNil(HostViewController.analyticsSequence("1.0")); XCTAssertNil(HostViewController.analyticsSequence("1e2"))
         XCTAssertEqual(HostViewController.analyticsSequence("9007199254740991"), 9_007_199_254_740_991)
     }
@@ -217,19 +198,19 @@ final class AnalyticsBridgeTests: XCTestCase {
 @MainActor
 final class AnalyticsHTTPTests: XCTestCase {
     private let origin = URL(string: "http://127.0.0.1:18797")!
-    private var root: URL { FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("analytics-http-acceptance", isDirectory: true) }
-    private func configuredPhase(_ revision: Int, name: String) async throws {
+    var root: URL { FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("analytics-http-acceptance", isDirectory: true) }
+    func configuredPhase(_ revision: Int, name: String) async throws {
         var request = URLRequest(url: origin.appendingPathComponent("api/analytics/policy/")); request.timeoutInterval = 2
         guard let (data, response) = try? await URLSession.shared.data(for: request), (response as? HTTPURLResponse)?.statusCode == 200,
               let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any], object["revision"] as? Int == revision,
               object["enabled"] as? Bool == true, object["names"] as? [String] == [name] else { throw XCTSkip("Local analytics collector is not configured for acceptance phase \(revision)") }
     }
-    private func engine() -> NativeAnalytics { var config = AnalyticsConfiguration(); config.origin = origin; return NativeAnalytics(root: root, configuration: config) }
-    private func record(_ analytics: NativeAnalytics, _ name: String) async throws { _ = try await withCheckedThrowingContinuation { continuation in analytics.record(category: "custom", name: name, properties: ["control": "acceptance-fixture"], source: "web") { continuation.resume(with: $0) } } }
-    private func flush(_ analytics: NativeAnalytics) async throws -> [String: Any] { try await withCheckedThrowingContinuation { continuation in analytics.flush { continuation.resume(with: $0.map { $0 as! [String: Any] }) } } }
-    private func status(_ analytics: NativeAnalytics) async throws -> [String: Any] { try await withCheckedThrowingContinuation { continuation in analytics.status { continuation.resume(with: $0.map { $0 as! [String: Any] }) } } }
-    private func events(_ analytics: NativeAnalytics) async -> [[String: Any]] { await withCheckedContinuation { continuation in analytics.inspectForTesting { continuation.resume(returning: $0) } } }
-    private func receipt(_ name: String, _ value: [String: Any]) throws {
+    func engine() -> NativeAnalytics { var config = AnalyticsConfiguration(); config.origin = origin; return NativeAnalytics(root: root, configuration: config) }
+    func record(_ analytics: NativeAnalytics, _ name: String) async throws { _ = try await withCheckedThrowingContinuation { continuation in analytics.record(category: "custom", name: name, properties: ["control": "acceptance-fixture"], source: "web") { continuation.resume(with: $0) } } }
+    func flush(_ analytics: NativeAnalytics) async throws -> [String: Any] { try await withCheckedThrowingContinuation { continuation in analytics.flush { continuation.resume(with: $0.map { $0 as! [String: Any] }) } } }
+    func status(_ analytics: NativeAnalytics) async throws -> [String: Any] { try await withCheckedThrowingContinuation { continuation in analytics.status { continuation.resume(with: $0.map { $0 as! [String: Any] }) } } }
+    func events(_ analytics: NativeAnalytics) async -> [[String: Any]] { await withCheckedContinuation { continuation in analytics.inspectForTesting { continuation.resume(returning: $0) } } }
+    func receipt(_ name: String, _ value: [String: Any]) throws {
         let data = try AnalyticsSchema.encode(value); try data.write(to: root.appendingPathComponent(name + ".json"), options: .atomic)
         print("ANALYTICS_HTTP_\(name): " + String(data: data, encoding: .utf8)!)
     }

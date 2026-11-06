@@ -1,0 +1,10 @@
+{
+  "result": "passed",
+  "mode": "production Next server with auth-only declaration",
+  "checks": [
+    "storage server route returns 404",
+    "auth session route remains available and anonymous",
+    "auth SSR renders anonymously",
+    "SDK contains auth actions and omits storage actions"
+  ]
+}

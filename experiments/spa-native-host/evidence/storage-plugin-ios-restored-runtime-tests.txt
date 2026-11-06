@@ -1,0 +1,8 @@
+Test Case '-[SPAHostTests.PluginRegistryTests testBridgeAdvertisesExactlyTheSelectedPluginCapabilities]' passed (2.572 seconds).
+Test Suite 'PluginRegistryTests' passed at 2026-11-06 10:07:11.928.
+	 Executed 1 test, with 0 failures (0 unexpected) in 2.572 (2.587) seconds
+Test Suite 'SPAHostTests.xctest' passed at 2026-11-06 10:07:11.929.
+	 Executed 1 test, with 0 failures (0 unexpected) in 2.572 (2.588) seconds
+Test Suite 'Selected tests' passed at 2026-11-06 10:07:11.929.
+	 Executed 1 test, with 0 failures (0 unexpected) in 2.572 (2.592) seconds
+** TEST SUCCEEDED **

@@ -6,7 +6,7 @@ export async function installMockNative(page, options = {}) {
     let currentSession = null;
     let pendingBack = null;
     const state = {path: '/', title: '', canGoBack: false, toolbar: null, modal: false, haptics: 0, visits: [], subscriptions: {}, observations: [], customEvents: [], auth: options.auth?.status || {authenticated: false, configured: false, providers: [], passkeys: false}, pendingAuthStatus: [], pendingAuthActions: []};
-    const capabilities = ['navigation.update', 'navigation.back', 'navigation.present', 'navigation.dismiss', 'toolbar.set', 'toolbar.clear', 'haptics.impact', 'storage.get', 'storage.set', 'storage.remove', 'camera.capture', 'files.previewURL', 'files.remove'];
+    const capabilities = ['navigation.update', 'navigation.back', 'navigation.present', 'navigation.dismiss', 'toolbar.set', 'toolbar.clear', 'haptics.impact', 'storage.get', 'storage.set', 'storage.remove', 'camera.capture', 'files.previewURL', 'files.remove'].filter(action => options.storage !== false || !action.startsWith('storage.'));
     const host = options.native ? {apiVersion: 2, contentMode: options.contentMode || 'packaged', navigationMode: 'native', chromeMode: options.chromeMode || 'tabs', surfaceId: 'mock-surface', activeTab: 'overview'} : null;
     if (host) capabilities.push('navigation.visit', 'events.subscribe', 'events.unsubscribe', 'chrome.state', 'chrome.selectTab');
     if (options.auth) capabilities.push('auth.status', 'auth.signIn', 'auth.registerPasskey', 'auth.signOut', 'auth.syncWebSession');
@@ -27,7 +27,8 @@ export async function installMockNative(page, options = {}) {
         identity = request.document;
         currentSession = `mock-${identity}`;
         response(request, {platform: 'ios', capabilities, ...(host ? {host} : {})});
-      } else if (action === 'storage.get') response(request, localStorage.getItem(`mock-native:${args.key}`));
+      } else if (action.startsWith('storage.') && options.storage === false) send({v: 1, id: request.id, document: request.document, session: currentSession, ok: false, error: {code: 'UNSUPPORTED', message: 'Storage is not installed.'}});
+      else if (action === 'storage.get') response(request, localStorage.getItem(`mock-native:${args.key}`));
       else if (action === 'storage.set') {localStorage.setItem(`mock-native:${args.key}`, args.value); response(request, null);}
       else if (action === 'storage.remove') {localStorage.removeItem(`mock-native:${args.key}`); response(request, null);}
       else if (action === 'navigation.update') {

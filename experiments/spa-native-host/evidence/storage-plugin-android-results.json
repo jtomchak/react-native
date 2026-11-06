@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "device": {
+    "serial": "805KPFX1843819",
+    "model": "Pixel 2 XL",
+    "androidApi": 30
+  },
+  "selected": {
+    "plugins": 2,
+    "storageAssertions": 63,
+    "hostAssertions": 47,
+    "restartAssertions": 2,
+    "runtimeAssertions": 8,
+    "authAssertions": 31,
+    "authLiveAssertions": 27,
+    "persistenceReceipt": "evidence/storage-plugin-android-process-restart.json"
+  },
+  "authOnly": {
+    "plugins": 1,
+    "runtimeAssertions": 13,
+    "analyticsAssertions": 53,
+    "authAssertions": 31,
+    "authLiveAssertions": 27,
+    "artifacts": "evidence/storage-plugin-android-auth-only-artifacts.json"
+  },
+  "restored": {
+    "plugins": 2,
+    "runtimeAssertions": 8,
+    "assetHashesVerified": 40,
+    "appApkSha256": "b52364ae071ac6d0e6305b2538cd3fa9a2da63f31fdaa0c1103d040f203336c9",
+    "testApkSha256": "2aa8de2800649664ee28e8290bfb3cb89d2bad1ba842d21e7faa4e64388d0d19"
+  },
+  "limits": [
+    "Debug on Android API30 only; no Release benchmark",
+    "OAuth uses isolated loopback issuer; production providers/passkey enrollment remain unverified",
+    "An optional final DevTools scalar probe was inconclusive; existing storage63/host47 are the scalar acceptance receipts"
+  ],
+  "commands": {
+    "build": "bash experiments/spa-native-host/hosts/android/build.sh :app:assembleDebug :app:assembleDebugAndroidTest",
+    "storage": "adb -s 805KPFX1843819 shell am instrument -w -e mode storage dev.spahost.prototype.test/dev.spahost.prototype.HostInstrumentation",
+    "restart": "python3 experiments/spa-native-host/hosts/android/verify-device.py --serial 805KPFX1843819",
+    "authOnlyBuild": "SPA_PLUGIN_DECLARATION_FILE=/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/build/storage-plugin-matrix/auth-only.json bash experiments/spa-native-host/hosts/android/build.sh :app:assembleDebug :app:assembleDebugAndroidTest :app:dependencies --configuration debugRuntimeClasspath",
+    "authOnlyRuntime": "adb -s 805KPFX1843819 shell am instrument -w -e mode plugins -e expectedPlugins 1 -e absentAction storage.get -e absentPrefix storage. -e absentNamespace storage -e smokeAction auth.status dev.spahost.prototype.test/dev.spahost.prototype.HostInstrumentation"
+  }
+}

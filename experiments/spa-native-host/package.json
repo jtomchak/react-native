@@ -31,7 +31,8 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "@nativehost/plugin-api": "file:packages/plugin-api",
-    "@nativehost/auth": "file:packages/auth"
+    "@nativehost/auth": "file:packages/auth",
+    "@nativehost/storage": "file:packages/storage"
   },
   "devDependencies": {
     "@playwright/test": "1.65.0"
