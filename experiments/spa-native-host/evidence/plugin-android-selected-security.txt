@@ -54,14 +54,13 @@ INSTRUMENTATION_STATUS: assertion=real bridge advertises auth actions
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_STATUS: assertion=bridge returns unconfigured native auth status
 INSTRUMENTATION_STATUS_CODE: 0
-INSTRUMENTATION_RESULT: assertions=28
-INSTRUMENTATION_RESULT: error=java.lang.AssertionError: bridge rejects undeclared auth arguments
-INSTRUMENTATION_RESULT: stack=java.lang.AssertionError: bridge rejects undeclared auth arguments
-	at dev.spahost.prototype.AuthSuite.check(AuthSuite.kt:21)
-	at dev.spahost.prototype.AuthSuite.run(AuthSuite.kt:80)
-	at java.lang.reflect.Method.invoke(Native Method)
-	at dev.spahost.prototype.HostInstrumentation.onStart(HostInstrumentation.kt:26)
-	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2205)
-
-INSTRUMENTATION_RESULT: status=failed
-INSTRUMENTATION_CODE: 1
+INSTRUMENTATION_STATUS: assertion=bridge rejects undeclared auth arguments
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=disabled passkey action fails explicitly
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=failed auth releases native presentation lease
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: assertions=31
+INSTRUMENTATION_RESULT: limits=No OAuth provider sign-in, passkey enrollment, native prompt interaction or hosted server session is implied.
+INSTRUMENTATION_RESULT: status=passed
+INSTRUMENTATION_CODE: -1

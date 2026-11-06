@@ -2,14 +2,57 @@ INSTRUMENTATION_STATUS: assertion=isolated loopback fixture state reset
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_STATUS: assertion=hosted auth page ready
 INSTRUMENTATION_STATUS_CODE: 0
-INSTRUMENTATION_RESULT: assertions=2
-INSTRUMENTATION_RESULT: error=java.lang.AssertionError: Timed out: native cleanup refreshes hosted document
-INSTRUMENTATION_RESULT: stack=java.lang.AssertionError: Timed out: native cleanup refreshes hosted document
-	at dev.spahost.prototype.AuthLiveSuite.waitFor(AuthLiveSuite.kt:108)
-	at dev.spahost.prototype.AuthLiveSuite.run(AuthLiveSuite.kt:39)
-	at java.lang.reflect.Method.invoke(Native Method)
-	at dev.spahost.prototype.HostInstrumentation.onStart(HostInstrumentation.kt:26)
-	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2205)
-
-INSTRUMENTATION_RESULT: status=failed
-INSTRUMENTATION_CODE: 1
+INSTRUMENTATION_STATUS: assertion=native cleanup refreshes hosted document
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native test auth configured
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=SSR starts signed out
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=sibling hosted document ready
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=auth document restored
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native OAuth completes and app regains foreground
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=real CustomTabs OAuth callback establishes native session without JS tokens
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=inactive sibling JavaScript realm retired before cookie handoff
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=old hosted document is concealed pending cookie sync
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native status reflects verified issuer identity
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=cookie sync commits a fresh native widget
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=authenticated server rendering
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=session cookie unavailable to page JavaScript
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=native cookie handoff installed cookie
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=server rendered authenticated user
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=logout commits a fresh native widget
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=signed out server rendering
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=logout revoked the previous server cookie
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=React sign-in control becomes available
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=React helper OAuth returns to native foreground
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=React helper installs cookie and replaces document
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=actual React sign-in helper renders authenticated SSR
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=React sign-out control becomes available
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=React sign-out replaces hosted document
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=actual React sign-out helper renders anonymous SSR
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: assertions=27
+INSTRUMENTATION_RESULT: limits=Isolated loopback OIDC issuer only. No production provider or passkey prompt/enrollment claim.
+INSTRUMENTATION_RESULT: status=passed
+INSTRUMENTATION_CODE: -1

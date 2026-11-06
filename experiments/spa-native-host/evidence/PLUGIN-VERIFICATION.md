@@ -17,6 +17,7 @@ auth package.
 | iOS Xcode.RC / iPad simulator, iOS 27.2 | 22 passed; final restored build passed | 4 core/registry tests passed |
 | Android app and instrumentation APK builds | Passed with auth and shared API libraries | Passed without auth, Credentials or Browser libraries |
 | Physical Pixel 2 XL generic registry | 7 assertions passed | 8 assertions passed; removed action rejected; core storage works |
+| Physical Pixel 2 XL auth security / live session | 31 security and 27 live OIDC/session assertions passed | Not applicable |
 | npm package consumer | Both tarballs installed offline outside checkout; JS exports and native paths resolve | Not applicable |
 
 The selected iOS tests include 14 auth tests, three hosted-document privacy
@@ -31,12 +32,14 @@ merged manifest. Both removal matrices used an ignored temporary declaration;
 the checked-in selection stayed unchanged. Generated outputs and app artifacts
 were restored to the normal selected-auth configuration afterward.
 
-The physical Android auth security run completed 28 assertions, then failed at
-the next bridge admission assertion. The live session run completed two, then
-timed out waiting for a foreground-dependent document refresh. The device was
-observed with a secure keyguard showing. These two runs are **incomplete**, not
-passing auth suites; they need an unlocked-device rerun. The generic registry
-results above do not replace them. Raw assertion summaries are retained below.
+The physical Android auth security and live session runs were rerun after the
+user unlocked the Pixel. Both passed: 31 security assertions and 27 live session
+assertions. This replaces the earlier incomplete keyguard-blocked results. The
+live run used the actual Custom Tabs OAuth callback, Android Keystore, native
+cookie handoff, authenticated Next.js server rendering, hosted-document
+retirement, server-session revocation, and React sign-in/sign-out helpers against
+an isolated loopback issuer. These are real native/hosted integration checks;
+the issuer is a local test fixture. Assertion summaries are retained below.
 
 Production OAuth provider configuration and real-device passkey association
 remain deferred as previously requested. Local fixture success does not verify
@@ -92,8 +95,8 @@ ordinary export/build commands without the override. See [PLUGINS.md](../PLUGINS
 - [Removed iOS test summary](plugin-ios-empty-tests.txt)
 - [Selected Android registry](plugin-android-selected-runtime.txt)
 - [Removed Android registry](plugin-android-removed-runtime.txt)
-- [Incomplete Android auth security run](plugin-android-selected-security.txt)
-- [Incomplete Android live session run](plugin-android-selected-live.txt)
+- [Android auth security run](plugin-android-selected-security.txt)
+- [Android live session run](plugin-android-selected-live.txt)
 - [Browser client results](browser-results.json)
 - [Production Next auth fixture results](auth-server-browser-results.json)
 
