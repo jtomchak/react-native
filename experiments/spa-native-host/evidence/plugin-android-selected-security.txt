@@ -1,0 +1,67 @@
+INSTRUMENTATION_STATUS: assertion=vault starts empty
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=Keystore encrypted credential round trip
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=vault origin isolation
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=preferences contain no plaintext credential
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=secure credential removal
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=exact secure session cookie accepted
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=domain-scoped cookie denied
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=missing HttpOnly denied
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=missing Secure denied
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=foreign cookie name denied
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=cookie header injection denied
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=debug cookie cannot replace production cookie
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=origin comparison rejects foreign port
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=origin comparison rejects userinfo
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=unconfigured auth disabled
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=provider underscore accepted consistently
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=invalid auth RP rejected
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=unexpected configuration field rejected
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=orphan cookie fixture installed
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=orphan web session blocks OAuth before new identity
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=orphan web cookie removed before retry
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=orphan web reset creates no native credential
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=disabled native auth status does not invent session
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=orphan auth callback consumed without login
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=ordinary route is not consumed by auth
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=real WebView document loaded
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=real bridge advertises auth actions
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=bridge returns unconfigured native auth status
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: assertions=28
+INSTRUMENTATION_RESULT: error=java.lang.AssertionError: bridge rejects undeclared auth arguments
+INSTRUMENTATION_RESULT: stack=java.lang.AssertionError: bridge rejects undeclared auth arguments
+	at dev.spahost.prototype.AuthSuite.check(AuthSuite.kt:21)
+	at dev.spahost.prototype.AuthSuite.run(AuthSuite.kt:80)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at dev.spahost.prototype.HostInstrumentation.onStart(HostInstrumentation.kt:26)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2205)
+
+INSTRUMENTATION_RESULT: status=failed
+INSTRUMENTATION_CODE: 1

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "auth",
+  "hostApiVersion": 1,
+  "peer": "@nativehost/plugin-api",
+  "client": {"entry": "client/index.mjs", "factory": "installAuth"},
+  "react": "./react",
+  "server": "./server",
+  "configuration": {"validator": "./configuration"},
+  "actions": [
+    {"name": "auth.status", "timeoutMs": 60000},
+    {"name": "auth.signIn", "timeoutMs": 120000},
+    {"name": "auth.registerPasskey", "timeoutMs": 120000},
+    {"name": "auth.signOut", "timeoutMs": 120000},
+    {"name": "auth.syncWebSession", "timeoutMs": 120000}
+  ],
+  "events": ["auth.changed"],
+  "ios": {"path": "ios/NativeHostAuth", "product": "NativeHostAuth", "factory": "AuthPlugin", "testPath": "ios/IntegrationTests"},
+  "android": {
+    "path": "android", "project": "native-host-auth", "factory": "dev.nativehost.auth.AuthPlugin", "testPath": "android/integrationTest",
+    "testEntrypoints": {"auth": "dev.spahost.prototype.AuthSuite", "auth-live": "dev.spahost.prototype.AuthLiveSuite", "auth-state": "dev.spahost.prototype.AuthStateSuite"}
+  }
+}

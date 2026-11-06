@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "serial": "805KPFX1843819",
+  "steps": [
+    {
+      "name": "packaged",
+      "result": {
+        "assertions": "45",
+        "limits": "No camera capture, hardware sensation, process termination, or Release execution is implied by these assertions.",
+        "persistenceToken": "restart-a72bc631-acf2-4e33-a813-4d3ba9f74544",
+        "pid": "26945",
+        "status": "passed"
+      }
+    },
+    {
+      "name": "process-restart",
+      "result": {
+        "assertions": "4",
+        "pid": "27080",
+        "status": "passed"
+      }
+    }
+  ],
+  "limits": [
+    "No physical camera capture or perceived haptic sensation asserted",
+    "No Release execution or benchmark asserted"
+  ],
+  "androidApi": "30",
+  "webView": "Current WebView Update Service state\n  Fallback logic enabled: false\n  Multiprocess enabled: true\n  Current WebView package (name, version): (com.google.android.webview, 156.0.8078.47)\n  Minimum targetSdkVersion: 30\n  Minimum WebView version code: 410410683\n  Number of relros started: 2\n  Number of relros finished: 2\n  WebView package dirty: false\n  Any WebView package installed: true\n  Preferred WebView package (name, version): (com.google.android.webview, 156.0.8078.47)\n  WebView packages:\n    Valid package com.google.android.webview (versionName: 156.0.8078.47, versionCode: 807804703, targetSdkVersion: 36) is  installed/enabled for all users\n    com.google.android.webview.beta is NOT installed.\n    com.google.android.webview.dev is NOT installed.\n    com.google.android.webview.canary is NOT installed.\n    com.google.android.webview.debug is NOT installed.\n    com.android.webview is NOT installed.\n",
+  "appApkSha256": "9aaa215d7bd2ce977de47685bc0c9de92f4fba2a5a99d308d9201bc99e2c6181",
+  "testApkSha256": "4d02f902563485411e26123b70b02fd68b14649506a9c88f77ff615898d19f52"
+}

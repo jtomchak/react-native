@@ -1,0 +1,39 @@
+{
+  "name": "spa-native-host-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "export": "node tooling/cli.mjs export",
+    "sync": "node tooling/cli.mjs sync",
+    "dev": "node tooling/cli.mjs dev",
+    "hosted:build": "node tooling/cli.mjs build-hosted",
+    "hosted:start": "node tooling/cli.mjs start-hosted",
+    "hosted:dev": "node tooling/cli.mjs dev-hosted",
+    "configure:host": "node tooling/configure-host.mjs",
+    "analytics:policy": "node tooling/analytics-policy.mjs",
+    "serve": "node tooling/serve.mjs",
+    "test": "node --test tests/contracts/*.test.mjs tests/tooling/*.test.mjs",
+    "test:browser": "playwright test",
+    "test:hosted": "playwright test --config tests/browser/hosted.playwright.mjs",
+    "test:auth": "playwright test --config tests/browser/auth-server.playwright.mjs",
+    "build:ios": "node tooling/cli.mjs build-ios",
+    "build:android": "node tooling/cli.mjs build-android",
+    "plugins:sync": "node tooling/plugins.mjs sync",
+    "plugins:check": "node tooling/plugins.mjs check",
+    "plugins:pack-test": "node tooling/test-plugin-package.mjs"
+  },
+  "dependencies": {
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "@nativehost/plugin-api": "file:packages/plugin-api",
+    "@nativehost/auth": "file:packages/auth"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0"
+  }
+}

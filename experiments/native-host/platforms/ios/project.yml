@@ -1,0 +1,92 @@
+name: NativeHost
+options:
+  deploymentTarget:
+    iOS: "16.0"
+settings:
+  base:
+    CLANG_CXX_LANGUAGE_STANDARD: c++20
+    CLANG_ENABLE_OBJC_ARC: YES
+    ARCHS: arm64
+    CODE_SIGNING_ALLOWED: NO
+    NH_RUST_TARGET: aarch64-apple-ios-sim
+    "NH_RUST_TARGET[sdk=iphoneos*]": aarch64-apple-ios
+    HEADER_SEARCH_PATHS:
+      - $(NH_EXPERIMENT)/runtime
+      - $(NH_EXPERIMENT)/core/include
+      - $(NH_HERMES)/include
+      - $(NH_REPO)/packages/react-native/ReactCommon/yoga
+    OTHER_LDFLAGS:
+      - $(inherited)
+      - -lc++
+      - -lnative_host_core
+    LIBRARY_SEARCH_PATHS:
+      - $(NH_EXPERIMENT)/core/target/$(NH_RUST_TARGET)/release
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+targets:
+  NativeHost:
+    type: application
+    platform: iOS
+    sources:
+      - NativeHost
+      - path: ../../runtime/Host.cpp
+      - path: ../../../../packages/react-native/ReactCommon/yoga/yoga
+        excludes: ["CMakeLists.txt", "module.modulemap"]
+    postBuildScripts:
+      - name: Copy configuration-specific React bundle
+        script: |
+          set -eu
+          mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+          cp "${NH_EXPERIMENT}/build/${NH_BUNDLE_NAME}" "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/app.bundle.js"
+        inputFiles:
+          - $(NH_EXPERIMENT)/build/$(NH_BUNDLE_NAME)
+        outputFiles:
+          - $(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/app.bundle.js
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.nativehost.prototype
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: NO
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: "1,2"
+      configs:
+        Debug:
+          NH_BUNDLE_NAME: app.bundle.js
+          GCC_PREPROCESSOR_DEFINITIONS: ["$(inherited)", "NH_TEST_HOOKS=1", "NH_SERVICE_TEST_HOOKS=1", "NH_DEV_UPDATES=1"]
+        Release:
+          NH_BUNDLE_NAME: app.release.bundle.js
+          GCC_PREPROCESSOR_DEFINITIONS: ["$(inherited)", "NH_PRODUCTION_ARTIFACT=1"]
+    dependencies:
+      - framework: ${NH_HERMES}/Library/Frameworks/universal/hermesvm.xcframework
+        embed: true
+      - sdk: UIKit.framework
+      - sdk: WebKit.framework
+      - sdk: Foundation.framework
+      - sdk: CoreGraphics.framework
+      - sdk: QuartzCore.framework
+  NativeHostUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [NativeHostUITests]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.nativehost.prototype.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: NativeHost
+    dependencies:
+      - target: NativeHost
+schemes:
+  NativeHost:
+    build:
+      targets:
+        NativeHost: all
+        NativeHostUITests: [test]
+    test:
+      targets: [NativeHostUITests]
+      environmentVariables:
+        NH_DRIVER_ENABLED: ${NH_DRIVER_ENABLED}
+        NH_DRIVER_TOKEN: ${NH_DRIVER_TOKEN}
+        NH_DRIVER_PORT: ${NH_DRIVER_PORT}
+        NH_DRIVER_TIMEOUT: ${NH_DRIVER_TIMEOUT}
+        NH_DRIVER_REVISION: ${NH_DRIVER_REVISION}
+        NH_DRIVER_INJECT_FAULT: ${NH_DRIVER_INJECT_FAULT}

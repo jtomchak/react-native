@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "token": "fd608ca726cb4b47b967ec73eef12913",
+  "writePID": 1859,
+  "readPID": 1864,
+  "writeChecks": 9,
+  "readChecks": 2,
+  "evidence": "Fixed in-app WK/native probes, not independent OS touch or perceived haptic/camera evidence"
+}

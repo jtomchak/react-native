@@ -1,0 +1,16 @@
+INSTRUMENTATION_STATUS: assertion=real transport handshake
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=generated plugin selection matches runtime count
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=selected plugin capabilities advertised
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=removed plugin action not advertised
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=removed plugin action rejected by native dispatcher
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=core native storage works without optional plugins
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: assertions=8
+INSTRUMENTATION_RESULT: plugins=0
+INSTRUMENTATION_RESULT: status=passed
+INSTRUMENTATION_CODE: -1

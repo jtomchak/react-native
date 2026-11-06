@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "plugins": [
+    {
+      "package": "@nativehost/auth",
+      "configuration": {"enabled": false, "origin": null, "providers": [], "rpId": null}
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "native-host-experiment",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bundle": "node scripts/bundle.mjs",
+    "bundle:release": "node scripts/bundle.mjs --release",
+    "test": "playwright test",
+    "test:mobile": "playwright test --config playwright.mobile.config.mjs",
+    "test:driver": "node --test testing/native-driver.test.mjs",
+    "test:contracts": "node scripts/compare-contracts.mjs",
+    "test:contract-comparator": "node --test testing/contracts/compare.test.mjs",
+    "test:probe": "node --test testing/probe-cleanup.test.mjs",
+    "benchmark:tooling": "node scripts/benchmark-tooling.mjs",
+    "dev": "cargo run --manifest-path dev/Cargo.toml --",
+    "test:dev": "cargo test --manifest-path dev/Cargo.toml && cargo build --manifest-path dev/Cargo.toml && node --test dev/tests/watch.test.mjs",
+    "test:core": "cargo test --manifest-path core/Cargo.toml",
+    "build:native": "bash scripts/build-native.sh"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-reconciler": "0.34.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "react-refresh": "0.14.2",
+    "rolldown": "1.3.0"
+  }
+}

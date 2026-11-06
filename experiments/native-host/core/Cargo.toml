@@ -1,0 +1,17 @@
+[package]
+name = "native-host-core"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["staticlib", "rlib"]
+
+[features]
+default = []
+test-hooks = []
+
+[profile.release]
+panic = "unwind"
+
+[workspace]

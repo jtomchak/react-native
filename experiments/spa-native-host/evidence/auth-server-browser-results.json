@@ -1,0 +1,248 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/browser/auth-server.playwright.mjs"
+    ],
+    "configFile": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/auth-server.playwright.mjs",
+    "rootDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "auth-server.spec.mjs"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
+        "snapshotDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
+        "testIgnore": [],
+        "testMatch": "auth-server.spec.mjs",
+        "timeout": 45000,
+        "use": {
+          "headless": true,
+          "baseURL": "http://localhost:18801"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/evidence/auth-server-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth-server.spec.mjs",
+      "file": "auth-server.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real OIDC exchange, proof, cookie import, SSR identity and linked logout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T15:21:16.846Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a08f4fc1c8f63c5ba82-50c54155c804bd3cddf0",
+          "file": "auth-server.spec.mjs",
+          "line": 74,
+          "column": 1
+        },
+        {
+          "title": "OIDC invalid nonce and invalid signature fail closed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T15:21:18.459Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a08f4fc1c8f63c5ba82-759165354f805290a388",
+          "file": "auth-server.spec.mjs",
+          "line": 89,
+          "column": 1
+        },
+        {
+          "title": "SSR-first initialization preserves auth errors and blocks cross-origin handoffs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 344,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T15:21:18.491Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a08f4fc1c8f63c5ba82-c09f85ca798b44f92a3c",
+          "file": "auth-server.spec.mjs",
+          "line": 93,
+          "column": 1
+        },
+        {
+          "title": "real WebAuthn registration and assertion with a browser virtual authenticator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 230,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T15:21:18.840Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a08f4fc1c8f63c5ba82-8ecad99ba073a7c26d74",
+          "file": "auth-server.spec.mjs",
+          "line": 102,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-06T15:21:16.591Z",
+    "duration": 2532.518,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

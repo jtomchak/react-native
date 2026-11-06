@@ -1,0 +1,12 @@
+{
+  "files": {
+    "app/build.gradle": "f7dc6bdc097d578bdcfcb3bfa05ec08e22cedeb9d13e3cec826b59ae399b4a0b",
+    "app/src/main/AndroidManifest.xml": "7599a511aadd01cc438fb538e4f7c5d21ec1536ed099bc8e838cb36c8eee0b84",
+    "app/src/main/java/dev/spahost/prototype/HostActivity.kt": "4c02856c95e183639b064b4a208418c588b7b355acb38f2f845fe355adc6cb5c",
+    "app/src/main/java/dev/spahost/prototype/HostConfiguration.kt": "628d59a0bf320bc5475249e0e3577e51e50c95b7a53f64524702c240971cb697",
+    "app/src/main/java/dev/spahost/prototype/NativePushState.kt": "b02ab6f2e25364e7677f0f6b69ee19a06ce05edab0fc044427125b0b1622aa50",
+    "app/src/main/java/dev/spahost/prototype/Storage.kt": "1459f19f05d06d747f10fa2e4f0f50f87481fd115a79d9008d41ee24752e65c2",
+    "app/src/main/res/xml/file_paths.xml": "cf79a97c4d02cb54e8c60aa112a6a662ef1fc27881b0f997f6ba60ee157534a0"
+  },
+  "manifestSha256": "0471023cc5ab155d0fd9b57d23078b0cd877d2a71c676b0f5f4e16d72c60c64d"
+}

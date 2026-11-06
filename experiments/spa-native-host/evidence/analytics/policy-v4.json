@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "revision": 4,
+  "enabled": true,
+  "categories": [
+    "lifecycle",
+    "navigation",
+    "bridge",
+    "interaction",
+    "custom"
+  ],
+  "names": [
+    "custom.analytics_later"
+  ],
+  "properties": {},
+  "sampleBasisPoints": 10000,
+  "lookbackSeconds": 604800,
+  "destinations": [
+    "recording"
+  ],
+  "expiresInSeconds": 300
+}

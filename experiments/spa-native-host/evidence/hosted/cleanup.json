@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-11-05T22:53:31.297Z",
+  "ownedPorts": {
+    "status": 1,
+    "output": ""
+  },
+  "adbForwards": {
+    "status": 0,
+    "output": ""
+  },
+  "pixelReverse": {
+    "status": 0,
+    "output": "UsbFfs tcp:18791 tcp:18791"
+  },
+  "devices": {
+    "status": 0,
+    "output": "List of devices attached\n805KPFX1843819\tdevice"
+  },
+  "git": {
+    "status": 0,
+    "output": "?? ../"
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "status": "passed",
+  "recordedAt": "2026-11-05T22:47:43.926564+00:00",
+  "nativeSourceManifestSha256": "0471023cc5ab155d0fd9b57d23078b0cd877d2a71c676b0f5f4e16d72c60c64d",
+  "artifacts": {
+    "app/build/outputs/apk/debug/app-debug.apk": "db6c5e61152608c89597c47e4a202ddcb97a1b9a4c0e08a71b63fb7742b7acef",
+    "app/build/outputs/apk/release/app-release-unsigned.apk": "135f847d6218c398270671001433c9ec47978be1b33d1a3f40d0aba06872a0fb",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "a0d0d9dc89eb913b8a9323dfff1ab4761d74cf3dc42ebbf6395f10831cdc2814"
+  },
+  "baseline": {
+    "status": "passed",
+    "serial": "805KPFX1843819",
+    "steps": [
+      {
+        "name": "packaged",
+        "result": {
+          "assertions": "47",
+          "limits": "No camera capture, hardware sensation, process termination, or Release execution is implied by these assertions.",
+          "persistenceToken": "restart-1fa19ac1-14a9-46b6-a5e9-fe69638aaa72",
+          "pid": "2383",
+          "status": "passed"
+        }
+      },
+      {
+        "name": "process-restart",
+        "result": {
+          "assertions": "6",
+          "pid": "2647",
+          "status": "passed"
+        }
+      }
+    ],
+    "limits": [
+      "No physical camera capture or perceived haptic sensation asserted",
+      "No Release execution or benchmark asserted"
+    ],
+    "androidApi": "30",
+    "webView": "Current WebView Update Service state\n  Fallback logic enabled: false\n  Multiprocess enabled: true\n  Current WebView package (name, version): (com.google.android.webview, 156.0.8078.47)\n  Minimum targetSdkVersion: 30\n  Minimum WebView version code: 410410683\n  Number of relros started: 2\n  Number of relros finished: 2\n  WebView package dirty: false\n  Any WebView package installed: true\n  Preferred WebView package (name, version): (com.google.android.webview, 156.0.8078.47)\n  WebView packages:\n    Valid package com.google.android.webview (versionName: 156.0.8078.47, versionCode: 807804703, targetSdkVersion: 36) is  installed/enabled for all users\n    com.google.android.webview.beta is NOT installed.\n    com.google.android.webview.dev is NOT installed.\n    com.google.android.webview.canary is NOT installed.\n    com.google.android.webview.debug is NOT installed.\n    com.android.webview is NOT installed.\n",
+    "appApkSha256": "db6c5e61152608c89597c47e4a202ddcb97a1b9a4c0e08a71b63fb7742b7acef",
+    "testApkSha256": "d8ad87b83441ab514c5ba3dbc22205e357c3253e1938a46b4ef94800b11e25c2"
+  },
+  "extensionReceipts": [
+    {
+      "name": "hosted",
+      "device": "Pixel 2 XL API30",
+      "result": {
+        "assertions": "77",
+        "limits": "Native widget/state assertions; no APNs/FCM delivery, receiver delivery, biometric presence or predictive system gesture implied",
+        "pid": "1826",
+        "source": "hosted",
+        "status": "passed"
+      },
+      "logSha256": "631ea8e275cf64be7ccd10405e245df3bd5defe7b9bebb88505afeef8fd87e1c",
+      "testApkSha256": "d8ad87b83441ab514c5ba3dbc22205e357c3253e1938a46b4ef94800b11e25c2"
+    },
+    {
+      "name": "packaged",
+      "device": "Pixel 2 XL API30",
+      "result": {
+        "assertions": "56",
+        "limits": "Native widget/state assertions; no APNs/FCM delivery, receiver delivery, biometric presence or predictive system gesture implied",
+        "pid": "2116",
+        "source": "packaged",
+        "status": "passed"
+      },
+      "logSha256": "2f0eb6e5e2de80627eec6025c084420923dd3c817273f7d39b86a0c62aa3b7aa",
+      "testApkSha256": "d8ad87b83441ab514c5ba3dbc22205e357c3253e1938a46b4ef94800b11e25c2"
+    },
+    {
+      "name": "gestures",
+      "device": "emulator-5580 API36",
+      "result": {
+        "assertions": "13",
+        "feature": "gestures",
+        "pid": "4455",
+        "status": "passed"
+      },
+      "logSha256": "14b83cfb42f8915325d0fd73381b5b63c76f09843b239a699ce1c353e7d9f898",
+      "testApkSha256": "d8ad87b83441ab514c5ba3dbc22205e357c3253e1938a46b4ef94800b11e25c2"
+    },
+    {
+      "name": "share",
+      "device": "emulator-5580 API36",
+      "result": {
+        "assertions": "6",
+        "feature": "share",
+        "pid": "4642",
+        "status": "passed"
+      },
+      "logSha256": "199d2ac14b3c2423e6b9ff0d41bcfec572fcb33e2bb002dd50ad1559d5d50eac",
+      "testApkSha256": "d8ad87b83441ab514c5ba3dbc22205e357c3253e1938a46b4ef94800b11e25c2"
+    },
+    {
+      "name": "permissions",
+      "device": "emulator-5580 API36",
+      "result": {
+        "assertions": "9",
+        "feature": "permissions",
+        "pid": "4761",
+        "status": "passed"
+      },
+      "logSha256": "2fcda6fd4ffb5760951343fe6b49dfdfa1f655408714bda8ff781241b6abe800",
+      "testApkSha256": "d8ad87b83441ab514c5ba3dbc22205e357c3253e1938a46b4ef94800b11e25c2"
+    },
+    {
+      "name": "biometrics",
+      "device": "emulator-5580 API36",
+      "result": {
+        "assertions": "4",
+        "feature": "biometrics",
+        "pid": "4878",
+        "status": "passed"
+      },
+      "logSha256": "8f57ba6ef74750d8b1df235a55a6728790e12d8a63b301097fc1c8a70489b09e",
+      "testApkSha256": "d8ad87b83441ab514c5ba3dbc22205e357c3253e1938a46b4ef94800b11e25c2"
+    },
+    {
+      "name": "offline",
+      "device": "emulator-5580 API36",
+      "result": {
+        "assertions": "7",
+        "feature": "offline",
+        "status": "passed"
+      },
+      "logSha256": "00d83a6da34d8645864d67606a7f18b71243c3b7a542d92075805c9db1132d60",
+      "testApkSha256": "d8ad87b83441ab514c5ba3dbc22205e357c3253e1938a46b4ef94800b11e25c2"
+    },
+    {
+      "name": "links",
+      "device": "Pixel 2 XL API30",
+      "result": {
+        "assertions": "7",
+        "feature": "links",
+        "pid": "3163",
+        "status": "passed"
+      },
+      "logSha256": "2b32e5dd9dccae5bf78b23e69b9476e9dd4ce56bcb732401b13f4384a283931f",
+      "testApkSha256": "a0d0d9dc89eb913b8a9323dfff1ab4761d74cf3dc42ebbf6395f10831cdc2814"
+    }
+  ],
+  "build": {
+    "debug": true,
+    "test": true,
+    "release": true,
+    "lintRelease": true,
+    "verifiedPackagedAssets": 40,
+    "releaseExecuted": false
+  },
+  "testProvenance": "All runtime receipts use identical final Debug app APK. Links fixture added afterward to test-only APK; other receipts test APK hash retained per row. No runtime code changes after final2 build.",
+  "transientFailure": "Initial packaged instrumentation reported Process crashed before assertions with no crash buffer entries; identical app/test APK rerun passed56, then baseline47+6 passed. Retained initial log; no fix inferred.",
+  "demo": {
+    "serial": "805KPFX1843819",
+    "pid": 3395,
+    "command": "adb -s 805KPFX1843819 shell am start -S -W -n dev.spahost.prototype/.HostActivity -a android.intent.action.VIEW -d spahost://app/ --es spa.content packaged --es spa.navigation native --es spa.chrome tabs",
+    "screenshot": "pixel-native-tabs.png",
+    "reverseCleanup": "Owned tcp:18797 removed; pre-existing tcp:18791 preserved. emulator-5580 has no reverse entries; lifecycle owned by parent."
+  },
+  "limits": [
+    "No FCM delivery/project configured; registration UNAVAILABLE verified, native adapters compile.",
+    "No verified HTTPS App Link domain association; configured-origin parser pass and foreign rejection only. Actual OS custom-scheme routing passed.",
+    "Share proves actual chooser presentation/dismissal, not receiver delivery.",
+    "Biometric fixture proves native no-enrollment/unavailable path, not successful presence.",
+    "Actual predictive OS callbacks from injected edge touchscreen gestures passed on API36 emulator; physical API30 does not support predictive proof.",
+    "Release compiled and exact asset hashes verified; Release not executed.",
+    "No new physical camera capture or perceived haptic sensation asserted by this extension run."
+  ]
+}

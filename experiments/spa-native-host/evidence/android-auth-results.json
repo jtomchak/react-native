@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-06T01:50:12.508213+00:00",
+  "device": {
+    "model": "Pixel 2 XL",
+    "android": "11",
+    "apiLevel": 30,
+    "physical": true
+  },
+  "build": {
+    "status": "passed",
+    "verifiedPackagedAssets": 40,
+    "command": "bash experiments/spa-native-host/hosts/android/build.sh assembleDebug assembleDebugAndroidTest",
+    "apkSha256": "f979df79e54c5c91068d2ca55e5fd4bc8d7e5842309e902dca4043f2f03926c1"
+  },
+  "nativeSecurity": {
+    "status": "passed",
+    "assertions": 31,
+    "stages": [
+      "vault starts empty",
+      "Keystore encrypted credential round trip",
+      "vault origin isolation",
+      "preferences contain no plaintext credential",
+      "secure credential removal",
+      "exact secure session cookie accepted",
+      "domain-scoped cookie denied",
+      "missing HttpOnly denied",
+      "missing Secure denied",
+      "foreign cookie name denied",
+      "cookie header injection denied",
+      "debug cookie cannot replace production cookie",
+      "origin comparison rejects foreign port",
+      "origin comparison rejects userinfo",
+      "unconfigured auth disabled",
+      "provider underscore accepted consistently",
+      "invalid auth RP rejected",
+      "unexpected configuration field rejected",
+      "orphan cookie fixture installed",
+      "orphan web session blocks OAuth before new identity",
+      "orphan web cookie removed before retry",
+      "orphan web reset creates no native credential",
+      "disabled native auth status does not invent session",
+      "orphan auth callback consumed without login",
+      "ordinary route is not consumed by auth",
+      "real WebView document loaded",
+      "real bridge advertises auth actions",
+      "bridge returns unconfigured native auth status",
+      "bridge rejects undeclared auth arguments",
+      "disabled passkey action fails explicitly",
+      "failed auth releases native presentation lease"
+    ],
+    "evidence": "android-auth-security.txt"
+  },
+  "nativeOAuthAndHostedSession": {
+    "status": "passed",
+    "assertions": 27,
+    "stages": [
+      "isolated loopback fixture state reset",
+      "hosted auth page ready",
+      "native cleanup refreshes hosted document",
+      "native test auth configured",
+      "SSR starts signed out",
+      "sibling hosted document ready",
+      "auth document restored",
+      "native OAuth completes and app regains foreground",
+      "real CustomTabs OAuth callback establishes native session without JS tokens",
+      "inactive sibling JavaScript realm retired before cookie handoff",
+      "old hosted document is concealed pending cookie sync",
+      "native status reflects verified issuer identity",
+      "cookie sync commits a fresh native widget",
+      "authenticated server rendering",
+      "session cookie unavailable to page JavaScript",
+      "native cookie handoff installed cookie",
+      "server rendered authenticated user",
+      "logout commits a fresh native widget",
+      "signed out server rendering",
+      "logout revoked the previous server cookie",
+      "React sign-in control becomes available",
+      "React helper OAuth returns to native foreground",
+      "React helper installs cookie and replaces document",
+      "actual React sign-in helper renders authenticated SSR",
+      "React sign-out control becomes available",
+      "React sign-out replaces hosted document",
+      "actual React sign-out helper renders anonymous SSR"
+    ],
+    "evidence": "android-auth-live.txt"
+  },
+  "commands": [
+    "adb -s 805KPFX1843819 shell am instrument -w -e mode auth dev.spahost.prototype.test/dev.spahost.prototype.HostInstrumentation",
+    "adb -s 805KPFX1843819 shell am instrument -w -e mode auth-live dev.spahost.prototype.test/dev.spahost.prototype.HostInstrumentation"
+  ],
+  "scope": "Actual Android native app, Custom Tabs, Keystore, WebView cookie APIs and hosted Next.js against an isolated loopback OIDC issuer.",
+  "notVerified": [
+    "Production OAuth providers and credentials",
+    "Native passkey prompt, credential enrollment and website association",
+    "Physical iOS authentication behavior"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "serial": "805KPFX1843819",
+  "androidApi": 30,
+  "nativeAssertions": 49,
+  "realHttpPhases": {
+    "record": 6,
+    "replay": 4
+  },
+  "baselineAssertions": 47,
+  "restartAssertions": 6,
+  "baselinePids": [
+    26510,
+    26670
+  ],
+  "livePids": [
+    26363,
+    26806
+  ],
+  "customEventIds": [
+    {
+      "id": "47855fe1-c610-4d1e-8738-d1df3f55d513",
+      "name": "custom.analytics_keep",
+      "control": "android-live"
+    },
+    {
+      "id": "f2d5e951-1f9e-4d1d-8b0f-d66501ef9134",
+      "name": "custom.analytics_later",
+      "control": "android-live"
+    }
+  ],
+  "destinationReceipts": [
+    {
+      "eventId": "47855fe1-c610-4d1e-8738-d1df3f55d513",
+      "destination": "recording"
+    },
+    {
+      "eventId": "f2d5e951-1f9e-4d1d-8b0f-d66501ef9134",
+      "destination": "recording"
+    }
+  ],
+  "nativeJournalRetainedCount": 164,
+  "installedDebugApkSHA256": "8bbefb5ca299cae1319c2584433dba6e6b69c7423824babf7cbf4da2d954c9b4",
+  "artifacts": {
+    "app/build/outputs/apk/debug/app-debug.apk": "8bbefb5ca299cae1319c2584433dba6e6b69c7423824babf7cbf4da2d954c9b4",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "5e54db88e504cb705ec56f9ad4839ecf2de91cf576ac28ef5967f186bd828cfa",
+    "app/build/outputs/apk/release/app-release-unsigned.apk": "8fbe9b1c8fc276fec69c05da9c79d075d8205ded9008d709a8af399ddbf1b315"
+  },
+  "sourceSHA256": {
+    "app/build.gradle": "f7dc6bdc097d578bdcfcb3bfa05ec08e22cedeb9d13e3cec826b59ae399b4a0b",
+    "app/src/androidTest/java/dev/spahost/prototype/AnalyticsSuite.kt": "70ac58998e299d8a5200d3d95565dc8fe103adbadbbdb7b23eb22a791038fc4f",
+    "app/src/androidTest/java/dev/spahost/prototype/HostInstrumentation.kt": "c18e36da0cabb7d9f7bde007cdbadfc06a0eb91d7dd98b59fa17f2182b56e9e6",
+    "app/src/main/AndroidManifest.xml": "7599a511aadd01cc438fb538e4f7c5d21ec1536ed099bc8e838cb36c8eee0b84",
+    "app/src/main/java/dev/spahost/prototype/HostActivity.kt": "c4d42e2729acec569e9e47438eba83bd56045755a00ffc5f95bd4daab53f8330",
+    "app/src/main/java/dev/spahost/prototype/HostConfiguration.kt": "4e737b93aaae33514b5a90d1cbc33b2df5b9b554eb2405e83adb6b7e92ddad77",
+    "app/src/main/java/dev/spahost/prototype/NativeAnalytics.kt": "59bd57e97c9104af4c36cdb51aab81f3592feef50ec442362a586db24a4d3fa4",
+    "app/src/main/java/dev/spahost/prototype/NativePushState.kt": "bca0fa32283a83a7dc5c4c704dd4aa38abcbb51c2faaf2f831ac8116f6c1e04f",
+    "app/src/main/java/dev/spahost/prototype/Storage.kt": "1459f19f05d06d747f10fa2e4f0f50f87481fd115a79d9008d41ee24752e65c2",
+    "app/src/main/res/xml/file_paths.xml": "cf79a97c4d02cb54e8c60aa112a6a662ef1fc27881b0f997f6ba60ee157534a0"
+  },
+  "logsSHA256": {
+    "native-final-suite.log": "9bb0779bfc65719019046692e021fed868e4c998a1baadd4596ac5b1d0257e0d",
+    "live-phase1.log": "05dff374b8496a93fa85290c7a7d629511da6b8bba02667faa866e4e0a70cbb6",
+    "live-phase2.log": "4f635c02038dba744e5afbb539d31044b6e5cc729d6ff601c7d7b8e7e81b2507",
+    "baseline-regression.log": "2d3fd73b3ab7a1eb45648bf57186a04e54fdcfb99d3bb062edc07ac6a1344587",
+    "baseline-restart.log": "f831d4fca2dc2d4b67079e0ac8a723285e5bf27c42a755be51bad573f8c1d93a"
+  },
+  "build": {
+    "debug": true,
+    "androidTest": true,
+    "releaseUnsigned": true,
+    "lintRelease": true,
+    "verifiedPackagedAssets": 40,
+    "releaseExecuted": false,
+    "releaseAnalyticsDebugOriginAbsent": true
+  },
+  "limits": [
+    "Real collector durable ACK is distinct from vendor delivery",
+    "No external vendor credentials or requests used",
+    "maxBytes bounds serialized event payloads; SQLite metadata/index/receipts/WAL overhead is additional",
+    "No physical camera/haptic/biometric/push-delivery acceptance claimed",
+    "Initial pragma-initialization failure fixed with rawQuery; initial foreground denial was locked/dozing device, no secure-keyguard bypass"
+  ],
+  "privacyProbe": "No rejected input values, normal storage values or keys present in semantic journal",
+  "recordedAt": "2026-11-06T00:04:27.569405+00:00",
+  "demo": {
+    "pid": 26989,
+    "content": "packaged",
+    "navigation": "native",
+    "chrome": "tabs",
+    "analyticsOrigin": null,
+    "ownedReverseRemoved": 18797,
+    "preexistingReversePreserved": 18791
+  },
+  "journalSnapshot": "Consistent analytics-only SQLite main/WAL snapshot pulled after targeted force-stop; default local-only demo relaunched afterward.",
+  "stagedAssetManifestSHA256": "9638216427db2324098499533b93b065cc144d0a33ec2c48346ad96736648708"
+}

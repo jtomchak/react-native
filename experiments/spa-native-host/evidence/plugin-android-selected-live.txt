@@ -1,0 +1,15 @@
+INSTRUMENTATION_STATUS: assertion=isolated loopback fixture state reset
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: assertion=hosted auth page ready
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: assertions=2
+INSTRUMENTATION_RESULT: error=java.lang.AssertionError: Timed out: native cleanup refreshes hosted document
+INSTRUMENTATION_RESULT: stack=java.lang.AssertionError: Timed out: native cleanup refreshes hosted document
+	at dev.spahost.prototype.AuthLiveSuite.waitFor(AuthLiveSuite.kt:108)
+	at dev.spahost.prototype.AuthLiveSuite.run(AuthLiveSuite.kt:39)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at dev.spahost.prototype.HostInstrumentation.onStart(HostInstrumentation.kt:26)
+	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2205)
+
+INSTRUMENTATION_RESULT: status=failed
+INSTRUMENTATION_CODE: 1

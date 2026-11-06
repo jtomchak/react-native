@@ -1,0 +1,86 @@
+[
+  {
+    "id": "3f6c3a1c-f79f-4efd-944f-86301968d3cc",
+    "installId": "5b57c177-707a-482d-a125-a31789be4451",
+    "sessionId": "7185c935-826e-45ed-8363-2cf9851c9911",
+    "timeMs": 1793924023522,
+    "platform": "android",
+    "name": "custom.analytics_keep",
+    "policyRevision": 3,
+    "properties": {
+      "control": "android-live"
+    }
+  },
+  {
+    "id": "63e5a354-844d-4f18-9863-7aaeed565355",
+    "installId": "1b726378-d38a-433e-acf7-e1793c83bb1b",
+    "sessionId": "fad17f78-b1ea-4bc9-88e2-98052d925f8e",
+    "timeMs": 1793922528509,
+    "platform": "ios",
+    "name": "custom.analytics_keep",
+    "policyRevision": 1,
+    "properties": {
+      "control": "acceptance-fixture"
+    }
+  },
+  {
+    "id": "47855fe1-c610-4d1e-8738-d1df3f55d513",
+    "installId": "5b57c177-707a-482d-a125-a31789be4451",
+    "sessionId": "2f188418-c930-4ff5-b225-2bbcd9b69fba",
+    "timeMs": 1793923148034,
+    "platform": "android",
+    "name": "custom.analytics_keep",
+    "policyRevision": 1,
+    "properties": {
+      "control": "android-live"
+    }
+  },
+  {
+    "id": "57b64c38-a203-4b5a-acd3-fb9ff428286e",
+    "installId": "a32cef10-6f92-414f-bd5d-32547b9a78de",
+    "sessionId": "c4d22725-6ab8-4481-bc51-06284e05c274",
+    "timeMs": 1793923190752,
+    "platform": "ios",
+    "name": "custom.analytics_later",
+    "policyRevision": 2,
+    "properties": {
+      "control": "acceptance-fixture"
+    }
+  },
+  {
+    "id": "29b4b5c8-22c4-43c6-b0f0-cde3408027de",
+    "installId": "a32cef10-6f92-414f-bd5d-32547b9a78de",
+    "sessionId": "c4d22725-6ab8-4481-bc51-06284e05c274",
+    "timeMs": 1793923190735,
+    "platform": "ios",
+    "name": "custom.analytics_keep",
+    "policyRevision": 1,
+    "properties": {
+      "control": "acceptance-fixture"
+    }
+  },
+  {
+    "id": "c671341f-adcc-44db-b1f7-f4d8b579ea04",
+    "installId": "5b57c177-707a-482d-a125-a31789be4451",
+    "sessionId": "7185c935-826e-45ed-8363-2cf9851c9911",
+    "timeMs": 1793924023735,
+    "platform": "android",
+    "name": "custom.analytics_later",
+    "policyRevision": 4,
+    "properties": {
+      "control": "android-live"
+    }
+  },
+  {
+    "id": "f2d5e951-1f9e-4d1d-8b0f-d66501ef9134",
+    "installId": "5b57c177-707a-482d-a125-a31789be4451",
+    "sessionId": "2f188418-c930-4ff5-b225-2bbcd9b69fba",
+    "timeMs": 1793923148250,
+    "platform": "android",
+    "name": "custom.analytics_later",
+    "policyRevision": 2,
+    "properties": {
+      "control": "android-live"
+    }
+  }
+]

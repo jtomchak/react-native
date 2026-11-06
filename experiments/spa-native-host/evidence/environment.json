@@ -1,0 +1,30 @@
+{
+  "recordedAt": "2026-11-05T21:38:59.195Z",
+  "node": "v26.7.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "dependencies": {
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0"
+  },
+  "xcode": {
+    "ok": true,
+    "output": "Xcode 26.6\nBuild version 17F113"
+  },
+  "java": {
+    "ok": true,
+    "output": "openjdk version \"17.0.19\" 2026-04-21 LTS\nOpenJDK Runtime Environment Zulu17.66+19-CA (build 17.0.19+10-LTS)\nOpenJDK 64-Bit Server VM Zulu17.66+19-CA (build 17.0.19+10-LTS, mixed mode, sharing)"
+  },
+  "android": {
+    "ok": true,
+    "output": "List of devices attached\n805KPFX1843819         device usb:1-1 product:taimen model:Pixel_2_XL device:taimen transport_id:4"
+  },
+  "simulator": {
+    "ok": true,
+    "output": "{\n  \"devices\" : {\n    \"com.apple.CoreSimulator.SimRuntime.iOS-27-0\" : [\n\n    ],\n    \"com.apple.CoreSimulator.SimRuntime.iOS-27-2\" : [\n\n    ],\n    \"com.apple.CoreSimulator.SimRuntime.iOS-27-2-iPhone19-4\" : [\n\n    ],\n    \"com.apple.CoreSimulator.SimRuntime.iOS-26-5\" : [\n      {\n        \"dataPath\" : \"\\/Users\\/jesse\\/Library\\/Developer\\/CoreSimulator\\/Devices\\/D942F30F-EB29-4921-892E-5F3160A038A3\\/data\",\n        \"dataPathSize\" : 2706894848,\n        \"logPath\" : \"\\/Users\\/jesse\\/Library\\/Logs\\/CoreSimulator\\/D942F30F-EB29-4921-892E-5F3160A038A3\",\n        \"udid\" : \"D942F30F-EB29-4921-892E-5F3160A038A3\",\n        \"lastUsedAt\" : \"2026-11-05T15:45:42Z\",\n        \"isAvailable\" : true,\n        \"logPathSize\" : 581632,\n        \"deviceTypeIdentifier\" : \"com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro\",\n        \"state\" : \"Booted\",\n        \"name\" : \"NativeHost-Prototype-iOS26.5\"\n      }\n    ]\n  }\n}"
+  }
+}

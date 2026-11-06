@@ -1,0 +1,146 @@
+{
+  "status": "passed",
+  "recordedAt": "2026-11-06T00:16:39.660473+00:00",
+  "serial": "805KPFX1843819",
+  "androidApi": 30,
+  "nativeAssertions": 53,
+  "atomicRebindRegression": "SQLite BEFORE INSERT abort trigger on second metadata reset write proves origin/revision/policy rollback and preserved floor across reopen, then newer valid policy recovery",
+  "realHttpPhases": {
+    "record": {
+      "policyRevision": 3,
+      "assertions": 6
+    },
+    "replay": {
+      "policyRevision": 4,
+      "assertions": 4
+    }
+  },
+  "baselineAssertions": 47,
+  "restartAssertions": 6,
+  "baselinePids": [
+    27835,
+    27990
+  ],
+  "livePids": [
+    28119,
+    28344
+  ],
+  "customEventIds": [
+    {
+      "id": "47855fe1-c610-4d1e-8738-d1df3f55d513",
+      "name": "custom.analytics_keep",
+      "control": "android-live",
+      "timeMs": 1793923148034
+    },
+    {
+      "id": "f2d5e951-1f9e-4d1d-8b0f-d66501ef9134",
+      "name": "custom.analytics_later",
+      "control": "android-live",
+      "timeMs": 1793923148250
+    },
+    {
+      "id": "3f6c3a1c-f79f-4efd-944f-86301968d3cc",
+      "name": "custom.analytics_keep",
+      "control": "android-live",
+      "timeMs": 1793924023522
+    },
+    {
+      "id": "c671341f-adcc-44db-b1f7-f4d8b579ea04",
+      "name": "custom.analytics_later",
+      "control": "android-live",
+      "timeMs": 1793924023735
+    }
+  ],
+  "latestCustomEventIds": [
+    {
+      "id": "3f6c3a1c-f79f-4efd-944f-86301968d3cc",
+      "name": "custom.analytics_keep",
+      "control": "android-live",
+      "timeMs": 1793924023522
+    },
+    {
+      "id": "c671341f-adcc-44db-b1f7-f4d8b579ea04",
+      "name": "custom.analytics_later",
+      "control": "android-live",
+      "timeMs": 1793924023735
+    }
+  ],
+  "destinationReceipts": [
+    {
+      "eventId": "3f6c3a1c-f79f-4efd-944f-86301968d3cc",
+      "destination": "recording"
+    },
+    {
+      "eventId": "47855fe1-c610-4d1e-8738-d1df3f55d513",
+      "destination": "recording"
+    },
+    {
+      "eventId": "c671341f-adcc-44db-b1f7-f4d8b579ea04",
+      "destination": "recording"
+    },
+    {
+      "eventId": "f2d5e951-1f9e-4d1d-8b0f-d66501ef9134",
+      "destination": "recording"
+    }
+  ],
+  "cachedBinding": {
+    "origin": "http://127.0.0.1:18797",
+    "revision": "4"
+  },
+  "nativeJournalRetainedCount": 311,
+  "installedDebugApkSHA256": "dea9cc0e5d47d4770a37f86026ffd72da23c5d3fcf91d643d3651b2228e49115",
+  "installedTestApkSHA256": "1145447017aa9221173dd413df608abf09369e5faa95d859ffe2002c38181941",
+  "artifacts": {
+    "app/build/outputs/apk/debug/app-debug.apk": "dea9cc0e5d47d4770a37f86026ffd72da23c5d3fcf91d643d3651b2228e49115",
+    "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "1145447017aa9221173dd413df608abf09369e5faa95d859ffe2002c38181941",
+    "app/build/outputs/apk/release/app-release-unsigned.apk": "c4224de344f1a97fd527a6c0301b481ce5b9241ec4f772a5cce8023c6ec6ab9a"
+  },
+  "sourceSHA256": {
+    "app/build.gradle": "f7dc6bdc097d578bdcfcb3bfa05ec08e22cedeb9d13e3cec826b59ae399b4a0b",
+    "app/src/androidTest/java/dev/spahost/prototype/AnalyticsSuite.kt": "53ab5d12f9c144234ba488f9379983864e5a363ee115b1e8faf8e9e5221595a8",
+    "app/src/androidTest/java/dev/spahost/prototype/HostInstrumentation.kt": "c18e36da0cabb7d9f7bde007cdbadfc06a0eb91d7dd98b59fa17f2182b56e9e6",
+    "app/src/main/AndroidManifest.xml": "7599a511aadd01cc438fb538e4f7c5d21ec1536ed099bc8e838cb36c8eee0b84",
+    "app/src/main/java/dev/spahost/prototype/HostActivity.kt": "c4d42e2729acec569e9e47438eba83bd56045755a00ffc5f95bd4daab53f8330",
+    "app/src/main/java/dev/spahost/prototype/HostConfiguration.kt": "4e737b93aaae33514b5a90d1cbc33b2df5b9b554eb2405e83adb6b7e92ddad77",
+    "app/src/main/java/dev/spahost/prototype/NativeAnalytics.kt": "dc6a944186b931b420bb6f565fe08747c76705c4c3c034d4e3b4f495691962f1",
+    "app/src/main/java/dev/spahost/prototype/NativePushState.kt": "bca0fa32283a83a7dc5c4c704dd4aa38abcbb51c2faaf2f831ac8116f6c1e04f",
+    "app/src/main/java/dev/spahost/prototype/Storage.kt": "1459f19f05d06d747f10fa2e4f0f50f87481fd115a79d9008d41ee24752e65c2",
+    "app/src/main/res/xml/file_paths.xml": "cf79a97c4d02cb54e8c60aa112a6a662ef1fc27881b0f997f6ba60ee157534a0"
+  },
+  "logsSHA256": {
+    "native-atomic-suite.log": "5a2e5e5d9e7a925c0f30e61c98bb5792594ef9e6a4f43dabd423dd4bfea8dac5",
+    "live-phase3.log": "eef39aa0c211346518ee493781054a48c0b71121cf66cd05d3156ae99b5a6c8a",
+    "live-phase4.log": "426e887afe9f4d386edc83aca5e9a6d21e0e0df7c8d6c4c5aac1fc5d410002bd",
+    "baseline-atomic-regression.log": "2ee2440ec83d8c713b4b0ab94c694322097dfb5e14a526515647165bbdddb394",
+    "baseline-atomic-restart.log": "52e0ff68443d6958a638e4109155720388c3ea59cfd44e6285e42729b7774e52"
+  },
+  "stagedAssetManifestSHA256": "9638216427db2324098499533b93b065cc144d0a33ec2c48346ad96736648708",
+  "build": {
+    "debug": true,
+    "androidTest": true,
+    "releaseUnsigned": true,
+    "lintRelease": true,
+    "verifiedPackagedAssets": 40,
+    "releaseExecuted": false,
+    "releaseAnalyticsDebugOriginAbsent": true
+  },
+  "limits": [
+    "All final runtime checks refer to the same atomic-rebind-fixed app and test APKs",
+    "Real collector durable ACK is distinct from vendor delivery",
+    "No external vendor credentials or requests used",
+    "maxBytes bounds serialized event payloads; SQLite metadata/index/receipts/WAL overhead is additional",
+    "Earlier artifact results remain in analytics-pre-atomic; their policy1/2 pair is historical",
+    "No physical camera/haptic/biometric/push-delivery acceptance claimed"
+  ],
+  "journalSnapshot": "Analytics-only SQLite main/WAL pulled after targeted force-stop; consistent snapshot, then local-only demo relaunched.",
+  "privacyProbe": "No rejected input values, normal storage values or keys present in semantic journal",
+  "demo": {
+    "pid": 28521,
+    "content": "packaged",
+    "navigation": "native",
+    "chrome": "tabs",
+    "analyticsOrigin": null,
+    "ownedReverseRemoved": 18797,
+    "preexistingReversePreserved": 18791
+  }
+}

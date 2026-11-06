@@ -1,0 +1,46 @@
+import {test, expect} from './mobile-fixture.mjs';
+
+test('real OS background/foreground delivers AppState and unsubscribe stops callbacks', async ({app}, testInfo) => {
+  const text = id => app.getByTestId(id).textContent();
+  const read = async id => JSON.parse(await text(id));
+  await expect.poll(() => text('as-capability')).toBe('true');
+  await expect.poll(() => text('as-current')).toBe('active');
+  expect(await text('as-error')).toBe('none');
+  const identity = await app.describe();
+  const instance = await text('as-instance');
+  const capture = async () => {
+    const previous = await read('as-snapshot');
+    await app.getByTestId('as-snapshot-button').tap();
+    await expect.poll(async () => (await read('as-snapshot'))?.snapshotSerial || 0).toBeGreaterThan(previous?.snapshotSerial || 0);
+    const value = await read('as-snapshot');
+    expect(value.state).toBe('active');
+    expect(value.source).toBe('native-lifecycle');
+    return value;
+  };
+  const initial = await capture();
+  const before = await read('as-events');
+  await app.driver.call('lifecycle.background');
+  await app.driver.call('lifecycle.activate');
+  await expect.poll(() => text('as-current')).toBe('active');
+  await expect.poll(async () => (await read('as-events')).slice(before.length).some(event => event.state === 'background')).toBe(true);
+  const events = (await read('as-events')).slice(before.length);
+  expect(events.at(-1).state).toBe('active');
+  expect(events.every(event => event.generation === initial.generation)).toBe(true);
+  for (let i = 1; i < events.length; i++) expect(events[i].sequence).toBeGreaterThan(events[i - 1].sequence);
+  expect(await text('as-instance')).toBe(instance);
+  const after = await app.describe();
+  expect(after.runtimeGeneration).toBe(identity.runtimeGeneration);
+  expect(after.pid ?? after.processId).toBe(identity.pid ?? identity.processId);
+  const active = await capture();
+  await app.getByTestId('as-unsubscribe').tap();
+  await expect.poll(() => text('as-subscribed')).toBe('false');
+  const stopped = await read('as-events');
+  await app.driver.call('lifecycle.background');
+  await app.driver.call('lifecycle.activate');
+  const withoutSubscription = await capture();
+  expect(withoutSubscription.sequence).toBeGreaterThan(active.sequence);
+  expect(await read('as-events')).toEqual(stopped);
+  expect(await text('as-instance')).toBe(instance);
+  expect(await text('as-error')).toBe('none');
+  await testInfo.attach('app-state-os-evidence', {contentType: 'application/json', body: JSON.stringify({identity, after, initial, events, active, withoutSubscription, stopped}, null, 2)});
+});

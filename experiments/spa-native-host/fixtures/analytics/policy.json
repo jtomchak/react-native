@@ -1,0 +1,1 @@
+{"schemaVersion":1,"revision":1,"enabled":false,"categories":["lifecycle","navigation","bridge","interaction","custom"],"names":["*"],"properties":{},"sampleBasisPoints":10000,"lookbackSeconds":604800,"destinations":["recording"],"expiresInSeconds":300}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "content": {"mode": "packaged", "origin": null, "initialPath": "/"},
+  "navigation": {"mode": "web", "maxLiveSurfaces": 8, "maxDepthPerTab": 4},
+  "chrome": {
+    "mode": "standard",
+    "largeTitles": true,
+    "backGestures": true,
+    "tabs": [
+      {"id": "overview", "title": "Overview", "path": "/", "icon": "house"},
+      {"id": "compose", "title": "Compose", "path": "/compose/", "icon": "square.and.pencil"},
+      {"id": "library", "title": "Library", "path": "/library/", "icon": "photo"}
+    ]
+  },
+  "notifications": {"enabled": false, "firebase": null},
+  "plugins": {},
+  "analytics": {"enabled": true, "origin": null, "destinations": ["recording"], "maxEvents": 10000, "maxBytes": 8388608, "retentionSeconds": 604800}
+}

@@ -1,0 +1,10 @@
+{
+  "environment": "Chromium browser, no native transport",
+  "route": "http://127.0.0.1:53928/compose/",
+  "reloadPath": "/compose/",
+  "nativeReady": {
+    "code": "UNAVAILABLE",
+    "message": "Native host is not available in this browser."
+  },
+  "pageErrors": []
+}

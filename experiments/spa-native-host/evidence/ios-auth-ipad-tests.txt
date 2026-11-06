@@ -1,0 +1,33 @@
+Test Case '-[SPAHostTests.AuthSurfaceTests testAdaptiveDetailCannotRevealPriorAuthDocument]' passed (15.601 seconds).
+Test Case '-[SPAHostTests.AuthSurfaceTests testInitiatingStaleDocumentCanOnlyCoordinateAuthentication]' passed (4.139 seconds).
+Test Case '-[SPAHostTests.AuthSurfaceTests testTabsAndBackCannotRevealPriorAuthDocument]' passed (14.930 seconds).
+Test Suite 'AuthSurfaceTests' passed at 2026-11-05 18:28:38.387.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 34.670 (34.673) seconds
+Test Case '-[SPAHostTests.AuthTests testAuthChangedBuffersOnlyCurrentSnapshot]' passed (0.022 seconds).
+Test Case '-[SPAHostTests.AuthTests testCancelledRefreshCheckpointsRotationAndBlocksCompetingRefresh]' passed (0.085 seconds).
+Test Case '-[SPAHostTests.AuthTests testConfigurationRequiresApprovedOriginAndRelyingParty]' passed (0.001 seconds).
+Test Case '-[SPAHostTests.AuthTests testCookieImportRejectsWeakenedOrForeignCookies]' passed (0.003 seconds).
+Test Case '-[SPAHostTests.AuthTests testDisabledAuthenticationReportsUnavailableWithoutNetwork]' passed (0.001 seconds).
+Test Case '-[SPAHostTests.AuthTests testExpiredAccessRefreshesOnceAndPersistsRotationBeforeRetry]' passed (0.005 seconds).
+Test Case '-[SPAHostTests.AuthTests testMissingNativeVaultWithPriorWebCookieResetsBeforeOAuthStarts]' passed (0.017 seconds).
+Test Case '-[SPAHostTests.AuthTests testProofAndCallbackValidation]' passed (0.001 seconds).
+Test Case '-[SPAHostTests.AuthTests testRejectedRefreshClearsNativeSession]' passed (0.005 seconds).
+Test Case '-[SPAHostTests.AuthTests testSecureStorageIsPartitionedByOrigin]' passed (0.006 seconds).
+Test Case '-[SPAHostTests.AuthTests testSignOutClearsLocalCredentialsWhenServerUnavailable]' passed (0.004 seconds).
+Test Case '-[SPAHostTests.AuthTests testSignOutRefreshesExpiredAccessWithoutRestoringLocalCredentials]' passed (0.005 seconds).
+Test Case '-[SPAHostTests.AuthTests testStatusStripsCredentialsAndUsesAuthorizationHeader]' passed (0.002 seconds).
+Test Case '-[SPAHostTests.AuthTests testWebSyncRefreshesExpiredAccessAndImportsOnlySessionCookie]' passed (0.007 seconds).
+Test Suite 'AuthTests' passed at 2026-11-05 18:28:38.556.
+	 Executed 14 tests, with 0 failures (0 unexpected) in 0.163 (0.167) seconds
+Test Case '-[SPAHostTests.NativeShellTests testConfigurationRejectsUntrustedOriginsAndKeepsDefaults]' passed (0.002 seconds).
+Test Case '-[SPAHostTests.NativeShellTests testNativeEventsReachOnlyActiveSubscribedDocumentAndStripInvalidRoute]' passed (4.913 seconds).
+Test Suite 'NativeShellTests' passed at 2026-11-05 18:28:43.472.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 4.915 (4.916) seconds
+Test Case '-[SPAHostTests.SPAHostTests testDocumentStartSDKWithoutSDKScriptTag]' passed (2.228 seconds).
+Test Case '-[SPAHostTests.SPAHostTests testNativeValidationAndSubframeCannotClaimSession]' passed (2.529 seconds).
+Test Suite 'SPAHostTests' passed at 2026-11-05 18:28:48.230.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 4.757 (4.757) seconds
+Test Suite 'SPAHostTests.xctest' passed at 2026-11-05 18:28:48.230.
+	 Executed 21 tests, with 0 failures (0 unexpected) in 44.505 (44.515) seconds
+Test Suite 'Selected tests' passed at 2026-11-05 18:28:48.230.
+	 Executed 21 tests, with 0 failures (0 unexpected) in 44.505 (44.517) seconds

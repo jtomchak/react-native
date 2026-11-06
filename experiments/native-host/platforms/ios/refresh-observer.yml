@@ -1,0 +1,32 @@
+name: NativeRefreshObserver
+options:
+  deploymentTarget:
+    iOS: '16.0'
+settings:
+  base:
+    CODE_SIGNING_ALLOWED: NO
+    ARCHS: arm64
+    SWIFT_VERSION: '5.0'
+targets:
+  NativeHostUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - ../../performance/ios/observer/ObserverTests.swift
+    settings:
+      base:
+        # Reuse the already authorized prototype UI-test runner identity.
+        PRODUCT_BUNDLE_IDENTIFIER: dev.nativehost.prototype.uitests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  NativeRefreshObserver:
+    build:
+      targets:
+        NativeHostUITests: [test]
+    test:
+      targets: [NativeHostUITests]
+      environmentVariables:
+        NH_OBSERVER_ENABLED: ${NH_OBSERVER_ENABLED}
+        NH_OBSERVER_TOKEN: ${NH_OBSERVER_TOKEN}
+        NH_OBSERVER_PORT: ${NH_OBSERVER_PORT}
+        NH_OBSERVER_TIMEOUT: ${NH_OBSERVER_TIMEOUT}

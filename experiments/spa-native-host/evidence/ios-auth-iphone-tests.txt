@@ -1,0 +1,24 @@
+Test Case '-[SPAHostTests.AuthSurfaceTests testAdaptiveDetailCannotRevealPriorAuthDocument]' passed (16.306 seconds).
+Test Case '-[SPAHostTests.AuthSurfaceTests testInitiatingStaleDocumentCanOnlyCoordinateAuthentication]' passed (4.425 seconds).
+Test Case '-[SPAHostTests.AuthSurfaceTests testTabsAndBackCannotRevealPriorAuthDocument]' passed (15.860 seconds).
+Test Suite 'AuthSurfaceTests' passed at 2026-11-05 18:26:05.022.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 36.591 (36.596) seconds
+Test Case '-[SPAHostTests.AuthTests testAuthChangedBuffersOnlyCurrentSnapshot]' passed (0.017 seconds).
+Test Case '-[SPAHostTests.AuthTests testCancelledRefreshCheckpointsRotationAndBlocksCompetingRefresh]' passed (0.067 seconds).
+Test Case '-[SPAHostTests.AuthTests testConfigurationRequiresApprovedOriginAndRelyingParty]' passed (0.001 seconds).
+Test Case '-[SPAHostTests.AuthTests testCookieImportRejectsWeakenedOrForeignCookies]' passed (0.003 seconds).
+Test Case '-[SPAHostTests.AuthTests testDisabledAuthenticationReportsUnavailableWithoutNetwork]' passed (0.001 seconds).
+Test Case '-[SPAHostTests.AuthTests testExpiredAccessRefreshesOnceAndPersistsRotationBeforeRetry]' passed (0.005 seconds).
+Test Case '-[SPAHostTests.AuthTests testProofAndCallbackValidation]' passed (0.001 seconds).
+Test Case '-[SPAHostTests.AuthTests testRejectedRefreshClearsNativeSession]' passed (0.006 seconds).
+Test Case '-[SPAHostTests.AuthTests testSecureStorageIsPartitionedByOrigin]' passed (0.010 seconds).
+Test Case '-[SPAHostTests.AuthTests testSignOutClearsLocalCredentialsWhenServerUnavailable]' passed (0.011 seconds).
+Test Case '-[SPAHostTests.AuthTests testSignOutRefreshesExpiredAccessWithoutRestoringLocalCredentials]' passed (0.005 seconds).
+Test Case '-[SPAHostTests.AuthTests testStatusStripsCredentialsAndUsesAuthorizationHeader]' passed (0.003 seconds).
+Test Case '-[SPAHostTests.AuthTests testWebSyncRefreshesExpiredAccessAndImportsOnlySessionCookie]' passed (0.007 seconds).
+Test Suite 'AuthTests' passed at 2026-11-05 18:26:05.165.
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.138 (0.141) seconds
+Test Suite 'SPAHostTests.xctest' passed at 2026-11-05 18:26:05.165.
+	 Executed 16 tests, with 0 failures (0 unexpected) in 36.729 (36.739) seconds
+Test Suite 'Selected tests' passed at 2026-11-05 18:26:05.165.
+	 Executed 16 tests, with 0 failures (0 unexpected) in 36.729 (36.739) seconds

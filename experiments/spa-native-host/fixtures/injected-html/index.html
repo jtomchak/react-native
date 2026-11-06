@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Host SDK injection proof</title>
+  <script>
+    // Deliberately no SDK script tag or dependency on React/Next/Stimulus.
+    window.__sdkInjectedBeforePage = typeof window.platform === 'object';
+    window.__injectedReady = null;
+    if (window.__sdkInjectedBeforePage) {
+      window.platform.ready().then(function (value) {
+        window.__injectedReady = value;
+      }, function (error) {
+        window.__injectedReady = {error: error.code || 'UNKNOWN'};
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('status').textContent = window.__sdkInjectedBeforePage
+        ? 'The host injected platform before this page ran.'
+        : 'No native host SDK was injected. This is expected in a normal browser.';
+    });
+  </script>
+</head>
+<body>
+  <h1>Host SDK injection proof</h1>
+  <p id="status">Checking document-start injection…</p>
+  <a href="/">Return to application</a>
+</body>
+</html>

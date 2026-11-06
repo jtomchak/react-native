@@ -1,0 +1,9 @@
+Selected lines from the local Xcode.RC test log, 2026-11-06.
+    /Applications/Xcode.RC.app/Contents/Developer/usr/bin/xcodebuild test -project SPAHost.xcodeproj -scheme SPAHost -configuration Debug -destination "platform=iOS Simulator,id=6B126463-F3F6-481F-AE05-A660182B4DC5" -derivedDataPath build/DerivedData CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=- "-only-testing:SPAHostTests/PluginRegistryTests" "-only-testing:SPAHostTests/SPAHostTests/testDocumentStartSDKWithoutSDKScriptTag" "-only-testing:SPAHostTests/SPAHostTests/testNativeValidationAndSubframeCannotClaimSession" "-only-testing:SPAHostTests/NativeShellTests/testConfigurationRejectsUntrustedOriginsAndKeepsDefaults"
+
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.225 (0.242) seconds
+	 Executed 1 test, with 0 failures (0 unexpected) in 2.488 (2.488) seconds
+	 Executed 2 tests, with 0 failures (0 unexpected) in 4.680 (4.681) seconds
+	 Executed 4 tests, with 0 failures (0 unexpected) in 7.393 (7.412) seconds
+	 Executed 4 tests, with 0 failures (0 unexpected) in 7.393 (7.412) seconds
+** TEST SUCCEEDED **

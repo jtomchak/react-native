@@ -1,0 +1,12 @@
+{
+  "pid": 25541,
+  "result": {
+    "id": 1,
+    "result": {
+      "result": {
+        "type": "string",
+        "value": "{\"path\":\"/compose/\",\"heading\":\"A thoughtworth keeping.\",\"draft\":\"pixel-hmr2-draft-kept\",\"nonce\":\"pixel-hmr2-179391\",\"session\":\"d89be556-6f69-4bcd-8499-029146f30291\",\"document\":\"2566ad5249a42b551b4d2d49910a3e5a\",\"connection\":\"Android host\"}"
+      }
+    }
+  }
+}

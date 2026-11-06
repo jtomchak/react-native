@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "kind": "source-inventory-not-test-results",
+  "referenceCommit": "fe398e511d7b4cfa22baf5b449e256ff9b7d66c4",
+  "inspectedOn": "2026-11-05",
+  "executionStatus": "partial-reference-execution",
+  "candidateAdapterStatus": "selected-contracts-implemented-not-differentially-equivalent",
+  "pathBase": "repository-root",
+  "sources": [
+    {
+      "id": "timers",
+      "path": "packages/react-native/src/private/timers/__tests__/Timers-itest.js",
+      "sha256": "67aabdf809f3c160b41582c5513ee272c1443f20f6217cad1f8d07fe433d67db",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 10,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-fantom-results.json"
+      }
+    },
+    {
+      "id": "commit-atomicity",
+      "path": "packages/react-native/src/private/renderer/branching/__tests__/ShadowTreeBranching-itest.js",
+      "sha256": "274e410f11b59d8b6595b849105462ce62a331ff0386f97dcb0e9f5f2b57bba1",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 4,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-fantom-results.json"
+      }
+    },
+    {
+      "id": "consistent-reads",
+      "path": "packages/react-native/src/private/renderer/consistency/__tests__/UIConsistency-itest.js",
+      "sha256": "dd8029df0850a60cd93206ad5f52de741cc4b7dc2e773e40e929e04cbbea2bc8",
+      "reuse": "triage-skipped-case",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed-with-logged-assertion-errors",
+      "referenceResult": {
+        "passed": 4,
+        "skipped": 2,
+        "failed": 0,
+        "evidence": "build/reference-fantom-results.json"
+      }
+    },
+    {
+      "id": "event-order",
+      "path": "packages/react-native/src/private/renderer/core/__tests__/EventDispatching-itest.js",
+      "sha256": "f81af0b34dd0708644a0cec0b82a8bdb75c3c29015aa5d8dac2167206e8e33d5",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 14,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-fantom-results.json"
+      }
+    },
+    {
+      "id": "view",
+      "path": "packages/react-native/Libraries/Components/View/__tests__/View-itest.js",
+      "sha256": "aaee39e97e8a40b7d1b3696f2c3875db8aaef1a0894b63f92957aa09376b1c1f",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 232,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-primitives-fantom-results.json"
+      }
+    },
+    {
+      "id": "text",
+      "path": "packages/react-native/Libraries/Text/__tests__/Text-itest.js",
+      "sha256": "558da653ffc9604ad2a74a96da5dee5e995274df8273df662880ad2e7afb7f22",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 155,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-primitives-fantom-results.json"
+      }
+    },
+    {
+      "id": "text-input",
+      "path": "packages/react-native/Libraries/Components/TextInput/__tests__/TextInput-itest.js",
+      "sha256": "ec372682a09f119019190aca94580c72024630ed870970db56f4c1c35fca2bc9",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 34,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-primitives-fantom-results.json"
+      }
+    },
+    {
+      "id": "pressable",
+      "path": "packages/react-native/Libraries/Components/Pressable/__tests__/Pressable-itest.js",
+      "sha256": "208bee1151866b54bd13666186c7575500c380272a0ae4c66166b7618ac81115",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 55,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-primitives-fantom-results.json"
+      }
+    },
+    {
+      "id": "scroll-view",
+      "path": "packages/react-native/Libraries/Components/ScrollView/__tests__/ScrollView-itest.js",
+      "sha256": "e934109be55216f685e668c08ab1185a2d822ce9d3cb287680e9c7034586ac25",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 9,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-primitives-fantom-results.json"
+      }
+    },
+    {
+      "id": "image",
+      "path": "packages/react-native/Libraries/Image/__tests__/Image-itest.js",
+      "sha256": "1e64ca6090fd0a26f777735ad7e42b7e189c885f04f7cf37d04dad57444ebff9",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 108,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-primitives-fantom-results.json"
+      }
+    },
+    {
+      "id": "dimensions",
+      "path": "packages/react-native/Libraries/Utilities/__tests__/Dimensions-itest.js",
+      "sha256": "6dd19466e6f81342e6846f096f290e50936765afc96e2d0375d55a99aac32b67",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 3,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-primitives-fantom-results.json"
+      }
+    },
+    {
+      "id": "network-request-state",
+      "path": "packages/react-native/Libraries/Network/__tests__/Network-itest.js",
+      "sha256": "ee92ba7e4943afd1a47ea77d0e527d137e1c2d87107833c8fc152f4573cb5636",
+      "reuse": "adapt-public-assertions",
+      "referenceHarness": "fantom",
+      "executionStatus": "reference-executed",
+      "referenceResult": {
+        "passed": 9,
+        "skipped": 0,
+        "failed": 0,
+        "evidence": "build/reference-primitives-fantom-results.json"
+      }
+    },
+    {
+      "id": "runtime-shutdown",
+      "path": "packages/react-native/ReactCommon/react/runtime/tests/cxx/RuntimeExecutorShutdownTest.cpp",
+      "sha256": "b5fe5c45affe638fb9125c5e76ff10c29e353f6a814aa83664fc2ee7876fb4d0",
+      "reuse": "port-service-contract",
+      "referenceHarness": "gtest",
+      "executionStatus": "not-run"
+    },
+    {
+      "id": "executor-buffering",
+      "path": "packages/react-native/ReactCommon/react/runtime/tests/cxx/BufferedRuntimeExecutorTest.cpp",
+      "sha256": "36de481f9664578ce9ebc429043a4c5608313b260ed3ff534450b466483bd3ea",
+      "reuse": "port-service-contract",
+      "referenceHarness": "gtest",
+      "executionStatus": "not-run"
+    },
+    {
+      "id": "value-and-buffer-bridging",
+      "path": "packages/react-native/ReactCommon/react/bridging/tests/BridgingTest.cpp",
+      "sha256": "a010250baa02a1c151d3dbf9c7c508a8376fd7ae317c58236b1ac1ca6efe2654",
+      "reuse": "port-service-contract",
+      "referenceHarness": "gtest",
+      "executionStatus": "not-run"
+    },
+    {
+      "id": "ios-native-boundary",
+      "path": "packages/react-native/ReactCommon/react/nativemodule/core/iostests/RCTTurboModuleTests.mm",
+      "sha256": "c9e68b0332bf5fbb2d120b94c4fc3571fbe91e602cb6179926309f516e436e25",
+      "reuse": "port-platform-contract",
+      "referenceHarness": "xctest",
+      "executionStatus": "not-run"
+    },
+    {
+      "id": "uncommitted-event-handler",
+      "path": "packages/react-native/Libraries/ReactNative/__tests__/StaleEventHandlersFromInterruptedRender-itest.js",
+      "sha256": "74eb455ecdc7ba2440b3a371e7bf79c60bab178f518a9a02aaa842b8405a0bd9",
+      "reuse": "known-bug-reference-only",
+      "referenceHarness": "fantom",
+      "executionStatus": "not-run"
+    }
+  ],
+  "newContractAreas": [
+    "service-cancellation-races",
+    "runtime-generation-isolation",
+    "service-subscription-lifetime",
+    "embedded-webview-composition",
+    "webview-document-generation-isolation",
+    "test-protocol-actionability",
+    "scoped-test-synchronization",
+    "native-and-dom-automation-adapters"
+  ],
+  "verification": "VERIFICATION.md"
+}

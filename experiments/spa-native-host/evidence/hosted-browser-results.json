@@ -1,0 +1,257 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "tests/browser/hosted.playwright.mjs"
+    ],
+    "configFile": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser/hosted.playwright.mjs",
+    "rootDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "hosted.spec.mjs"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
+        "snapshotDir": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/tests/browser",
+        "testIgnore": [],
+        "testMatch": "hosted.spec.mjs",
+        "timeout": 30000,
+        "use": {
+          "headless": true,
+          "baseURL": "http://127.0.0.1:18803"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/Users/jesse/.codex/worktrees/389b/original-react-native/experiments/spa-native-host/evidence/hosted-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "hosted.spec.mjs",
+      "file": "hosted.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "actual production Next hosted server",
+          "file": "hosted.spec.mjs",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "request-time rendering changes its nonce while sharing the client application routes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1019,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-06T01:47:54.228Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9f045cd6b3c59568f8ab-a446750c22b593067949",
+              "file": "hosted.spec.mjs",
+              "line": 5,
+              "column": 3
+            },
+            {
+              "title": "server action commits an HttpOnly cookie and server rendering reads it after reload",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 386,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-06T01:47:55.623Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9f045cd6b3c59568f8ab-02767257cb674397a8d1",
+              "file": "hosted.spec.mjs",
+              "line": 16,
+              "column": 3
+            },
+            {
+              "title": "hosted health is dynamic server data and the independent injection fixture remains available",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 84,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-06T01:47:56.014Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9f045cd6b3c59568f8ab-fd4561214a5f0711acb2",
+              "file": "hosted.spec.mjs",
+              "line": 28,
+              "column": 3
+            },
+            {
+              "title": "dynamic server item routes accept identifiers that were never packaged",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 221,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-06T01:47:56.103Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9f045cd6b3c59568f8ab-3fb1f1aa36f94491ab45",
+              "file": "hosted.spec.mjs",
+              "line": 37,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-06T01:47:54.028Z",
+    "duration": 2347.8779999999997,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

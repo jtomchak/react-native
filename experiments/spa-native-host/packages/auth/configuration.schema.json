@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["enabled", "origin", "providers", "rpId"],
+  "properties": {
+    "enabled": {"type": "boolean"},
+    "origin": {"type": ["string", "null"], "description": "Exact HTTPS origin; checked by configuration export"},
+    "providers": {"type": "array", "maxItems": 8, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,31}$"}},
+    "rpId": {"type": ["string", "null"], "maxLength": 253}
+  }
+}

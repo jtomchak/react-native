@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "pid": 27200,
+  "appApkSha256": "9aaa215d7bd2ce977de47685bc0c9de92f4fba2a5a99d308d9201bc99e2c6181",
+  "checks": [
+    "actual changed heading",
+    "actual restored heading",
+    "draft preserved",
+    "document nonce preserved",
+    "host session/document preserved",
+    "PID unchanged",
+    "native Save one event and one storage write",
+    "native storage contains current draft"
+  ],
+  "inputEvidence": "Draft entered through browser DOM input events, not physical keyboard",
+  "nativeTap": "Android input tap at freshly observed native toolbar Save bounds"
+}

@@ -1,0 +1,44 @@
+name: SPAHost
+include:
+  - ../../build/plugins/ios-project.yml
+options:
+  deploymentTarget:
+    iOS: '16.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ''
+targets:
+  SPAHost:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+      - path: ../../build/web
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.spahost.prototype
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Info.plist
+        TARGETED_DEVICE_FAMILY: '1,2'
+        OTHER_LDFLAGS: '$(inherited) -lsqlite3'
+      configs:
+        Debug:
+          INFOPLIST_FILE: Info-Debug.plist
+    scheme:
+      testTargets: [SPAHostTests]
+  SPAHostTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [Tests]
+    dependencies:
+      - target: SPAHost
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.spahost.prototype.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: '$(BUILT_PRODUCTS_DIR)/SPAHost.app/SPAHost'
+        BUNDLE_LOADER: '$(TEST_HOST)'

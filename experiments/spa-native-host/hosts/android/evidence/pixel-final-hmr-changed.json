@@ -1,0 +1,13 @@
+{
+  "pid": 27200,
+  "appApkSha256": "9aaa215d7bd2ce977de47685bc0c9de92f4fba2a5a99d308d9201bc99e2c6181",
+  "result": {
+    "id": 1,
+    "result": {
+      "result": {
+        "type": "string",
+        "value": "{\"heading\":\"A thoughtworth keeping on device.\",\"draft\":\"final-pixel-draft-kept\",\"nonce\":\"pixel-final-hmr\",\"session\":\"dbdcf714-64a6-496a-96d7-e0961a583977\",\"document\":\"6daf686b2927c8d000f3ed8174471471\",\"connection\":\"Android host\"}"
+      }
+    }
+  }
+}

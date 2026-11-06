@@ -1,0 +1,12 @@
+{
+  "pid": 24198,
+  "probe": {
+    "id": 1,
+    "result": {
+      "result": {
+        "type": "string",
+        "value": "{\"origin\":\"http://127.0.0.1:18796\",\"connection\":\"Android host\",\"capabilities\":{\"platform\":\"android\",\"capabilities\":[\"haptics.impact\",\"storage.get\",\"storage.set\",\"storage.remove\",\"navigation.update\",\"navigation.back\",\"navigation.present\",\"navigation.dismiss\",\"toolbar.set\",\"toolbar.clear\",\"camera.capture\",\"files.previewURL\",\"files.remove\",\"cancel\"]},\"nativeStorage\":\"real-native\",\"api\":{\"status\":200,\"id\":1},\"ready\":\"complete\",\"resources\":[{\"name\":\"http://127.0.0.1:18796/favicon.ico\",\"status\":404}]}"
+      }
+    }
+  }
+}

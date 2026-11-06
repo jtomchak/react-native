@@ -1,0 +1,13 @@
+{
+  "origin": "https://app.example.com",
+  "databasePath": "/absolute/private/path/native-auth.sqlite",
+  "providers": {
+    "company": {
+      "issuer": "https://identity.example.com",
+      "clientId": "registered-server-client-id",
+      "clientSecretEnv": "SPA_COMPANY_CLIENT_SECRET"
+    }
+  },
+  "rpId": "app.example.com",
+  "passkeyOrigins": ["https://app.example.com"]
+}

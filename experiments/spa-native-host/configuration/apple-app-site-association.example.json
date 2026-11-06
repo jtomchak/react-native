@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["NSLC4354J7.dev.spahost.prototype"],
+        "components": [
+          {"/": "/compose/*"},
+          {"/": "/library/*"},
+          {"/": "/hosted/*"},
+          {"/": "/"}
+        ]
+      }
+    ]
+  }
+}

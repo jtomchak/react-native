@@ -1,0 +1,48 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'dev.nativehost'
+    compileSdk 35
+    ndkVersion '27.1.12297006'
+    defaultConfig {
+        applicationId 'dev.nativehost.experiment'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '0.1'
+        testInstrumentationRunner 'dev.nativehost.HostInstrumentation'
+        ndk { abiFilters 'arm64-v8a' }
+        externalNativeBuild { cmake { arguments '-DANDROID_STL=c++_shared'; cppFlags '-std=c++20' } }
+    }
+    buildTypes {
+        debug { externalNativeBuild { cmake { arguments '-DNH_TEST_HOOKS=ON', '-DNH_DEV_UPDATES=ON', '-DNH_PRODUCTION_ARTIFACT=OFF' } } }
+        release { minifyEnabled false; externalNativeBuild { cmake { arguments '-DNH_TEST_HOOKS=OFF', '-DNH_DEV_UPDATES=OFF', '-DNH_PRODUCTION_ARTIFACT=ON' } } }
+    }
+    buildFeatures { prefab true; buildConfig true }
+    externalNativeBuild { cmake { path 'src/main/cpp/CMakeLists.txt'; version '3.30.5' } }
+    sourceSets {
+        debug { assets.srcDir layout.buildDirectory.dir('generated/nativeHostAssets/debug') }
+        release { assets.srcDir layout.buildDirectory.dir('generated/nativeHostAssets/release') }
+    }
+    packaging { jniLibs { useLegacyPackaging true } }
+}
+
+['Debug': 'app.bundle.js', 'Release': 'app.release.bundle.js'].each { variant, bundle ->
+    tasks.register("requireNativeHost${variant}Bundle") {
+        doLast { if (!file("../../../build/${bundle}").exists()) throw new GradleException("Build experiments/native-host/build/${bundle} first") }
+    }
+    tasks.register("copyNativeHost${variant}Bundle", Copy) {
+        dependsOn "requireNativeHost${variant}Bundle"
+        from('../../../build') { include bundle; rename { 'app.bundle.js' } }
+        into layout.buildDirectory.dir("generated/nativeHostAssets/${variant.toLowerCase()}")
+    }
+    tasks.matching { it.name == "pre${variant}Build" }.configureEach { dependsOn "copyNativeHost${variant}Bundle" }
+}
+
+dependencies {
+    // Existing Hermes transitive runtime, pinned to this AAR's published POM.
+    implementation 'com.facebook.fbjni:fbjni:0.7.0'
+    debugImplementation 'com.facebook.hermes:hermes-android:250829098.0.16:debug@aar'
+    releaseImplementation 'com.facebook.hermes:hermes-android:250829098.0.16:release@aar'
+}
+

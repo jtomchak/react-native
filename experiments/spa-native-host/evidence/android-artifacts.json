@@ -1,0 +1,5 @@
+{
+  "app/build/outputs/apk/debug/app-debug.apk": "28ee512cfc043f81b5be2c544b8d3bfc735c218c5d0a727c019e04513fc6c03b",
+  "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk": "bca598d9a02aa8b030c0f7815957bb0fde9c494deafd480a960f0e7ae9fdfd52",
+  "app/build/outputs/apk/release/app-release-unsigned.apk": "f21417f76fdcb8cb30e42df33b25fbcb5de9a8cf4e14034562cc646780db9a61"
+}

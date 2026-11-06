@@ -1,0 +1,16 @@
+appId: ${APP_ID}
+---
+- launchApp
+- assertVisible: "Count: 0"
+- tapOn: "Increment"
+- assertVisible: "Count: 1"
+- tapOn: "Echo"
+- assertVisible: "Echo: Native"
+- tapOn:
+    text: "Web action"
+    index: 0
+- assertVisible: "Primary: 1"
+- tapOn: "Toggle cover"
+- tapOn: "Web cover"
+- assertVisible: "Overlay: 1"
+- assertVisible: "Primary: 1"

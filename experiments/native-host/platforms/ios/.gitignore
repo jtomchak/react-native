@@ -1,0 +1,7 @@
+/build/
+/NativeHost.xcodeproj/
+/NativeRefreshObserver.xcodeproj/
+/artifacts/
+/*.log
+
+build-device/

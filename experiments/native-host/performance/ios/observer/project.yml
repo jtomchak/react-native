@@ -1,0 +1,30 @@
+name: PerformanceObserver
+options:
+  deploymentTarget:
+    iOS: '16.0'
+settings:
+  base:
+    CODE_SIGNING_ALLOWED: NO
+    ARCHS: arm64
+    SWIFT_VERSION: '5.0'
+targets:
+  ObserverTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [ObserverTests.swift]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.nativehost.performance.observerTests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  PerformanceObserver:
+    build:
+      targets:
+        ObserverTests: [test]
+    test:
+      targets: [ObserverTests]
+      environmentVariables:
+        NH_OBSERVER_ENABLED: ${NH_OBSERVER_ENABLED}
+        NH_OBSERVER_TOKEN: ${NH_OBSERVER_TOKEN}
+        NH_OBSERVER_PORT: ${NH_OBSERVER_PORT}
+        NH_OBSERVER_TIMEOUT: ${NH_OBSERVER_TIMEOUT}

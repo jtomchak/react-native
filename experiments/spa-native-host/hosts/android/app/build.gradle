@@ -1,0 +1,87 @@
+plugins { id 'com.android.application'; id 'org.jetbrains.kotlin.android' }
+
+android {
+    namespace 'dev.spahost.prototype'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'dev.spahost.prototype'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '0.1'
+        testInstrumentationRunner 'dev.spahost.prototype.HostInstrumentation'
+        manifestPlaceholders = [nativeHostActivity: 'dev.spahost.prototype.HostActivity']
+    }
+    buildFeatures { buildConfig true }
+    // AAPT's default asset ignore rules omit directories beginning with '_',
+    // including Next's runtime chunks. The staged asset manifest is authoritative.
+    androidResources { ignoreAssetsPattern = '!.git:!.svn:!.ds_store:!*.scc:.*:CVS:thumbs.db:picasa.ini:*~' }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    kotlinOptions { jvmTarget = '17' }
+    sourceSets { main { assets.srcDir layout.buildDirectory.dir('generated/spaAssets') } }
+    buildTypes { release { minifyEnabled false } }
+}
+
+tasks.register('stageSpaAssets', Sync) {
+    def staged = file('../../../build/web')
+    doFirst { if (!new File(staged, 'index.html').isFile()) throw new GradleException('Run prototype export and tooling/sync.mjs before building Android') }
+    from(staged)
+    into(layout.buildDirectory.dir('generated/spaAssets/web'))
+}
+tasks.named('preBuild').configure { dependsOn 'stageSpaAssets' }
+
+['Debug', 'Release'].each { variant ->
+    def name = "verifyPackaged${variant}Assets"
+    tasks.register(name) {
+        dependsOn "package${variant}"
+        doLast {
+            def manifest = new groovy.json.JsonSlurper().parse(file('../../../build/web/asset-manifest.json'))
+            def apks = fileTree(layout.buildDirectory.dir("outputs/apk/${variant.toLowerCase()}")).matching { include '*.apk' }.files
+            if (apks.size() != 1) throw new GradleException("Expected one ${variant} APK")
+            new java.util.zip.ZipFile(apks.first()).withCloseable { zip ->
+                manifest.assets.each { path, metadata ->
+                    def entry = zip.getEntry('assets/web' + path)
+                    if (entry == null) throw new GradleException("Packaged asset missing: ${path}")
+                    def bytes = zip.getInputStream(entry).withCloseable { it.bytes }
+                    def digest = java.security.MessageDigest.getInstance('SHA-256').digest(bytes).encodeHex().toString()
+                    if (digest != metadata.sha256 || bytes.length != metadata.bytes) throw new GradleException("Packaged asset mismatch: ${path}")
+                }
+                println "Verified ${manifest.assets.size()} packaged SPA assets in ${variant} APK"
+            }
+        }
+    }
+    tasks.matching { it.name == "assemble${variant}" }.configureEach { finalizedBy name }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'
+    implementation 'androidx.activity:activity:1.10.1'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.1.21'
+    implementation 'com.google.android.material:material:1.13.0'
+    implementation 'com.google.firebase:firebase-messaging:26.0.1'
+}
+
+// App Links are opt-in and tied to the exact configured production HTTPS host.
+// The default build declares no web-domain association.
+if (providers.gradleProperty('spaAppLinkHost').isPresent()) {
+    def host = providers.gradleProperty('spaAppLinkHost').get()
+    def configFile = file('../../../build/web/host-config.json')
+    def config = new groovy.json.JsonSlurper().parse(configFile)
+    def origin = new URI(config.content.origin ?: '')
+    if (config.content.mode != 'hosted' || origin.scheme != 'https' || origin.host != host || !(host ==~ /[A-Za-z0-9.-]+/)) throw new GradleException('spaAppLinkHost must match the configured hosted HTTPS origin')
+    def original = file('src/main/AndroidManifest.xml')
+    def generated = layout.buildDirectory.file('generated/appLinks/AndroidManifest.xml')
+    def generate = tasks.register('generateConfiguredAppLinksManifest') {
+        inputs.file(original); inputs.file(configFile); inputs.property('host', host)
+        outputs.file(generated)
+        doLast {
+            def declaration = '<intent-filter android:autoVerify="true"><action android:name="android.intent.action.VIEW"/><category android:name="android.intent.category.DEFAULT"/><category android:name="android.intent.category.BROWSABLE"/><data android:scheme="https" android:host="' + host + '"/></intent-filter>'
+            def output = generated.get().asFile; output.parentFile.mkdirs()
+            output.text = original.text.replace('</activity>', declaration + '</activity>')
+        }
+    }
+    android.sourceSets.main.manifest.srcFile(generated.get().asFile)
+    tasks.matching { it.name.matches(/process.*MainManifest/) }.configureEach { dependsOn generate }
+}
+
+apply from: file('../../../build/plugins/app.gradle')

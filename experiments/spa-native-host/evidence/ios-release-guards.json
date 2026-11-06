@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "configuration": "Release",
+  "forbiddenMarkersAbsent": [
+    "--spa-dev-url",
+    "--spa-smoke",
+    "SPA_SMOKE_FINISHED",
+    "SmokeProbe",
+    "spa-smoke-token"
+  ],
+  "debugATSAbsent": true,
+  "stagedPhysicalDebugAndReleaseAssetsMatch": true,
+  "filesIncludingManifest": 41,
+  "assetManifestSha256": "221d62f82ba5550231df26a81508a27879d33f7a97b2850d41c29eafb810efe0",
+  "localPhysicalLauncherSha256": "cb7c5e7b5f5933c1d08fa4b1bd4236b697f3f3d9fb5ff0c37fe304bcc7dce511",
+  "localPhysicalDebugDylibSha256": "d8c37c7b5171e983ff30fcb42191a08899f625bc44ce346eda4d7b4414bfc7d0",
+  "localReleaseSimulatorBinarySha256": "7d15bcc82e24e698ccb3f93776dac321ce9cf797fc336f8ef23d285f08b6a579"
+}

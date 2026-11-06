@@ -1,0 +1,8 @@
+Stopping: dev.spahost.prototype
+Starting: Intent { act=android.intent.action.VIEW dat=spahost://app/ cmp=dev.spahost.prototype/.HostActivity (has extras) }
+Status: ok
+LaunchState: COLD
+Activity: dev.spahost.prototype/.HostActivity
+TotalTime: 1146
+WaitTime: 1149
+Complete

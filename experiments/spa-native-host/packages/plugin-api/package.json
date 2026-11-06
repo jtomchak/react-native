@@ -1,0 +1,16 @@
+{
+  "name": "@nativehost/plugin-api",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "ios/NativeHostPluginAPI/Package.swift",
+    "ios/NativeHostPluginAPI/Sources",
+    "android/build.gradle.kts",
+    "android/src",
+    "README.md"
+  ],
+  "license": "MIT"
+}

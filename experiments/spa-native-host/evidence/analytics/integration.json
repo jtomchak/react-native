@@ -1,0 +1,88 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-11-06T00:19:41.124Z",
+  "nativeSourcesAndArtifactsChecked": 34,
+  "sourceSHA256": {
+    "packages/platform-sdk/bridge.js": "0dd41f4bf5951166d72aa73fa5bedd58f106c003e5c9fc4dba154b22d0bb79d2",
+    "packages/analytics-core/index.mjs": "12e2d5ed15eea31e75220d56300f5cfb4e715ee064ca0e1846148dbc49a5f4e6",
+    "packages/analytics-core/collector.mjs": "b238fbe528659ca56661ceeee4a7a370f67142684f3fe13858a9972f114e92d4",
+    "packages/analytics-core/adapters.mjs": "74ea85af6b8843647ce57409c40f2ee1edf6f7d52522eddab0a6ccbb3c77e591",
+    "apps/server/lib/analytics.mjs": "7d8a89a86ecafd8013207d9040b76e1ecd285dd3dc201b3675492fd07cd61bc6",
+    "apps/server/app/api/analytics/policy/route.js": "263a2ae7f7af2fc38d1caf86308d68f5a09a57c6454f731a8180adc6f345599a",
+    "apps/server/app/api/analytics/batch/route.js": "336a4bf6fa5d30e6fb88ccb67cbc80a2edcca04a91e3cf8478ad6239f1c52b80",
+    "tooling/configuration.mjs": "9c228fe7ff633b95b1e50fbc8da1122b0070e7e1bf345eda6098070289610830",
+    "tooling/configure-host.mjs": "70699956638433599b463cf2653852147049da3925621dedae65471a7b2f8192",
+    "tooling/analytics-policy.mjs": "9b2eb92d38eba15845c3f958e32ba50b7d28ade8b35a518310d0c03cf331af82",
+    "configuration/host-config.json": "5b64e162fd1f33c3b90ff597c93775bfebae222ca9bc4f7db887cb5255f3debf",
+    "fixtures/analytics/policy.json": "e812bd503308ec1cfbfa1286a0eef07935c7cbc82c2dfddcfd8c9c51a59de123",
+    "fixtures/analytics/sampling.json": "5709458d4d6e5e29eebd69cd5512455f8449fb86ac66b21ff8a9534d4a1faf2b"
+  },
+  "serverGraph": {
+    "sha256": "95e69874093af9cd9556700a40bca776d8527e6d3c1c5d9d4a6197ad5562bf63",
+    "files": 184
+  },
+  "finalCollectorPairs": [
+    {
+      "id": "29b4b5c8-22c4-43c6-b0f0-cde3408027de",
+      "installId": "a32cef10-6f92-414f-bd5d-32547b9a78de",
+      "sessionId": "c4d22725-6ab8-4481-bc51-06284e05c274",
+      "timeMs": 1793923190735,
+      "platform": "ios",
+      "name": "custom.analytics_keep",
+      "policyRevision": 1,
+      "properties": {
+        "control": "acceptance-fixture"
+      }
+    },
+    {
+      "id": "57b64c38-a203-4b5a-acd3-fb9ff428286e",
+      "installId": "a32cef10-6f92-414f-bd5d-32547b9a78de",
+      "sessionId": "c4d22725-6ab8-4481-bc51-06284e05c274",
+      "timeMs": 1793923190752,
+      "platform": "ios",
+      "name": "custom.analytics_later",
+      "policyRevision": 2,
+      "properties": {
+        "control": "acceptance-fixture"
+      }
+    },
+    {
+      "id": "3f6c3a1c-f79f-4efd-944f-86301968d3cc",
+      "installId": "5b57c177-707a-482d-a125-a31789be4451",
+      "sessionId": "7185c935-826e-45ed-8363-2cf9851c9911",
+      "timeMs": 1793924023522,
+      "platform": "android",
+      "name": "custom.analytics_keep",
+      "policyRevision": 3,
+      "properties": {
+        "control": "android-live"
+      }
+    },
+    {
+      "id": "c671341f-adcc-44db-b1f7-f4d8b579ea04",
+      "installId": "5b57c177-707a-482d-a125-a31789be4451",
+      "sessionId": "7185c935-826e-45ed-8363-2cf9851c9911",
+      "timeMs": 1793924023735,
+      "platform": "android",
+      "name": "custom.analytics_later",
+      "policyRevision": 4,
+      "properties": {
+        "control": "android-live"
+      }
+    }
+  ],
+  "documentationLinks": "passed",
+  "checks": {
+    "node": 57,
+    "browser": 12,
+    "hosted": 4,
+    "iosNative": 31,
+    "androidNative": 53
+  },
+  "cleanup": {
+    "ownedPortsClosed": true,
+    "adbForwards": "",
+    "pixelReverses": "UsbFfs tcp:18791 tcp:18791",
+    "xcodeSelection": "/Applications/Xcode.app/Contents/Developer"
+  }
+}
